@@ -1,0 +1,103 @@
+:host ::ng-deep {
+    .overlay {
+        position: relative;
+        right: 63vh;
+        bottom: 20vh;
+      }
+    button.p-confirm-dialog-accept {
+        position: relative;
+        right: 99px;
+        background-color: cadetblue;
+        border: none;
+    }
+    button.p-confirm-dialog-accept:hover {
+        background-color: rgb(48, 85, 87);
+    }
+    button.p-confirm-dialog-reject {
+        background-color: crimson;
+        position: relative;
+        left: 70px;
+        border: none;
+    }
+    button.p-confirm-dialog-reject:hover {
+        background-color: rgb(138, 16, 40);
+    }
+  
+        .imageTable > .p-image-preview-container > img{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        #amountPayedInput:disabled {
+            opacity: 1;
+            background-color: yellowgreen;
+          }
+          #restPayedInput:disabled {
+            opacity: 1;
+            background-color: orangered;
+            color: aliceblue;
+          }
+          .p-card-header img{
+            width: 40%;
+            border-radius: 10%;
+        }
+      
+     
+        .imageQr{
+            width: 50%;
+        }
+        .col-12.sm\:col-6.lg\:col-12.xl\:col-4.p-2 {
+            width: 294px;
+          }
+          #payPrintDialog .p-dialog > div {
+            width: 150%;
+          }
+          .p-card {
+            background-color: #dcf2f2;
+            padding: 1rem;
+            box-shadow: #647775 3px 8px 8px 3px;
+          }
+}
+.imageDropdown{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.field {
+    margin-top: 20px;
+}
+.QrCard{
+    margin:15px;
+}
+
+.qrInfos{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    margin: 8px;
+
+}
+.subInfos{
+    border:solid 1px black;
+}
+@media print{
+ 
+   
+    .qrInfos{
+        font-weight: bold;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 18px;
+        color: rgb(2, 8, 21);
+        margin: 15px;
+    }
+  
+    .subInfos{
+        border:solid 1px black;
+    }
+
+  
+      .imageQr{
+        width: 40%;
+        border-radius: 10%;
+    }
+
+}

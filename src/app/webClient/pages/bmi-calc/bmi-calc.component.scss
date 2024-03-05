@@ -1,0 +1,7 @@
+:host ::ng-deep{
+    .p-togglebutton.p-button:not(.p-disabled):not(.p-highlight) {
+        background: #f392de;
+        border-color: #ced4da;
+        color: #495057;
+      }
+}

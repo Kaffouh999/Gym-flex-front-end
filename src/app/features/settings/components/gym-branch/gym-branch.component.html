@@ -1,0 +1,369 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button
+                pButton
+                pRipple
+                label="New"
+                icon="pi pi-plus"
+                class="p-button-success mx-2"
+                (click)="openNew()"
+            ></button>
+            <button
+                pButton
+                pRipple
+                [label]="'Delete'"
+                icon="pi pi-trash"
+                class="p-button-danger"
+                (click)="deleteSelectedgymBranches()"
+                [disabled]="!selectedgymBranches || !selectedgymBranches.length"
+            ></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button
+                pButton
+                pRipple
+                label="Export"
+                icon="pi pi-upload"
+                class="p-button-help"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="gymBranches"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="[
+            'name',
+            'email',
+            'phoneNumber',
+            'adress',
+            'sessionDurationAllowed'
+        ]"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [(selection)]="selectedgymBranches"
+        [rowHover]="true"
+        dataKey="id"
+        styleClass="p-datatable-gridlines"
+        [resizableColumns]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Manage GYM Branches</h5>
+                <!-- <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                        pInputText
+                        type="text"
+                        (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                        "
+                        placeholder="Search..."
+                    />
+                </span> -->
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th >
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="name" >
+                    Name<p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="adress">
+                    adress<p-sortIcon field="adress"></p-sortIcon>
+                </th>
+                <th pSortableColumn="email" >
+                    Email<p-sortIcon field="email"></p-sortIcon>
+                </th>
+                <th pSortableColumn="appPassword">
+                    appPassword <p-sortIcon field="appPassword"></p-sortIcon>
+                </th>
+                <th pSortableColumn="phoneNumber" >
+                    phone Number<p-sortIcon field="phoneNumber"></p-sortIcon>
+                </th>
+                <th pSortableColumn="openingDate" >
+                    opening Date<p-sortIcon field="openingDate"></p-sortIcon>
+                </th>
+                <th pSortableColumn="closingDate" >
+                    closing Date<p-sortIcon field="closingDate"></p-sortIcon>
+                </th>
+                <th
+                    pSortableColumn="sessionDurationAllowed"
+                   
+                >
+                    session Duration<p-sortIcon
+                        field="sessionDurationAllowed"
+                    ></p-sortIcon>
+                </th>
+
+                <th></th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>
+                    <p-columnFilter type="text" field="name"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="adress"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="email"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter
+                        type="text"
+                        field="appPasswordEmail"
+                    ></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter
+                        type="text"
+                        field="phoneNumber"
+                    ></p-columnFilter>
+                </th>
+                <th></th>
+                <th></th>
+                <th>
+                    <p-columnFilter
+                        type="text"
+                        field="sessionDurationAllowed"
+                    ></p-columnFilter>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-gymBranch>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="gymBranch"></p-tableCheckbox>
+                </td>
+                <td>{{ gymBranch.name }}</td>
+                <td>{{ gymBranch.adress }}</td>
+                <td>{{ gymBranch.email }}</td>
+                <td>{{ gymBranch.appPasswordEmail }}</td>
+                <td>{{ gymBranch.phoneNumber }}</td>
+                <td>{{ gymBranch.openingDate | date: "shortTime" }}</td>
+                <td>{{ gymBranch.closingDate | date: "shortTime" }}</td>
+                <td>{{ gymBranch.sessionDurationAllowed }}</td>
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success mr-2"
+                        (click)="editgymBrancheInput(gymBranch)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-warning"
+                        (click)="deletegymBrancheInput(gymBranch)"
+                    ></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are
+                {{ gymBranches ? gymBranches.length : 0 }} gymBranch.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog
+    [(visible)]="gymBranchDialog"
+    [style]="{ width: '50%' }"
+    header="Gym Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <form [formGroup]="gymbranchFrom" class="p-fluid">
+            <div class="formgrid grid">
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <input
+                            type="text"
+                            pInputText
+                            id="name"
+                            formControlName="name"
+                            required
+                        />
+                        <label htmlFor="name">Name</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            gymbranchFrom.get('name').invalid &&
+                            (gymbranchFrom.get('name').dirty ||
+                                gymbranchFrom.get('name').touched)
+                        "
+                        class="p-error"
+                        >Name is required</small
+                    >
+                </div>
+
+                <div class="field col-12 md:col-8">
+                    <span class="p-float-label">
+                        <input id="email" pInputText formControlName="email" />
+                        <label htmlFor="email">Email</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            gymbranchFrom.get('email').invalid &&
+                            (gymbranchFrom.get('email').dirty ||
+                                gymbranchFrom.get('email').touched)
+                        "
+                        class="p-error"
+                        >not a valid email</small
+                    >
+                </div>
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <input
+                            id="appPassword"
+                            formControlName="appPasswordEmail"
+                            pInputText
+                        />
+                        <label htmlFor="appPassword">appPassword</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            gymbranchFrom.get('appPasswordEmail').invalid &&
+                            (gymbranchFrom.get('appPasswordEmail').dirty ||
+                                gymbranchFrom.get('appPasswordEmail').touched)
+                        "
+                        class="p-error"
+                        >appPassword for email is required</small
+                    >
+                </div>
+                <div class="field col-6 md:col-3">
+                    <span class="p-float-label">
+                        <p-calendar
+                            id="openingTime"
+                            formControlName="openingTime"
+                            [timeOnly]="true"
+                            [hourFormat]="'12'"
+                        >
+                        </p-calendar>
+                        <label htmlFor="openingTime">Open Time</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            gymbranchFrom.get('openingTime').invalid &&
+                            (gymbranchFrom.get('openingTime').dirty ||
+                                gymbranchFrom.get('openingTime').touched)
+                        "
+                        class="p-error"
+                        >opening Time is required</small
+                    >
+                </div>
+                <div class="field col-6 md:col-3">
+                    <span class="p-float-label">
+                        <p-calendar
+                            id="closingTime"
+                            formControlName="closingTime"
+                            [timeOnly]="true"
+                            [hourFormat]="'12'"
+                        >
+                        </p-calendar>
+                        <label htmlFor="closingTime">Close Time</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-8">
+                    <span class="p-float-label">
+                        <input
+                            id="phoneNumber"
+                            formControlName="phoneNumber"
+                            pInputText
+                        />
+                        <label htmlFor="phoneNumber">phone Number</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            gymbranchFrom.get('phoneNumber').invalid &&
+                            (gymbranchFrom.get('phoneNumber').dirty ||
+                                gymbranchFrom.get('phoneNumber').touched)
+                        "
+                        class="p-error"
+                        >not a valid phone number</small
+                    >
+                </div>
+
+                <div class="field col-6 md:col-3">
+                    <span class="p-float-label">
+                        <p-inputNumber
+                            id="sessionDurationAllowed"
+                            formControlName="sessionDurationAllowed"
+                        ></p-inputNumber>
+                        <label htmlFor="sessionDurationAllowed"
+                            >session Duration
+                        </label>
+                    </span>
+                    <small
+                        *ngIf="
+                            gymbranchFrom.get('sessionDurationAllowed')
+                                .invalid &&
+                            (gymbranchFrom.get('sessionDurationAllowed')
+                                .dirty ||
+                                gymbranchFrom.get('sessionDurationAllowed')
+                                    .touched)
+                        "
+                        class="p-error"
+                        >not a valid session duration</small
+                    >
+                </div>
+                <div class="field col-12 md:col-8">
+                    <span class="p-float-label">
+                        <input
+                            id="adress"
+                            pInputText
+                            formControlName="adress"
+                        />
+                        <label htmlFor="adress">Adress</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            gymbranchFrom.get('adress').invalid &&
+                            (gymbranchFrom.get('adress').dirty ||
+                                gymbranchFrom.get('adress').touched)
+                        "
+                        class="p-error"
+                        >Adress is required</small
+                    >
+                </div>
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="Cancel"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+            pButton
+            pRipple
+            label="Save"
+            icon="pi pi-check"
+            class="p-button-text"
+            [disabled]="gymbranchFrom.invalid"
+            (click)="savegymBrancheInput()"
+        ></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

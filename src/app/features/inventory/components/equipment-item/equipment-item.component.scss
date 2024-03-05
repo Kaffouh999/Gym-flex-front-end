@@ -1,0 +1,62 @@
+:host ::ng-deep {
+    button.p-confirm-dialog-accept {
+        position: relative;
+        right: 99px;
+        background-color: cadetblue;
+        border: none;
+    }
+    button.p-confirm-dialog-accept:hover {
+        background-color: rgb(48, 85, 87);
+    }
+    button.p-confirm-dialog-reject {
+        background-color: crimson;
+        position: relative;
+        left: 70px;
+        border: none;
+    }
+    button.p-confirm-dialog-reject:hover {
+        background-color: rgb(138, 16, 40);
+    }
+}
+
+.field {
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 960px){
+    :host ::ng-deep{
+        
+    .p-datatable-tbody > tr > td {
+    min-width: 300px;
+  display: flex;
+  width: 100% !important;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(235, 242, 242);
+height: 40px;
+color: black;
+font-weight: bolder;
+
+}  
+.p-column-title {
+    margin-inline: 24px;
+    font-size: 15px;
+    color: #995c0d;
+    border-radius: 4px;
+}
+.p-datatable-tbody > tr > td:last-child {
+    margin-bottom: 20px;
+    padding-inline:70px ;
+    height: 20%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow:2px 2px 3px 3px gray;
+  }
+ .p-datatable-tbody > tr > td:first-child {
+    
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    
+  }
+    }
+}

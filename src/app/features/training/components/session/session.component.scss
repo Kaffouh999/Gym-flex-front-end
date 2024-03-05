@@ -1,0 +1,43 @@
+:host ::ng-deep {
+  
+    button.p-confirm-dialog-accept {
+        position: relative;
+        right: 99px;
+        background-color: cadetblue;
+        border: none;
+    }
+    button.p-confirm-dialog-accept:hover {
+        background-color: rgb(48, 85, 87);
+    }
+    button.p-confirm-dialog-reject {
+        background-color: crimson;
+        position: relative;
+        left: 70px;
+        border: none;
+    }
+    button.p-confirm-dialog-reject:hover {
+        background-color: rgb(138, 16, 40);
+    }
+  
+        .imageTable > .p-image-preview-container > img{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        .qrScanner > video {
+            width: 50%;
+            height: 32rem;
+            position: relative;
+            left: 15%;
+            margin: 50px;
+        }
+    
+}
+.imageDropdown{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.field {
+    margin-top: 20px;
+}

@@ -1,0 +1,75 @@
+
+:host ::ng-deep{
+    .p-component.p-inputwrapper.p-input-icon-right {
+        height: 48px;
+        width: 100%;
+      }
+      .p-float-label {
+       
+        height: 51px;
+        margin-bottom: 15px;
+      }
+     
+
+      .leave-comment form input {
+        background: #f5ecec1f;
+        margin-bottom: 0px;
+
+      }
+      .p-float-label{
+        margin: 30px;
+      }
+} 
+
+.separetor {
+    margin-top: 10px;
+}
+.separetor span {
+    background: #fff;
+    position: relative;
+    top: 10px;
+    padding: 10px 0px 0px;
+}
+.sign-icon {
+    display: block;
+    overflow: hidden;
+    margin-top: 30px;
+    text-align: center;
+}
+.sign-icon ul li {
+    display: inline-block;
+    margin: 0px 5px;
+}
+.sign-icon ul li a {
+    color: #fff;
+    display: block;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding: 0px 30px 0px 0px;
+    font-weight: 600;
+}
+.sign-icon ul li a.facebook{
+    color: #3B5998
+}
+.sign-icon ul li a.twitter{
+    color: #00ACED
+}
+.sign-icon ul li a.google{
+    color: #C32F10
+}
+.acc-not {
+    font-size: 13px;
+    margin-top: 20px;
+    font-weight: 600;
+    color: white;
+}
+.registerBtn:disabled{
+    background-color:#f4d3b284 ;
+}
+@media only screen and (min-width: 1200px){
+.container {
+  max-width: 1500px;
+  position: relative;
+  bottom: 55px;
+}
+}

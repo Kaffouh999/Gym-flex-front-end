@@ -1,0 +1,230 @@
+<p-toast></p-toast>
+<div class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button
+                pButton
+                pRipple
+                label="{{ 'New' | translate }}"
+                icon="pi pi-plus"
+                class="p-button-success mx-2"
+                (click)="openNew()"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+</div>
+
+<p-table
+    #dt
+    [value]="categories"
+    [rows]="10"
+    [paginator]="true"
+ 
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+    [globalFilterFields]="['name', 'description']"
+    responsiveLayout="stack" [breakpoint]="'960px'"
+>
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            <h5 class="m-0">{{ 'Manage' | translate }} {{ 'categories' | translate }}</h5>
+            <button
+                    pButton
+                    label="Clear"
+                    class="p-button-outlined clearButton"
+                    icon="pi pi-filter-slash"
+                    (click)="clear(dt)"
+                ></button>
+            <!-- <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input
+                    pInputText
+                    type="text"
+                    (input)="dt.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Search..."
+                />
+            </span> -->
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 4rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="name" >
+                {{ 'Name' | translate }} <p-sortIcon field="name"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="text"
+                field="name"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+            <th pSortableColumn="description" >
+                {{ 'Description' | translate }}
+                <p-sortIcon field="description"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="text"
+                field="description"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+            <th pSortableColumn="For Client" s>
+                {{ 'ForClient' | translate }} <p-sortIcon field="For Client"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="boolean"
+                field="isForClient"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+            <th pSortableColumn="ForInventory" >
+                {{ 'ForInventory' | translate }}
+                <p-sortIcon field="ForInventory"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="boolean"
+                field="isForInventory"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+
+            <th></th>
+        </tr>
+    
+    </ng-template>
+    <ng-template pTemplate="body" let-category>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="category"></p-tableCheckbox>
+            </td>
+            <td><span class="p-column-title">Name : </span>{{ category.name }}</td>
+            <td><span class="p-column-title">Description : </span>{{ category.description }}</td>
+            <td><span class="p-column-title">is For Client : </span>{{ category.isForClient }}</td>
+            <td><span class="p-column-title">is For Inventory : </span>{{ category.isForInventory }}</td>
+
+            <td>
+                <button
+                    pButton
+                    pRipple
+                    icon="pi pi-pencil"
+                    class="p-button-rounded p-button-success mr-2"
+                    (click)="editCategory(category)"
+                ></button>
+                <button
+                    pButton
+                    pRipple
+                    icon="pi pi-trash"
+                    class="p-button-rounded p-button-warning"
+                    (click)="deleteCategory(category)"
+                ></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            In total there are
+            {{ categories ? categories.length : 0 }} categories.
+        </div>
+    </ng-template>
+</p-table>
+
+<p-dialog
+    [(visible)]="addDialog"
+    [style]="{ width: '450px' }"
+    header="Category Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <form [formGroup]="categoryForm" class="p-fluid">
+            <div class="field">
+                <span class="p-float-label">
+                    <input
+                        type="text"
+                        pInputText
+                        id="name"
+                        formControlName="name"
+                        required
+                        autofocus
+                    />
+                    <label for="name">{{ 'Name' | translate }}</label>
+                </span>
+                <small
+                    *ngIf="
+                        categoryForm.get('name').invalid &&
+                        (categoryForm.get('name').dirty ||
+                            categoryForm.get('name').touched)
+                    "
+                    class="p-error"
+                    >{{ 'Name' | translate }} {{ 'isRequired' | translate }}</small
+                >
+            </div>
+            <div class="field">
+                <span class="p-float-label">
+                    <input
+                        type="text"
+                        pInputText
+                        id="description"
+                        formControlName="description"
+                    />
+                    <label for="description">{{ 'Description' | translate }}</label>
+                </span>
+            </div>
+            <div class="field">
+                <p-checkbox
+                    id="isForClient"
+                    [binary]="true"
+                    formControlName="isForClient"
+                ></p-checkbox>
+                <label for="isForClient">&nbsp; {{ 'ForClient' | translate }}</label>
+            </div>
+            <div class="field">
+                <p-checkbox
+                    id="isForInventory"
+                    [binary]="true"
+                    formControlName="isForInventory"
+                ></p-checkbox>
+                <label for="isForInventory">&nbsp; {{ 'ForInventory' | translate }}</label>
+            </div>
+            <small
+                *ngIf="
+                    categoryForm.get('isForClient').value === false &&
+                    categoryForm.get('isForInventory').value == false
+                "
+                class="p-error"
+                >{{ 'oneShouldBeSelected' | translate }}</small
+            >
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="{{ 'Cancel' | translate }}"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+        id="save"
+            pButton
+            pRipple
+            label="{{ 'Save' | translate }}"
+            icon="pi pi-check"
+            class="p-button-text"
+            [disabled]="
+                categoryForm.invalid ||
+                (categoryForm.get('isForClient').value === false &&
+                    categoryForm.get('isForInventory').value == false)
+            "
+            (click)="addCategory()"
+        ></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

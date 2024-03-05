@@ -1,0 +1,75 @@
+<div class="title" [class.ar]="translationService.currentLang=== 'ar'">
+<div class="topbar">
+    <div class="flex ">
+    <div id="topbar-left" class="mx-4">
+        <a id="omega-menu-button" href="#" (click)="appMain.toggleMenu($event)">
+            <span class="pi pi-bars"></span>
+        </a>
+        <ng-template ngFor let-item let-last="last" [ngForOf]="items">
+            <span class="topbar-title">{{item.label}}</span>
+        </ng-template>
+    </div>
+        <div>
+            <p-dropdown [options]="translationService.languages" (onChange)="swichLanguage()" [(ngModel)]="selectedLanguage"></p-dropdown>
+        </div>
+    </div>
+
+    <a id="options-menu-button" href="#" (click)="appMain.toggleTopMenu($event)">
+        <span class="pi pi-ellipsis-h"></span>
+    </a>
+   
+    <p-overlayPanel #op [style]="{'width': '450px'}" [showCloseIcon]="true">
+        <ng-template pTemplate="content">
+            <p-table [value]="notifs" selectionMode="single"  responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr >
+                        <th colspan="3" pSortableColumn="name">{{ 'Notifications' | translate }}<p-sortIcon ></p-sortIcon></th>
+          
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-notif>
+                    <tr>
+                        <td><img [src]="notif.attachUrl" style="width: 50px;height:50px;border-radius:50%;" /></td>
+                        <td>{{notif.message}}</td>
+                    
+                        <td> <button
+                            pButton
+                            pRipple
+                            label="Ok"
+                            icon="pi pi-check"
+                            class="p-button-text"
+                            
+                            (click)="deleteNotif(notif)"
+                        ></button></td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+    </p-overlayPanel>
+
+    <div id="topbar-icons" class="animated"
+         [ngClass]="{'topbar-icons-visible flipInX':appMain.topMenuActive,'flipOutX':appMain.topMenuLeaving}">
+         
+
+
+         
+            <a >
+            <span class="topbar-item-text">{{ 'Notofications' | translate }}</span>
+          <span class="topbar-icon">  <i class="pi pi-bell text-xl" (mousedown)="markAsRead()" (click)="op.toggle($event)" severity="danger" pBadge [value]="notifNumber"></i></span> 
+        </a>
+          <a href="#">
+            <span class="topbar-item-text">{{ 'Settings' | translate }}</span>
+            <span class="topbar-icon pi pi-cog"></span>
+        </a>
+        <a href="#">
+            <span class="topbar-item-text">{{ 'User' | translate }}</span>
+            <span class="topbar-icon pi pi-user"></span>
+        </a>
+       
+            
+        
+</div>
+
+
+</div>
+<p-toast></p-toast>

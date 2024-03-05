@@ -1,0 +1,57 @@
+:host ::ng-deep{
+    .parentTable > .p-datatable {
+        width: 80%;
+        margin: auto;
+      }
+    
+      .p-datatable .p-datatable-header {
+        background: #151515;
+        color: #eaf2f9;
+        border: 1px solid #e66007;
+}
+    .p-datatable .p-datatable-thead > tr > th {
+    border: 1px solid #e66007;
+    color: #eaf2f9;
+    background-color: #151515;
+}
+.p-datatable .p-datatable-thead > tr > th:hover {
+    border: 1px solid #151515;
+    color: #151515;
+    background-color: #e66007;
+}
+.p-datatable .p-datatable-footer {
+    background: #151515;
+    color: #eaf2f9;
+    border: 1px solid #e66007;
+}
+.p-paginator {
+    background: #151515;
+    color: #eaf2f9;
+    border: solid #e66007;
+}
+.p-paginator .p-paginator-current {
+    color: #ebeff2;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    color: #ebeff2;
+}
+.p-multiselect .p-multiselect-label.p-placeholder {
+    border: 1px solid #e66007;
+    color: #ebeff2;
+    background-color: #151515;
+  }
+  .p-multiselect .p-multiselect-trigger {
+    border: 1px solid #e66007;
+    background: #151515;
+    color: #ebeff2;
+}
+.p-datatable .p-datatable-tbody > tr > td {
+   
+    border: 1px solid #f5ece8;
+
+    padding: 0% 1%;
+    background-color: #3e3c3a;
+    color: #f5efec;
+  }
+}

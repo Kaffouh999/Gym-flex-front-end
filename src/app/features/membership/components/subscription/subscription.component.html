@@ -1,0 +1,392 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button
+                pButton
+                pRipple
+                label="New"
+                icon="pi pi-plus"
+                class="p-button-success mx-2"
+                (click)="openNew()"
+            ></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button
+                pButton
+                pRipple
+                label="Export"
+                icon="pi pi-upload"
+                class="p-button-help"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+
+  
+<p-dataView #dv [value]="subscriptions" [layout]="layout">
+    <ng-template pTemplate="header">
+
+        <div class="search">
+            <p-dropdown [options]="members" class="seachDrop" [autoDisplayFirst]="false" [(ngModel)]="selectedMember"  [showClear]="true" placeholder="Select a Member">
+                <ng-template  pTemplate="selectedItem">
+                    <div class="flex align-items-center gap-2" *ngIf="selectedMember">
+                        <img [src]="selectedMember.onlineUser.profilePicture" style="width: 18px"/>
+                        <div>{{ selectedMember.onlineUser.firstName }}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-member pTemplate="item">
+                    <div class="flex align-items-center gap-2">
+                        <img [src]="member.onlineUser.profilePicture"  style="width: 18px"/>
+                        <div>{{ member.onlineUser.firstName}}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+
+            <p-dropdown [options]="plans" class="seachDrop" [autoDisplayFirst]="false" [(ngModel)]="selectedPlan"  [showClear]="true" placeholder="Select a Plan">
+                <ng-template let-plan pTemplate="selectedItem">
+                    <div class="flex align-items-center gap-2" *ngIf="selectedPlan">
+                        <img [src]="plan.imageAds" style="width: 18px"/>
+                        <div>{{ plan.name }}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-plan pTemplate="item">
+                    <div class="flex align-items-center gap-2">
+                        <img [src]="plan.imageAds"  style="width: 18px"/>
+                        <div>{{ plan.name}}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+            <p-calendar class="seachDate" [(ngModel)]="rangeDates" selectionMode="range" placeholder="Date Range" [readonlyInput]="true"></p-calendar>
+                
+            <p-button label="Search" class="searchbtn" (onClick)="searchSubs()" styleClass="p-button-outlined p-button-secondary"></p-button>
+        </div>
+
+        <div class="flex justify-content-end">
+            <p-dataViewLayoutOptions ></p-dataViewLayoutOptions>
+        </div>
+    </ng-template>
+    <ng-template let-subscription pTemplate="listItem">
+        <div class="col-12">
+            <div class="flex flex-row xl:flex-row xl:align-items-start p-4 gap-4">
+                <img class="w-9 h-6rem sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" [src]="subscription.member.onlineUser.profilePicture" [alt]="'member image'" />
+                <div class="flex flex-row sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                    <div class="flex flex-row align-items-center sm:align-items-start gap-3">
+                        <div class="text-2xl font-bold text-900">{{ subscription.member.onlineUser.firstName }}</div>
+  
+                        <div class="flex align-items-center gap-3">
+                            <span class="flex align-items-center gap-2">
+                                <i class="pi pi-tag"></i>
+                                <span class="font-semibold">{{ subscription.plan.name  }}</span>
+                            </span>
+                            
+                        </div>
+                    </div>
+                    <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+                        <span class="text-2xl font-semibold">{{ subscription.endDate | date:"dd/MM/yy" }}</span>
+                        <div >
+                            <button
+                            pButton
+                            pRipple
+                            icon="pi pi-qrcode"
+                            class="p-button-rounded p-button-secondary mr-2"
+                            (click)="showQrCode(subscription)"
+                        ></button>
+                        <button
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success mr-2"
+                        (click)="editSubscription(subscription)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-warning"
+                        (click)="deleteSubscription(subscription)"
+                    ></button>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template let-subscription pTemplate="gridItem">
+        <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
+            <div class="p-4 border-1 surface-border surface-card border-round">
+                <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+                    <span class="flex align-items-center gap-2">
+                        <i class="pi pi-tag"></i>
+                        <span class="font-semibold">{{ subscription.plan.name }}</span>
+                    </span>
+                    
+                </div>
+                <div class="flex flex-column align-items-center gap-3 py-5">
+                    <img class="w-9 h-10rem shadow-2 border-round" [src]="subscription.member.onlineUser.profilePicture" [alt]="'member image'" />
+                    <div class="text-2xl font-bold">{{ subscription.member.onlineUser.firstName }}</div>
+                </div>
+                <div class="flex align-items-center justify-content-between">
+                    <span class="text-2xl font-semibold">{{ subscription.endDate | date:"dd/MM/yy" }}</span>
+                    <button
+                    pButton
+                    pRipple
+                    icon="pi pi-qrcode"
+                    class="p-button-rounded p-button-secondary mr-2"
+                    (click)="showQrCode(subscription)"
+                ></button>
+                    <div>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success mr-2"
+                        (click)="editSubscription(subscription)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-warning"
+                        (click)="deleteSubscription(subscription)"
+                    ></button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>
+</div>
+
+<p-dialog
+    [(visible)]="subscriptionDialog"
+    [style]="{ width: '450px' }"
+    header="Update Subscription"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <form [formGroup]="subscriptionForm" class="p-fluid">
+            <div class="formgrid grid">
+            <div class="field col-12 md:col-12">
+                <span class="p-float-label">
+                    <p-dropdown
+                        appendTo="body"
+                        id="member"
+                        [options]="members"
+                        formControlName="member"
+                        optionLabel="onlineUser.firstName"
+                        [autoDisplayFirst]="true"
+                        [filter]="true" filterBy="onlineUser.firstName"
+                    >
+                    <ng-template pTemplate="selectedItem">
+                        <div class="flex align-items-center gap-2" *ngIf="subscriptionForm.get('member').value">
+                            <img [src]="subscriptionForm.get('member').value.onlineUser.profilePicture" class="imageDropdown" />
+                            <div>{{ subscriptionForm.get('member').value.onlineUser.firstName }}</div>
+                        </div>
+                    </ng-template>
+                   
+                    <ng-template let-mmeber pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <img [src]="mmeber.onlineUser.profilePicture" class="imageDropdown"  />
+                            <div>{{ mmeber.onlineUser.firstName }}</div>
+                        </div>
+                    </ng-template>
+                
+                </p-dropdown>
+                    <label for="member">{{'Member' | translate}}</label>
+                </span>
+                <small
+                    *ngIf="
+                        subscriptionForm.get('member').invalid &&
+                        (subscriptionForm.get('member').dirty ||
+                            subscriptionForm.get('member').touched)
+                    "
+                    class="p-error"
+                    >{{'Member' | translate}}  {{'isRequired' | translate}}</small
+                >
+            </div>
+
+            <div class="field col-12 md:col-12">
+                <span class="p-float-label">
+                    <p-dropdown
+                        appendTo="body"
+                        id="plan"
+                        [options]="plans"
+                        formControlName="plan"
+                        optionLabel="name"
+                        [autoDisplayFirst]="true"
+                        [filter]="true" filterBy="name"
+                    >
+               
+                </p-dropdown>
+                    <label for="plan">{{'Plan' | translate}}</label>
+                </span>
+                <small
+                    *ngIf="
+                        subscriptionForm.get('plan').invalid &&
+                        (subscriptionForm.get('plan').dirty ||
+                            subscriptionForm.get('plan').touched)
+                    "
+                    class="p-error"
+                    >{{'Plan' | translate}}  {{'isRequired' | translate}}</small
+                >
+            </div>
+
+            <div class="field col-12 md:col-6">
+                <span class="p-float-label">
+                    <p-calendar
+                        id="startDate"
+                        formControlName="startDate"
+                        appendTo="body"
+                        dateFormat="dd/mm/yy"
+                    >
+                    </p-calendar>
+                    <label htmlFor="startDate">{{'startDate' | translate}}</label>
+                </span>
+                <small
+                    *ngIf="
+                        subscriptionForm.get('startDate').invalid &&
+                        (subscriptionForm.get('startDate').dirty ||
+                            subscriptionForm.get('startDate').touched)
+                    "
+                    class="p-error"
+                    >{{'startDate' | translate}}  {{'isRequired' | translate}}</small
+                >
+            </div>
+
+            <div class="field col-12 md:col-6">
+                <span class="p-float-label">
+                    <p-inputNumber
+              
+                        id="discountPercentage"
+                        formControlName="discountPercentage"
+                      suffix="%"
+                    ></p-inputNumber>
+                    <label for="discountPercentage">{{'Discount' | translate}}</label>
+                </span>
+                <small
+                    *ngIf="
+                        subscriptionForm.get('discountPercentage').invalid &&
+                        (subscriptionForm.get('discountPercentage').dirty ||
+                            subscriptionForm.get('discountPercentage').touched)
+                    "
+                    class="p-error"
+                    >{{'Discount' | translate}}  {{'isRequired' | translate}} </small
+                >
+            </div>
+          
+        
+       
+
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="{{'Cancel' | translate}}"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+        id="save"
+            pButton
+            pRipple
+            label="{{'Save' | translate}}"
+            icon="pi pi-check"
+            class="p-button-text"
+            [disabled]="subscriptionForm.invalid"
+            (click)="saveSubscription()"
+        ></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog
+    [(visible)]="showQrDialog"
+    [style]="{ width: '450px' }"
+    header="Subscription Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+<div id="qrCard">
+    <p-card  class="QrCard" >
+        <ng-template pTemplate="header">
+            <div class="flex">
+            <img
+                        src="{{ subscriptionInput.member.onlineUser.profilePicture }}"
+                        class="imageQr  m-3"
+                        alt="Image"
+                       
+                    />
+                    
+                    <div>
+
+        
+
+      
+            <p class="qrInfos">
+                {{'CIN' | translate}}  : {{subscriptionInput.member.cin}}
+            </p>
+           
+        
+                <p class="qrInfos">
+                    {{'Plan' | translate}} : {{subscriptionInput.plan.name}}
+                </p>
+               
+               
+                    <p class="qrInfos">
+                        {{'startDate' | translate}} : {{subscriptionInput.startDate | date:'dd/MM/yyyy'}}
+                    </p>
+                    
+                    <p class="qrInfos">
+                        {{'endDate' | translate}} : {{subscriptionInput.endDate | date:'dd/MM/yyyy'}}
+                    </p>
+                </div>
+               
+                </div>
+                <div class="flex  justify-content-center">
+                  
+                            <p class="qrInfos">
+                                {{'FullName' | translate}} : {{subscriptionInput.member.onlineUser.firstName}} {{subscriptionInput.member.onlineUser.lastName}}
+                            </p>
+                            
+                   
+                </div>
+        </ng-template>
+        <div class="flex align-items-center justify-content-center">
+        <qr-code [value]="subscriptionInput.codeSubscription" [size]="256"></qr-code>
+    </div>
+       
+    </p-card>
+</div>
+<ng-template pTemplate="footer">
+    <button
+        pButton
+        pRipple
+        label="{{'Cancel' | translate}}"
+        icon="pi pi-times"
+        class="p-button-text"
+        (click)="hideqrDialog()"
+    ></button>
+    <button
+        pButton
+        pRipple
+        label="{{'Print' | translate}}"
+        icon="pi pi-check"
+        class="p-button-text"
+        [useExistingCss]="true"
+        [printStyle]="{'.QrCard':{'backgroud-color':'#c4d5d5'}}"
+        printSectionId="qrCard" ngxPrint>
+        
+        
+    </button>
+</ng-template>
+</p-dialog>
+
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

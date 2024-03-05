@@ -1,0 +1,53 @@
+<div>
+    <app-breadcrumb [pageName]="'Login'" [urlImage]="'../../../assets/img/hero/hero-2.jpg'" ></app-breadcrumb>
+
+    <section class="contact-section spad">
+        <div class="container">
+           
+                    <div class="leave-comment">
+                        <form [formGroup]="loginForm">
+                            
+                            <span class="p-float-label">
+                                
+                                <input pInputText formControlName="email" id="username"  />
+                                <label htmlFor="username">Email</label>
+                                <small
+                                *ngIf="
+                                    loginForm.get('email').invalid &&
+                                    (loginForm.get('email').dirty ||
+                                        loginForm.get('email').touched)
+                                "
+                                class="p-error">{{ 'email' | translate }} {{ 'isRequired' | translate }}</small>
+                               </span>  
+                                
+                            <span class="p-float-label">   
+                                 
+                                     <p-password formControlName="password" id="password" [toggleMask]="true"></p-password>  
+                                     <label for="password">Password</label>
+                                     <small
+                                     *ngIf="
+                                         loginForm.get('password').invalid &&
+                                         (loginForm.get('password').dirty ||
+                                             loginForm.get('password').touched)
+                                     "
+                                     class="p-error">{{ 'password' | translate }} {{ 'isRequired' | translate }}</small>
+                                    </span>                          
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="clear"></div>
+                                <div class="sign-icon">
+                                    <ul>
+                                        <li><a class="facebook" href="#">Facebook</a></li>
+                                        <li><a class="twitter" href="#">twitter</a></li>
+                                        <li><a class="google" href="#">google+</a></li>
+                                    </ul>
+                                    <div class="acc-not">Don't have an account  <a href="signup.html"> Sign up</a></div>
+                                </div> 
+                            </div> 
+                            <button type="submit" class="loginBtn" [disabled]="loginForm.invalid" (click)="login()">Login</button>
+                        </form>
+                </div>
+          
+        </div>
+    </section>
+    <p-toast></p-toast>
+</div>

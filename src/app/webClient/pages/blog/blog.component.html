@@ -1,0 +1,103 @@
+<div>
+     <!-- Breadcrumb Section Begin -->
+    <app-breadcrumb [pageName]="'Our Blogs'"></app-breadcrumb>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Blog Section Begin -->
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 p-0">
+                    <div class="blog-item" *ngFor="let blog of listBlogs">
+                        <div class="bi-pic">
+                            <img src="../assets/img/blog/blog-1.jpg" alt="">
+                        </div>
+                        <div class="bi-text">
+                            <h5><a routerLink="detailBlog">{{blog.title}}</a></h5>
+                            <ul>
+                              
+                                <li>{{blog.dateCreation}}</li>
+                               
+                            </ul>
+                           <p [innerHTML]="blog.body"> </p>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-pagination">
+                        <a routerLink="#">1</a>
+                        <a routerLink="#">2</a>
+                        <a routerLink="#">3</a>
+                        <a routerLink="#">Next</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 p-0">
+                    <div class="sidebar-option">
+                        <div class="so-categories">
+                            <h5 class="title">Categories</h5>
+                            <ul>
+                                <li><a routerLink="#">Yoga <span>12</span></a></li>
+                                <li><a routerLink="#">Runing <span>32</span></a></li>
+                                <li><a routerLink="#">Weightloss <span>86</span></a></li>
+                                <li><a routerLink="#">Cario <span>25</span></a></li>
+                                <li><a routerLink="#">Body buiding <span>36</span></a></li>
+                                <li><a routerLink="#">Nutrition <span>15</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="so-latest">
+                            <h5 class="title">Feature posts</h5>
+                            <div class="latest-large set-bg" data-setbg="../assets/img/letest-blog/latest-1.jpg">
+                                <div class="ll-text">
+                                    <h5><a routerLink="detailBlog">This Japanese Way of Making Iced Coffee Is a Game...</a></h5>
+                                    <ul>
+                                        <li>Aug 20, 2019</li>
+                                        <li>20 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="latest-item">
+                                <div class="li-pic">
+                                    <img src="../assets/img/letest-blog/latest-2.jpg" alt="">
+                                </div>
+                                <div class="li-text">
+                                    <h6><a routerLink="/detailBlog">Grilled Potato and Green Bean Salad</a></h6>
+                                    <span class="li-time">Aug 15, 2019</span>
+                                </div>
+                            </div>
+                            <div class="latest-item">
+                                <div class="li-pic">
+                                    <img src="../assets/img/letest-blog/latest-4.jpg" alt="">
+                                </div>
+                                <div class="li-text">
+                                    <h6><a routerLink="detailBlog">Ina Garten's Skillet-Roasted Lemon Chicken</a></h6>
+                                    <span class="li-time">Aug 15, 2019</span>
+                                </div>
+                            </div>
+                            <div class="latest-item">
+                                <div class="li-pic">
+                                    <img src="../assets/img/letest-blog/latest-5.jpg" alt="">
+                                </div>
+                                <div class="li-text">
+                                    <h6><a routerLink="detailBlog">The Best Weeknight Baked Potatoes, 3 Creative Ways</a></h6>
+                                    <span class="li-time">Aug 15, 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="so-tags">
+                            <h5 class="title">Popular tags</h5>
+                            <a routerLink="#">Gyming</a>
+                            <a routerLink="#">Body buidling</a>
+                            <a routerLink="#">Yoga</a>
+                            <a routerLink="#">Weightloss</a>
+                            <a routerLink="#">Proffeponal</a>
+                            <a routerLink="#">Streching</a>
+                            <a routerLink="#">Cardio</a>
+                            <a routerLink="#">Karate</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+</div>

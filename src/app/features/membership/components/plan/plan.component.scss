@@ -1,0 +1,23 @@
+.field{
+    margin-top: 20px;
+}
+:host{
+    ::ng-deep .imageTable > .p-image-preview-container > img{
+        width: 80px;
+        height: 60px;
+        border-radius: 5%;
+    }
+     ::ng-deep .imagebeforeupdate > .p-image-preview-container > img{
+        width: 250px;
+        height: 125px;
+    }
+    ::ng-deep .p-element.imagebeforeupdate{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+    .updateimagebtn{
+        width: 20%;
+      margin-top: 15px;
+    }
+    }

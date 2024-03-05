@@ -1,0 +1,325 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button
+                pButton
+                pRipple
+                label="{{ 'New' | translate }}"
+                icon="pi pi-plus"
+                class="p-button-success mx-2"
+                (click)="openNew()"
+            ></button>
+            <button
+                pButton
+                pRipple
+                label="{{ 'Delete' | translate }}"
+                icon="pi pi-trash"
+                class="p-button-danger"
+                (click)="deleteSelectedPlans()"
+                [disabled]="!selectedplans || !selectedplans.length"
+            ></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button
+                pButton
+                pRipple
+                label="{{ 'Export' | translate }}"
+                icon="pi pi-upload"
+                class="p-button-help"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="plans"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="[
+            'name',
+            'email',
+            'phoneNumber',
+            'adress',
+            'sessionDurationAllowed'
+        ]"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [(selection)]="selectedplans"
+        [rowHover]="true"
+        dataKey="id"
+        styleClass="p-datatable-gridlines"
+        [resizableColumns]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">{{ 'Manage' | translate }} {{ 'plans' | translate }}</h5>
+                <!-- <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                        pInputText
+                        type="text"
+                        (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                        "
+                        placeholder="Search..."
+                    />
+                </span> -->
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="name" style="min-width: 10rem">
+                    {{ 'Name' | translate }} <p-sortIcon field="name"></p-sortIcon>
+                    <p-columnFilter
+                    class="filterIcon"
+                    type="text"
+                    field="name"
+                    display="menu"
+                ></p-columnFilter>
+                </th>
+                <th>{{ 'Image' | translate }}</th>
+                <th pSortableColumn="description">
+                    {{ 'Description' | translate }}<p-sortIcon field="description"></p-sortIcon>
+                    <p-columnFilter
+                    class="filterIcon"
+                    type="text"
+                    field="description"
+                    display="menu"
+                ></p-columnFilter>
+                </th>
+                <th pSortableColumn="duration" style="min-width: 10rem">
+                    {{ 'duration' | translate }}<p-sortIcon field="duration"></p-sortIcon>
+                    <p-columnFilter
+                    class="filterIcon"
+                    type="numeric"
+                    [suffix]="' Days'"
+                    field="duration"
+                    display="menu"
+                ></p-columnFilter>
+                </th>
+                <th pSortableColumn="price" style="min-width: 10rem">
+                    {{ 'price' | translate }}<p-sortIcon field="price"></p-sortIcon>
+                    <p-columnFilter
+                    class="filterIcon"
+                    [suffix]="' MAD'"
+                    type="numeric"
+                    field="price"
+                    display="menu"
+                ></p-columnFilter>
+                </th>
+
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-plan>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="gymBranch"></p-tableCheckbox>
+                </td>
+                <td>{{ plan.name }}</td>
+                <td id="image">
+                    <p-image
+                        src="{{ plan.imageAds }}?t={{ timeStamp }}"
+                        class="imageTable"
+                        alt="Image"
+                        [preview]="true"
+                    ></p-image>
+                </td>
+                <td>{{ plan.description }}</td>
+                <td>{{ plan.duration }}</td>
+                <td>{{ plan.price }}</td>
+                <td>   <p-rating
+                    [ngModel]="plan.ratingPer5"
+                    [readonly]="true"
+                    [stars]="5"
+                    [cancel]="false"
+                ></p-rating></td>
+
+                <td>
+                    <button
+                    pButton
+                    pRipple
+                    icon="pi pi-upload"
+                    class="p-button-rounded p-button-secondary mr-2"
+                    (click)="editImage(plan)"
+                ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success mr-2"
+                        (click)="editplanInput(plan)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-warning"
+                        (click)="deleteplan(plan)"
+                    ></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are
+                {{ plans ? plans.length : 0 }} plan.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog
+    [(visible)]="planDialog"
+    [style]="{ width: '50%' }"
+    header="Gym Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <form [formGroup]="plansFrom" class="p-fluid">
+            <div class="formgrid grid">
+                <div class="field col-12 md:col-12">
+                    <span class="p-float-label">
+                        <input
+                            type="text"
+                            pInputText
+                            id="name"
+                            formControlName="name"
+                            required
+                        />
+                        <label htmlFor="name">{{ 'Name' | translate }}</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            plansFrom.get('name').invalid &&
+                            (plansFrom.get('name').dirty ||
+                                plansFrom.get('name').touched)
+                        "
+                        class="p-error"
+                        >{{ 'Name' | translate }} {{ 'isRequired' | translate }}</small
+                    >
+                </div>
+
+                <div class="field col-12 md:col-12">
+                    <span class="p-float-label">
+                        <textarea
+                        id="description"
+                            [rows]="5"
+                            [cols]="30"
+                            pInputTextarea
+                            formControlName="description"
+                            [autoResize]="true"
+                        ></textarea>
+                        <label htmlFor="description">{{ 'Description' | translate }}</label>
+                    </span>
+                </div>
+                <div class="field col-6 md:col-6">
+                    <span class="p-float-label">
+                        <p-inputNumber
+                            id="duration"
+                            formControlName="duration"
+                            suffix=" min"
+                        ></p-inputNumber>
+                        <label htmlFor="duration">{{ 'duration' | translate }}</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            plansFrom.get('duration').invalid &&
+                            (plansFrom.get('duration').dirty ||
+                                plansFrom.get('duration').touched)
+                        "
+                        class="p-error"
+                        >{{ 'duration' | translate }} {{ 'isRequired' | translate }}</small
+                    >
+                </div>
+
+                <div class="field col-6 md:col-6">
+                    <span class="p-float-label">
+                        <p-inputNumber
+                            id="price"
+                            mode="currency"
+                            currency="MAD"
+                            locale="en-MA"
+                            formControlName="price"
+                        ></p-inputNumber>
+                        <label htmlFor="price"> {{ 'price' | translate }}</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            plansFrom.get('price').invalid &&
+                            (plansFrom.get('price').dirty ||
+                                plansFrom.get('price').touched)
+                        "
+                        class="p-error"
+                        >{{ 'price' | translate }} {{ 'isRequired' | translate }}</small
+                    >
+                </div>
+            </div>
+   
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="{{ 'Cancel' | translate }}"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+        id="save"
+            pButton
+            pRipple
+            label="{{ 'Save' | translate }}"
+            icon="pi pi-check"
+            class="p-button-text"
+            [disabled]="plansFrom.invalid"
+            (click)="saveplan()"
+        ></button>
+    </ng-template>
+</p-dialog>
+<p-dialog
+    [(visible)]="planImageDialog"
+    [style]="{ width: '450px' }"
+    header="Update Plan image"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <p-image
+            src="{{ planInput.imageAds }}?t={{ timeStamp }}"
+            class="imagebeforeupdate"
+            alt="Image"
+            [preview]="true"
+        ></p-image>
+        <p-fileUpload
+            [customUpload]="true"
+            [auto]="true"
+            accept="image/*"
+            (uploadHandler)="onUpload($event)"
+            [maxFileSize]="1000000"
+        >
+        </p-fileUpload>
+        <button
+            pButton
+            pRipple
+            label="{{ 'Save' | translate }}"
+            icon="pi pi-check"
+            class="p-button-text updateimagebtn"
+            (click)="updateImage()"
+        ></button>
+    </ng-template>
+</p-dialog>
+
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

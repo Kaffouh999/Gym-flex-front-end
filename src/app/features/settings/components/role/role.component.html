@@ -1,0 +1,315 @@
+<p-toast></p-toast>
+<div class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button
+                pButton
+                pRipple
+                label="{{ 'New' | translate }}"
+                icon="pi pi-plus"
+                class="p-button-success mx-2"
+                (click)="openNew()"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+</div>
+<p-table
+    #dt
+    [value]="roles"
+    [rows]="10"
+    [paginator]="true"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+    [globalFilterFields]="['name', 'description']"
+>
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            <h5 class="m-0">{{ 'Manage' | translate }} {{ 'roles' | translate }}</h5>
+            <button
+                    pButton
+                    label="Clear"
+                    class="p-button-outlined clearButton"
+                    icon="pi pi-filter-slash"
+                    (click)="clear(dt)"
+                ></button>
+            <!-- <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input
+                    pInputText
+                    type="text"
+                    (input)="dt.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Search..."
+                />
+            </span> -->
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 4rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="name" style="min-width: 15rem">
+                {{ 'Name' | translate }} <p-sortIcon field="name"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="text"
+                field="name"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+            <th pSortableColumn="description" style="min-width: 15rem">
+                {{ 'Description' | translate }}
+                <p-sortIcon field="description"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="text"
+                field="description"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+            <th pSortableColumn="Analytics" style="min-width: 15rem">
+                {{ 'analytics' | translate }} <p-sortIcon field="analytics"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="boolean"
+                field="analytics"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+            <th pSortableColumn="membership" style="min-width: 15rem">
+                {{ 'membership' | translate }}
+                <p-sortIcon field="membership"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="boolean"
+                field="membership"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+            <th pSortableColumn="payments" style="min-width: 15rem">
+                {{ 'payments' | translate }}
+                <p-sortIcon field="payments"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="boolean"
+                field="payments"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+            <th pSortableColumn="inventory" style="min-width: 15rem">
+                {{ 'inventory' | translate }}
+                <p-sortIcon field="inventory"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="boolean"
+                field="inventory"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+            <th pSortableColumn="training" style="min-width: 15rem">
+                {{ 'training' | translate }}
+                <p-sortIcon field="training"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="boolean"
+                field="training"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+            <th pSortableColumn="settings" style="min-width: 15rem">
+                {{ 'settings' | translate }}
+                <p-sortIcon field="settings"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="boolean"
+                field="settings"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+            <th pSortableColumn="preferences" style="min-width: 15rem">
+                {{ 'preferences' | translate }}
+                <p-sortIcon field="preferences"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="boolean"
+                field="preferences"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+            <th pSortableColumn="manageWebSite" style="min-width: 15rem">
+                {{ 'manageWebSite' | translate }}
+                <p-sortIcon field="manageWebSite"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="boolean"
+                field="manageWebSite"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+
+               <th pSortableColumn="coach" style="min-width: 15rem">
+                {{ 'Coach' | translate }}
+                <p-sortIcon field="coach"></p-sortIcon>
+                <p-columnFilter
+                class="filterIcon"
+                type="boolean"
+                field="coach"
+                display="menu"
+            ></p-columnFilter>
+            </th>
+
+            <th></th>
+        </tr>
+    
+    </ng-template>
+    <ng-template pTemplate="body" let-role>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="role"></p-tableCheckbox>
+            </td>
+            <td>{{ role.name }}</td>
+            <td>{{ role.description }}</td>
+            <td>{{ role.analytics }}</td>
+            <td>{{ role.membership }}</td>
+            <td>{{ role.payments }}</td>
+            <td>{{ role.inventory }}</td>
+            <td>{{ role.training }}</td>
+            <td>{{ role.settings }}</td>
+            <td>{{ role.preferences }}</td>
+            <td>{{ role.manageWebSite }}</td>
+            <td>{{ role.coach }}</td>
+
+            <td>
+                <button
+                    pButton
+                    pRipple
+                    icon="pi pi-pencil"
+                    class="p-button-rounded p-button-success mr-2"
+                    (click)="editRole(role)"
+                ></button>
+                <button
+                    pButton
+                    pRipple
+                    icon="pi pi-trash"
+                    class="p-button-rounded p-button-warning"
+                    (click)="deleteRole(role)"
+                ></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            In total there are
+            {{ roles ? roles.length : 0 }} roles.
+        </div>
+    </ng-template>
+</p-table>
+
+<p-dialog
+    [(visible)]="addDialog"
+    [style]="{ width: '450px' }"
+    header="Category Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <form [formGroup]="roleForm" class="p-fluid">
+            <div class="formgrid grid">
+            <div class="field col-12 md:col-5">
+                <span class="p-float-label">
+                    <input
+                        type="text"
+                        pInputText
+                        id="name"
+                        formControlName="name"
+                        required
+                        autofocus
+                    />
+                    <label for="name">{{ 'Name' | translate }}</label>
+                </span>
+                <small
+                    *ngIf="
+                        roleForm.get('name').invalid &&
+                        (roleForm.get('name').dirty ||
+                            roleForm.get('name').touched)
+                    "
+                    class="p-error"
+                    >{{ 'Name' | translate }} {{ 'isRequired' | translate }}</small
+                >
+            </div>
+            <div class="field col-12 md:col-7">
+                <span class="p-float-label">
+                    <input
+                        type="text"
+                        pInputText
+                        id="description"
+                        formControlName="description"
+                    />
+                    <label for="description">{{ 'Description' | translate }}</label>
+                </span>
+            </div>
+            <div class="field col-3 md:col-4">
+                <p-toggleButton formControlName="analytics" onLabel="{{ 'analytics' | translate }}" offLabel="No"></p-toggleButton>
+                <label for="analytics">&nbsp; {{ 'analytics' | translate }}</label>
+            </div>
+            <div class="field col-3 md:col-4">
+                <p-toggleButton formControlName="membership" onLabel="{{ 'membership' | translate }}" offLabel="No"></p-toggleButton>
+                <label for="membership">&nbsp; {{ 'membership' | translate }}</label>
+            </div>
+            <div class="field col-3 md:col-4">
+                <p-toggleButton formControlName="payments" onLabel="{{ 'payments' | translate }}" offLabel="No"></p-toggleButton>
+                <label for="payments">&nbsp; {{ 'payments' | translate }}</label>
+            </div>
+            <div class="field col-3 md:col-4">
+                <p-toggleButton formControlName="inventory" onLabel="{{ 'inventory' | translate }}" offLabel="No"></p-toggleButton>
+                <label for="inventory">&nbsp; {{ 'inventory' | translate }}</label>
+            </div>
+            <div class="field col-3 md:col-4">
+                <p-toggleButton formControlName="training" onLabel="{{ 'training' | translate }}" offLabel="No"></p-toggleButton>
+                <label for="training">&nbsp; {{ 'training' | translate }}</label>
+            </div>
+            <div class="field col-3 md:col-4">
+                <p-toggleButton formControlName="settings" onLabel="{{ 'settings' | translate }}" offLabel="No"></p-toggleButton>
+                <label for="settings">&nbsp; {{ 'settings' | translate }}</label>
+            </div>
+            <div class="field col-3 md:col-4">
+                <p-toggleButton formControlName="preferences" onLabel="{{ 'preferences' | translate }}" offLabel="No"></p-toggleButton>
+                <label for="preferences">&nbsp; {{ 'preferences' | translate }}</label>
+            </div>
+            <div class="field col-3 md:col-4">
+                <p-toggleButton formControlName="manageWebSite" onLabel="{{ 'manageWebSite' | translate }}" offLabel="No"></p-toggleButton>
+                <label for="manageWebSite">&nbsp; {{ 'manageWebSite' | translate }}</label>
+            </div>
+            <div class="field col-3 md:col-4">
+                <p-toggleButton formControlName="coach" onLabel="{{ 'coach' | translate }}" offLabel="No"></p-toggleButton>
+                <label for="coach">&nbsp; {{ 'coach' | translate }}</label>
+            </div>
+        </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="{{ 'Cancel' | translate }}"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+            pButton
+            pRipple
+            label="{{ 'Save' | translate }}"
+            icon="pi pi-check"
+            class="p-button-text"
+           
+            (click)="addRole()"
+        ></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

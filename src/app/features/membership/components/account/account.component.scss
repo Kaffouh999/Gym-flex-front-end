@@ -1,0 +1,54 @@
+:host ::ng-deep{
+     .imagebeforeupdate > .p-image-preview-container > img{
+        width: 25vh;
+        height: 25vh;
+        border-radius: 50%;
+    }
+  
+     .p-element.imagebeforeupdate{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+    .updateimagebtn{
+        width: 20%;
+      margin-top: 15px;
+    }
+    .p-inplace {
+        font-size: 1.7rem;
+        
+      
+      }
+      .formgrid{
+        width: 80%;
+        margin: 5% auto;
+        padding: 1%;
+        border-radius:5% ;
+        background-color: #f06e0f08;
+        box-shadow: gainsboro 7px 10px;
+
+      }
+      label {
+        font-size: 1.3rem;
+        color: darkgray;
+        margin: 1vh;
+      }
+      .p-inplace .p-inplace-display {
+        display: flex;
+        
+      }
+      .p-inputtext {
+        font-size: 1.17rem;
+        width:10%;
+      }
+      .formgroup-inline{
+        margin: 1vh;
+        width: 45%;
+      }
+      .p-fluid .p-inputtext {
+        width: 115%;
+      }
+      .p-fluid .p-button {
+        width: 20%;
+      }
+    }

@@ -1,0 +1,336 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button
+                pButton
+                pRipple
+                label="{{ 'New' | translate }}"
+                icon="pi pi-plus"
+                class="p-button-success mx-2"
+                (click)="openNew()"
+            ></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button
+                pButton
+                pRipple
+                label="{{ 'Export' | translate }}"
+                icon="pi pi-upload"
+                class="p-button-help"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="assurances"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="['name', 'description', 'subCategory.name']"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [rowHover]="true"
+        dataKey="id"
+        styleClass="p-datatable-gridlines"
+        [resizableColumns]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        [(selection)]="selectedAssurances"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">{{ 'Manage' | translate }} {{ 'assurances' | translate }}</h5>
+                <button
+                    pButton
+                    label="Clear"
+                    class="p-button-outlined clearButton"
+                    icon="pi pi-filter-slash"
+                    (click)="clear(dt)"
+                ></button>
+                <!-- <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                        pInputText
+                        type="text"
+                        (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                        "
+                        placeholder="Search..."
+                    />
+                </span> -->
+                <p-toolbar>
+                <div class="p-toolbar-group-start">
+                    <button [disabled]="!selectedAssurances || !selectedAssurances.length" type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+                    <button [disabled]="!selectedAssurances || !selectedAssurances.length" type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mx-2" pTooltip="PDF" tooltipPosition="bottom"></button>        <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+                    selectedItemsLabel="{0} columns selected" [style]="{'min-width': '200px'}" placeholder="Choose Columns"></p-multiSelect>    </div>
+                </p-toolbar>
+
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="name" style="min-width: 15rem">
+                     {{ 'assurancAgency' | translate }} <p-sortIcon field="name"></p-sortIcon>
+                     <p-columnFilter
+                     class="filterIcon"
+                     type="text"
+                     field="name"
+                     display="menu"
+                 ></p-columnFilter>
+                </th>
+                <th >
+                    {{ 'Member' | translate }}    <p-columnFilter field="member.id" matchMode="in" [showMenu]="false" >
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect appendTo="body" [ngModel]="value" optionValue="id" [options]="members" placeholder="Any" (onChange)="filter($event.value)" optionLabel="onlineUser.firstName">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="inline-block vertical-align-middle">
+                                        <img [alt]="'member image'" src="{{option.onlineUser.profilePicture}}" width="30" height="30" style="border-radius: 50%;" class="vertical-align-middle" />
+                                        <span class="ml-1 mt-1">{{ option.onlineUser.firstName+" "+ option.onlineUser.lastName}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
+                    
+                </th>
+                <th pSortableColumn="startDate" style="min-width: 10rem">
+                    {{ 'startDate' | translate }}<p-sortIcon
+                        field="startDate"
+                    ></p-sortIcon>
+                    <p-columnFilter type="date" field="startDate" display="menu"></p-columnFilter>
+                
+                </th>
+                <th pSortableColumn="endDate" style="min-width: 10rem">
+                    {{ 'endDate' | translate }}<p-sortIcon
+                        field="endDate"
+                    ></p-sortIcon>
+                    <p-columnFilter type="date" field="endDate" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="amountPayed" style="min-width: 10rem">
+                    {{ 'AmountPayed' | translate }}<p-sortIcon
+                        field="amountPayed"
+                    ></p-sortIcon>
+                    <p-columnFilter
+                    class="filterIcon"
+                    type="numeric"
+                    field="amountPayed"
+                    display="menu"
+                ></p-columnFilter>
+                </th>
+
+                <th></th>
+            </tr>
+           
+        </ng-template>
+        <ng-template pTemplate="body" let-assurance>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="assurance"></p-tableCheckbox>
+                </td>
+                <td>{{ assurance.assurancAgency }}</td>
+                <td id="image">
+                    <div class="flex align-items-center">
+                    <p-image
+                        src="{{ assurance.member.onlineUser.profilePicture }}?t={{ timeStamp }}"
+                        class="imageTable"
+                        alt="Image"
+                        [preview]="true"
+                    ></p-image>
+                    <p class="ml-1 font-semibold mt-1">{{ assurance.member.onlineUser.firstName+" "+ assurance.member.onlineUser.lastName}}</p>
+                </div>
+                </td>
+                <td>{{ assurance.startDate | date :'dd/MM/yyyy' }}</td>
+              
+                <td>{{ assurance.endDate | date :'dd/MM/yyyy'}}</td>
+
+                <td>{{ assurance.amountPayed }} DH</td>
+
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success mr-2"
+                        (click)="editAssurance(assurance)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-warning"
+                        (click)="deleteAssurance(assurance)"
+                    ></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are
+                {{ assurances ? assurances.length : 0 }} Assurance.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog
+    [(visible)]="assuranceDialog"
+    [style]="{ width: '450px' }"
+    header="Assurance Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <form [formGroup]="assuranceForm" class="p-fluid">
+            <div class="formgrid grid">
+            <div class="field col-12 md:col-12">
+                <span class="p-float-label">
+                    <p-dropdown
+                        appendTo="body"
+                        id="member"
+                        [options]="members"
+                        formControlName="member"
+                        optionLabel="onlineUser.firstName"
+                        [autoDisplayFirst]="true"
+                        [filter]="true" filterBy="onlineUser.firstName"
+                    >
+                    <ng-template pTemplate="selectedItem">
+                        <div class="flex align-items-center gap-2" *ngIf="assuranceForm.get('member').value">
+                            <img [src]="assuranceForm.get('member').value.onlineUser.profilePicture" class="imageDropdown" />
+                            <div>{{ assuranceForm.get('member').value.onlineUser.firstName }}</div>
+                        </div>
+                    </ng-template>
+                   
+                    <ng-template let-mmeber pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <img [src]="mmeber.onlineUser.profilePicture" class="imageDropdown"  />
+                            <div>{{ mmeber.onlineUser.firstName }}</div>
+                        </div>
+                    </ng-template>
+                
+                </p-dropdown>
+                    <label for="member">{{ 'Member' | translate }}</label>
+                </span>
+                <small
+                    *ngIf="
+                        assuranceForm.get('member').invalid &&
+                        (assuranceForm.get('member').dirty ||
+                            assuranceForm.get('member').touched)
+                    "
+                    class="p-error"
+                    >{{ 'Member' | translate }} {{ 'isRequired' | translate }}</small
+                >
+            </div>
+            <div class="field col-12 md:col-6">
+                <span class="p-float-label">
+                    <input
+                        type="text"
+                        pInputText
+                        id="assurancAgency"
+                        formControlName="assurancAgency"
+                        ng-required="true"
+                        autofocus
+                    />
+                    <label for="assurancAgency">{{ 'assurancAgency' | translate }}</label>
+                </span>
+            </div>
+            <div class="field col-12 md:col-6">
+                <span class="p-float-label">
+                    <p-inputNumber
+              
+                        id="amountPayed"
+                        formControlName="amountPayed"
+                        mode="currency"
+                            currency="MAD"
+                            locale="en-MA"
+                    ></p-inputNumber>
+                    <label for="amountPayed">{{ 'AmountPayed' | translate }}</label>
+                </span>
+                <small
+                    *ngIf="
+                        assuranceForm.get('amountPayed').invalid &&
+                        (assuranceForm.get('amountPayed').dirty ||
+                            assuranceForm.get('amountPayed').touched)
+                    "
+                    class="p-error"
+                    >{{ 'AmountPayed' | translate }} {{ 'isRequired' | translate }}</small
+                >
+            </div>
+            <div class="field col-6 md:col-6">
+                <span class="p-float-label">
+                    <p-calendar
+                        id="startDate"
+                        formControlName="startDate"
+                        appendTo="body"
+                        dateFormat="dd/mm/yy"
+                    >
+                    </p-calendar>
+                    <label htmlFor="startDate">{{ 'startDate' | translate }}</label>
+                </span>
+                <small
+                    *ngIf="
+                        assuranceForm.get('startDate').invalid &&
+                        (assuranceForm.get('startDate').dirty ||
+                            assuranceForm.get('startDate').touched)
+                    "
+                    class="p-error"
+                    >{{ 'startDate' | translate }} {{ 'isRequired' | translate }}</small
+                >
+            </div>
+            <div class="field col-6 md:col-6">
+                <span class="p-float-label">
+                    <p-calendar
+                    appendTo="body"
+                        id="endDate"
+                        formControlName="endDate"
+                        dateFormat="dd/mm/yy"
+                     
+                    >
+                    </p-calendar>
+                    <label htmlFor="endDate">{{ 'endDate' | translate }}</label>
+                </span>
+                <small
+                    *ngIf="
+                        assuranceForm.get('endDate').invalid &&
+                        (assuranceForm.get('endDate').dirty ||
+                            assuranceForm.get('endDate').touched)
+                    "
+                    class="p-error"
+                    >{{ 'endDate' | translate }} {{ 'isRequired' | translate }}</small
+                >
+            </div>
+       
+
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button
+        id="save"
+            pButton
+            pRipple
+            label="{{ 'Cancel' | translate }}"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+            pButton
+            pRipple
+            label="{{ 'Save' | translate }}"
+            icon="pi pi-check"
+            class="p-button-text"
+            [disabled]="assuranceForm.invalid"
+            (click)="saveAssurance()"
+        ></button>
+    </ng-template>
+</p-dialog>
+
+
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

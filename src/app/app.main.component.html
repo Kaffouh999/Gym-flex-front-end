@@ -1,0 +1,41 @@
+<div class="wrapper" [ngClass]="{'menu-layout-overlay':isOVerlay(),
+                                'menu-layout-static':isStatic(),
+                                'layout-light':app.lightMenu,
+                                'sidebar-inactive-l':menuInactiveDesktop,
+                                'sidebar-active-m':menuActiveMobile,
+                                'p-ripple-disabled': !app.ripple, 'p-input-filled': app.inputStyle === 'filled'}">
+    <app-topbar></app-topbar>
+
+    <div class="sidebar" (click)="onMenuClick()">
+        <div class="sidebar-scroll-content">
+            <div class="logo" routerLink="/" style="outline: none; cursor: pointer;">
+                <img [src]="'assets/img/logo.png'" style="position: absolute; top: 20px;left: 15px;"  alt="" width="130">
+                <img [src]="'assets/layout/images/gymFlexLogo.png'" style="position: absolute; bottom: 60px;left: 70px;" alt="" width="113">
+            </div>
+            <div class="profile">
+                <img style="height:10vh;width:10vh;border-radius: 50%;" src="{{ authUser.profilePicture }}?t={{ timeStamp }}" alt=""/>
+                <a id="profile-button" href="#" (click)="toggleProfile($event)">
+                    <span class="username">{{authUser.firstName}} {{authUser.lastName}}</span>
+                    <i class="pi pi-fw pi-cog"></i>
+                </a>
+                <ul [@submenu]="profileActive ? 'visible' : 'hidden'">
+                    <li><a routerLink="membership/account"><i class="pi pi-fw pi-sliders-h"></i><span>Account</span></a></li>
+                    <li><a href="#"><i class="pi pi-fw pi-bell"></i><span>Notifications</span><span
+                        class="menu-badge">2</span></a></li>
+                    <li><a (click)="logout()"><i class="pi pi-fw pi-sign-out"></i><span>Logout</span></a></li>
+                </ul>
+            </div>
+            <app-menu></app-menu>
+        </div>
+    </div>
+    <div class="main">
+        <router-outlet></router-outlet>
+    </div>
+
+    <app-config></app-config>
+
+    <div class="footer">
+        <img src="assets/layout/images/gymFlexLogo.png" alt="" style="margin-inline: 15px;" width="50">
+        <span class="footer-text">Don't limit your challenge , challenge your limit</span>
+    </div>
+</div>

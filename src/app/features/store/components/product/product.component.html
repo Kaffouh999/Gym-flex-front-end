@@ -1,0 +1,445 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button
+                pButton
+                pRipple
+                label="New"
+                icon="pi pi-plus"
+                class="p-button-success mr-2"
+                (click)="openNew()"
+            ></button>
+            <button
+                pButton
+                pRipple
+                icon="pi pi-trash"
+                class="p-button-danger"
+                (click)="deleteSelectedProducts()"
+                [disabled]="!selectedProducts || !selectedProducts.length"
+            ></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button
+                pButton
+                pRipple
+                label="Export"
+                icon="pi pi-upload"
+                class="p-button-help"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="products"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="[
+            'name',
+            'desscription',
+            'price',
+            'rating',
+            'discount',
+            'qteinSTock',
+            'subCategory.name'
+        ]"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [(selection)]="selectedProducts"
+        [rowHover]="true"
+        dataKey="id"
+        styleClass="p-datatable-gridlines"
+        [resizableColumns]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        [columns]="selectedColumns"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Manage Products</h5>
+                <button
+                    pButton
+                    label="Clear"
+                    class="p-button-outlined clearButton"
+                    icon="pi pi-filter-slash"
+                    (click)="clear(dt)"
+                ></button>
+                <p-multiSelect
+                    [options]="cols"
+                    [(ngModel)]="selectedColumns"
+                    optionLabel="header"
+                    selectedItemsLabel="{0} columns selected"
+                    [style]="{ minWidth: '200px' }"
+                    placeholder="Choose Columns"
+                ></p-multiSelect>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                        #searchInput
+                        pInputText
+                        type="text"
+                        (input)="dt.filterGlobal(searchInput.value, 'contains')"
+                        placeholder="Search..."
+                    />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th>Image</th>
+                <th pSortableColumn="name">
+                    Name<p-sortIcon field="name"></p-sortIcon>
+                    <p-columnFilter
+                        class="filterIcon"
+                        type="text"
+                        field="name"
+                        display="menu"
+                    ></p-columnFilter>
+                </th>
+                <th pSortableColumn="description">
+                    Description<p-sortIcon field="description"></p-sortIcon>
+                    <p-columnFilter
+                        class="filterIcon"
+                        type="text"
+                        field="description"
+                        display="menu"
+                    ></p-columnFilter>
+                </th>
+                <th pSortableColumn="price">
+                    Price<p-sortIcon field="price"></p-sortIcon>
+                    <p-columnFilter
+                        class="filterIcon"
+                        type="numeric"
+                        field="price"
+                        [suffix]="' MAD'"
+                        display="menu"
+                    ></p-columnFilter>
+                </th>
+                <th pSortableColumn="subCategory.name">
+                    SubCategory<p-sortIcon
+                        field="subCategory.name"
+                    ></p-sortIcon>
+                    <p-columnFilter
+                        class="filterIcon"
+                        type="text"
+                        field="subCategory.name"
+                        display="menu"
+                    ></p-columnFilter>
+            
+                </th>
+                <th pSortableColumn="qteinSTock">
+                    Qte in STock<p-sortIcon field="qteinSTock"></p-sortIcon>
+                    <p-columnFilter
+                        class="filterIcon"
+                        type="numeric"
+                        field="qteinSTock"
+                        display="menu"
+                    ></p-columnFilter>
+                </th>
+                <th pSortableColumn="rating">
+                    Rating<p-sortIcon field="rating"></p-sortIcon>
+                </th>
+                <th pSortableColumn="discount">
+                    Discount<p-sortIcon field="discount"></p-sortIcon>
+                    <p-columnFilter
+                        class="filterIcon"
+                        type="numeric"
+                        field="discount"
+                        [suffix]="' %'"
+                        display="menu"
+                    ></p-columnFilter>
+                </th>
+
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                </td>
+                <td id="image">
+                    <p-image
+                        src="{{ product.imageUrl }}?t={{ timeStamp }}"
+                        class="imageTable"
+                        alt="Image"
+                        [preview]="true"
+                    ></p-image>
+                </td>
+
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }} DH</td>
+                <td>{{ product.subCategory.name }}</td>
+                <td>{{ product.qteinSTock }}</td>
+                <td>
+                    <p-rating
+                        [ngModel]="product.rating"
+                        [readonly]="true"
+                        [stars]="5"
+                        [cancel]="false"
+                    ></p-rating>
+                </td>
+                <td>{{ product.discount }}</td>
+
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-upload"
+                        class="p-button-rounded p-button-secondary mr-2"
+                        (click)="editImage(product)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success mr-2"
+                        (click)="editProductInput(product)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-warning"
+                        (click)="deleteProduct(product)"
+                    ></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are
+                {{ products ? products.length : 0 }} Products
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog
+    [(visible)]="productDialog"
+    [style]="{ width: '50%' }"
+    header="Gym Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <form [formGroup]="productForm" class="p-fluid">
+            <div class="formgrid grid">
+                <div class="field col-12 md:col-8">
+                    <span class="p-float-label">
+                        <input
+                            type="text"
+                            pInputText
+                            id="name"
+                            formControlName="name"
+                            [required]
+                        />
+                        <label htmlFor="name">Name</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            productForm.get('name').invalid &&
+                            (productForm.get('name').dirty ||
+                                productForm.get('name').touched)
+                        "
+                        class="p-error"
+                        >Name is required</small
+                    >
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-dropdown
+                            appendTo="body"
+                            id="subCategory"
+                            [options]="subCategories"
+                            optionLabel="name"
+                            formControlName="subCategory"
+                        ></p-dropdown>
+                        <label for="subCategory">subCategory</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            productForm.get('subCategory').invalid &&
+                            (productForm.get('subCategory').dirty ||
+                                productForm.get('subCategory').touched)
+                        "
+                        class="p-error"
+                        >subCategory is required</small
+                    >
+                </div>
+                <div class="field col-12 md:col-12">
+                    <span class="p-float-label">
+                        <textarea
+                            [rows]="5"
+                            pInputTextarea
+                            id="description"
+                            formControlName="description"
+                            [autoResize]="true"
+                        ></textarea>
+                        <label htmlFor="description">Description</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            productForm.get('description').invalid &&
+                            (productForm.get('description').dirty ||
+                                productForm.get('description').touched)
+                        "
+                        class="p-error"
+                        >Description is required</small
+                    >
+                </div>
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-inputNumber
+                            id="price"
+                            formControlName="price"
+                            suffix=" DH"
+                            [required]
+                        ></p-inputNumber>
+                        <label htmlFor="price">Price</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            productForm.get('price').invalid &&
+                            (productForm.get('price').dirty ||
+                                productForm.get('price').touched)
+                        "
+                        class="p-error"
+                        >Price is required</small
+                    >
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-inputNumber
+                            id="qteinSTock"
+                            formControlName="qteinSTock"
+                            suffix=" Unit"
+                            [required]
+                        ></p-inputNumber>
+                        <label htmlFor="qteinSTock">Qte in Stock</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            productForm.get('qteinSTock').invalid &&
+                            (productForm.get('qteinSTock').dirty ||
+                                productForm.get('qteinSTock').touched)
+                        "
+                        class="p-error"
+                        >Qte is required</small
+                    >
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <span class="p-float-label">
+                        <p-inputNumber
+                            id="discount"
+                            formControlName="discount"
+                            suffix=" %"
+                            [required]
+                        ></p-inputNumber>
+                        <label htmlFor="discount">Discount</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            productForm.get('discount').invalid &&
+                            (productForm.get('discount').dirty ||
+                                productForm.get('discount').touched)
+                        "
+                        class="p-error"
+                        >Discount is required</small
+                    >
+                </div>
+                <div class="field col-4 md:col-4">
+                    <span class="">
+                        <label htmlFor="rating">Rating</label>
+                        <p-rating
+                            id="rating"
+                            formControlName="rating"
+                        ></p-rating>
+                    </span>
+                    <small
+                        *ngIf="
+                            productForm.get('rating').invalid &&
+                            (productForm.get('rating').dirty ||
+                                productForm.get('rating').touched)
+                        "
+                        class="p-error"
+                        >rating is required</small
+                    >
+                </div>
+
+                <p-fileUpload
+                    *ngIf="isAdd"
+                    [customUpload]="true"
+                    [auto]="true"
+                    accept="image/*"
+                    (uploadHandler)="onUpload($event)"
+                    [maxFileSize]="1000000"
+                >
+                </p-fileUpload>
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="Cancel"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+            pButton
+            pRipple
+            label="Save"
+            icon="pi pi-check"
+            class="p-button-text"
+            [disabled]="productForm.invalid"
+            (click)="saveProduct()"
+        ></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog
+    [(visible)]="userImageDialog"
+    [style]="{ width: '450px' }"
+    header="Update user image"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <p-image
+            src="{{ productInput.imageUrl }}?t={{ timeStamp }}"
+            class="imagebeforeupdate"
+            alt="Image"
+            [preview]="true"
+        ></p-image>
+        <p-fileUpload
+            [customUpload]="true"
+            [auto]="true"
+            accept="image/*"
+            (uploadHandler)="onUpload($event)"
+            [maxFileSize]="1000000"
+        >
+        </p-fileUpload>
+        <button
+            pButton
+            pRipple
+            label="Save"
+            icon="pi pi-check"
+            class="p-button-text updateimagebtn"
+            (click)="updateImage()"
+        ></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

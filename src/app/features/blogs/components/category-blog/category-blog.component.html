@@ -1,0 +1,191 @@
+<p-toast></p-toast>
+<div class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button
+                pButton
+                pRipple
+                label="{{ 'New' | translate }}"
+                icon="pi pi-plus"
+                class="p-button-success mx-2"
+                (click)="openNew()"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+</div>
+
+<p-table
+    #dt
+    [value]="categoryBlogs"
+    [rows]="10"
+    [paginator]="true"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+    [globalFilterFields]="['name', 'description']"
+    responsiveLayout="stack"
+    [breakpoint]="'960px'"
+>
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            <h5 class="m-0">
+                {{ "Manage" | translate }} {{ "categories" | translate }}
+            </h5>
+            <button
+                pButton
+                label="Clear"
+                class="p-button-outlined clearButton"
+                icon="pi pi-filter-slash"
+                (click)="clear(dt)"
+            ></button>
+            <!-- <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input
+                    pInputText
+                    type="text"
+                    (input)="dt.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Search..."
+                />
+            </span> -->
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 4rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="name">
+                {{ "Name" | translate }} <p-sortIcon field="name"></p-sortIcon>
+                <p-columnFilter
+                    class="filterIcon"
+                    type="text"
+                    field="name"
+                    display="menu"
+                ></p-columnFilter>
+            </th>
+            <th pSortableColumn="description">
+                {{ "Description" | translate }}
+                <p-sortIcon field="description"></p-sortIcon>
+                <p-columnFilter
+                    class="filterIcon"
+                    type="text"
+                    field="description"
+                    display="menu"
+                ></p-columnFilter>
+            </th>
+
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-categoryBlog>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="categoryBlog"></p-tableCheckbox>
+            </td>
+            <td>
+                <span class="p-column-title">Name : </span
+                >{{ categoryBlog.name }}
+            </td>
+            <td>
+                <span class="p-column-title">Description : </span
+                >{{ categoryBlog.description }}
+            </td>
+
+            <td>
+                <button
+                    pButton
+                    pRipple
+                    icon="pi pi-pencil"
+                    class="p-button-rounded p-button-success mr-2"
+                    (click)="editCategoryBlog(categoryBlog)"
+                ></button>
+                <button
+                    pButton
+                    pRipple
+                    icon="pi pi-trash"
+                    class="p-button-rounded p-button-warning"
+                    (click)="deleteCategoryBlog(categoryBlog)"
+                ></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            In total there are
+            {{ categoryBlogs ? categoryBlogs.length : 0 }} categories.
+        </div>
+    </ng-template>
+</p-table>
+
+<p-dialog
+    [(visible)]="addDialog"
+    [style]="{ width: '450px' }"
+    header="Category Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <form [formGroup]="categoryBlogForm" class="p-fluid">
+            <div class="field">
+                <span class="p-float-label">
+                    <input
+                        type="text"
+                        pInputText
+                        id="name"
+                        formControlName="name"
+                        required
+                        autofocus
+                    />
+                    <label for="name">{{ "Name" | translate }}</label>
+                </span>
+                <small
+                    *ngIf="
+                        categoryBlogForm.get('name').invalid &&
+                        (categoryBlogForm.get('name').dirty ||
+                            categoryBlogForm.get('name').touched)
+                    "
+                    class="p-error"
+                    >{{ "Name" | translate }}
+                    {{ "isRequired" | translate }}</small
+                >
+            </div>
+            <div class="field">
+                <span class="p-float-label">
+                    <input
+                        type="text"
+                        pInputText
+                        id="description"
+                        formControlName="description"
+                    />
+                    <label for="description">{{
+                        "Description" | translate
+                    }}</label>
+                </span>
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="{{ 'Cancel' | translate }}"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+            id="save"
+            pButton
+            pRipple
+            label="{{ 'Save' | translate }}"
+            icon="pi pi-check"
+            class="p-button-text"
+            [disabled]="categoryBlogForm.invalid"
+            (click)="addCategoryBlog()"
+        ></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

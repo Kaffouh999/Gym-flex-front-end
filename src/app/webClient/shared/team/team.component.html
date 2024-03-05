@@ -1,0 +1,35 @@
+ <!-- Team Section Begin -->
+ <section class="team-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="team-title">
+                    <div class="section-title">
+                        <span>Our Team</span>
+                        <h2>TRAIN WITH EXPERTS</h2>
+                    </div>
+                    <a href="#" class="primary-btn btn-normal appoinment-btn">appointment</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <owl-carousel-o class=" hero" [options]="carouselOptions">
+                <ng-container *ngFor="let member of teams">
+                <ng-template class="item"  carouselSlide>
+                <div class="col-lg-4">
+                    <div class="ts-item" [ngStyle]="{ 'background-image': 'url(' + member.onlineUser.profilePicture + ')' }">
+                        <div class="ts_text">
+                            <h4>{{member.onlineUser.firstName}} {{member.onlineUser.lastName}}</h4>
+                            <span>{{member.onlineUser.role.name}}</span>
+                        </div>
+                    </div>
+                </div>
+                </ng-template>
+            </ng-container>
+              
+                </owl-carousel-o>
+            </div>
+    </div>
+</section>
+<!-- Team Section End -->
+

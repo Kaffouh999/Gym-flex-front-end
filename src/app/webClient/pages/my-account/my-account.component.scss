@@ -1,0 +1,45 @@
+:host ::ng-deep{
+    app-account div{
+        background-color:#191a1a !important ;
+    }
+    
+    app-account .formgrid {
+    width: 70%;
+    margin: 0 auto;
+   position: relative;
+   bottom: 5%;
+    border-radius: 5%;
+    background-color: #191a1a;
+    box-shadow: #ec731a 10px 10px 15px 15px; 
+  }
+  
+  app-account .p-fileupload .p-fileupload-content {
+    background: #2b3735;
+  }
+  app-account .p-fileupload .p-fileupload-buttonbar {
+    background: #e6831b;
+  }
+  app-account .p-inplace .p-inplace-display {
+    display: flex;
+    color: antiquewhite;
+  }
+  app-account .p-element.imagebeforeupdate {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    background-color: #191a1a;
+  }
+  .p-fileupload-choose {
+    background: #689f38;
+    color: #ffffff;
+    border-color: #689f38;
+    width: 100% !important;
+
+  }
+  .p-fileupload-choose:hover {
+    background: #dc5b1b;
+    color: #ffffff;
+    border-color: #689f38;
+  }
+
+}

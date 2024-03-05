@@ -1,0 +1,409 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button
+                pButton
+                pRipple
+                label="{{'New'|translate}}"
+                icon="pi pi-plus"
+                class="p-button-success mx-2"
+                (click)="openNew()"
+            ></button>
+            <button
+            pButton
+            pRipple
+            label="{{'FindEquipmentByQrcode'|translate}}"
+            icon="pi pi-search"
+            class="p-button-success mx-2"
+            (click)="startScanner()"
+        ></button>
+        <button
+        pButton
+        pRipple
+        label="{{'Reset'|translate}}"
+        icon="pi pi-power-off"
+        class="p-button-success mx-2"
+        (click)="getAllEquipmentItems()"
+    ></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button
+                pButton
+                pRipple
+                label="Export"
+                icon="pi pi-upload"
+                class="p-button-help"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+    <p-overlayPanel #op (onHide)="stopScanner()">
+        <zxing-scanner
+ class="qrScanner"
+  (scanSuccess)="onScanSuccess($event)"
+  [formats]="barcodeFormat"
+  [torch]="false"
+  [tryHarder]="false"
+  #scanner
+  [autofocusEnabled]="true"
+  [enable]="false"
+  [delayBetweenScanSuccess]="7000"
+></zxing-scanner>
+</p-overlayPanel>
+    <p-table
+        #dt
+        [value]="equipmentItems"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="[
+            'firstUseDate',
+            'price',
+            'amortization',
+            'bareCode',
+            'safeMinValue',
+            'equipment',
+            'gymBranch'
+        ]"
+        [rowHover]="true"
+        dataKey="id"
+        styleClass="p-datatable-gridlines"
+        [resizableColumns]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        responsiveLayout="stack" [breakpoint]="'960px'"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">{{'Manage'|translate}} {{'Equipment'|translate}}</h5>
+                <button
+                    pButton
+                    label="{{'Clear'|translate}}"
+                    class="p-button-outlined clearButton"
+                    icon="pi pi-filter-slash"
+                    (click)="clear(dt)"
+                ></button>
+                <!-- <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input
+                    pInputText
+                    type="text"
+                    (input)="
+                        dt.filterGlobal($event.target.value, 'contains')
+                    "
+                    placeholder="Search..."
+                />
+            </span> -->
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="equipment" style="min-width: 10rem">
+                    {{'Equipment'|translate}}<p-sortIcon field="equipment"></p-sortIcon>
+                    <p-columnFilter field="equipment.id" matchMode="in" [showMenu]="false" >
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect appendTo="body" [ngModel]="value" optionValue="id" [options]="equipments" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="inline-block vertical-align-middle">
+                                        <span class="ml-1 mt-1">{{ option.name}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
+                    
+                </th>
+                <th pSortableColumn="gymBranch.name" style="min-width: 10rem">
+                    {{'GymBranch'|translate}}<p-sortIcon field="gymBranch.name"></p-sortIcon>
+                    <p-columnFilter field="gymBranch.id" matchMode="in" [showMenu]="false" >
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect appendTo="body" [ngModel]="value" optionValue="id" [options]="gymBranchs" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="inline-block vertical-align-middle">
+                                        <span class="ml-1 mt-1">{{ option.name}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
+                </th>
+                <th pSortableColumn="firstUseDate" style="min-width: 15rem">
+                    {{'FirstUseDate'|translate}}
+                    <p-sortIcon field="firstUseDate"></p-sortIcon>
+                    <p-columnFilter type="date" field="firstUseDate" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="price">
+                    {{'price'|translate}} <p-sortIcon field="price"></p-sortIcon>
+                    <p-columnFilter
+                    class="filterIcon"
+                    type="numeric"
+                    field="price"
+                    [suffix]="' MAD'"
+                    display="menu"
+                ></p-columnFilter>
+                </th>
+
+                <th pSortableColumn="amortization" style="min-width: 10rem">
+                    {{'Amortization'|translate}}<p-sortIcon field="amortization"></p-sortIcon>
+                    <p-columnFilter
+                    class="filterIcon"
+                    type="numeric"
+                    field="amortization"
+                    [suffix]="' %'"
+                    display="menu"
+                ></p-columnFilter>
+                </th>
+
+                <th style="min-width: 10rem">
+                    {{'QrCode'|translate}}<p-sortIcon field="amortization"></p-sortIcon>
+                </th>
+                <th pSortableColumn="safeMinValue" style="min-width: 10rem">
+                    {{'SafeMinValue'|translate}}<p-sortIcon field="safeMinValue"></p-sortIcon>
+                    <p-columnFilter
+                    class="filterIcon"
+                    type="numeric"
+                    field="safeMinValue"
+                    [suffix]="' %'"
+                    display="menu"
+                ></p-columnFilter>
+                </th>
+                <th></th>
+            </tr>
+          
+        </ng-template>
+        <ng-template pTemplate="body" let-equipmentItem>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="equipmentItem"></p-tableCheckbox>
+                </td>
+                <td><span class="p-column-title">Name : </span>{{ equipmentItem.equipment.name }}</td>
+                <td><span class="p-column-title">Gym Branch : </span>{{ equipmentItem.gymBranch.name }}</td>
+                <td><span class="p-column-title">First use Date : </span>{{ equipmentItem.firstUseDate | date:'dd/MM/yyyy' }}</td>
+                <td><span class="p-column-title">Price : </span>{{ equipmentItem.price }} MAD</td>
+                <td><span class="p-column-title">Amortization: </span>{{ equipmentItem.amortization }} %</td>
+                <td>   <button
+                    pButton
+                    pRipple
+                    icon="pi pi-qrcode"
+                    class="p-button-rounded p-button-secondary mr-2"
+                    (click)="showQrCode(equipmentItem)"
+                ></button></td>
+                <td><span class="p-column-title">SafeMinimum: </span>{{ equipmentItem.safeMinValue }} %</td>
+
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success mr-2"
+                        (click)="editEquipmentItem(equipmentItem)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-warning"
+                        (click)="deleteEquipmentItem(equipmentItem)"
+                    ></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are
+                {{ equipmentItems ? equipmentItems.length : 0 }} Equipment
+                Items.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog
+    [(visible)]="equipmentItemDialog"
+    [style]="{ width: '50%' }"
+    header="{{'EquipmentItem'|translate}} {{'Details'|translate}}"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+    <ng-template pTemplate="content">
+        <form [formGroup]="equipmentItemForm" class="p-fluid">
+            <div class="formgrid grid">
+                <br />
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <p-dropdown
+                            appendTo="body"
+                            id="equipment"
+                            [options]="equipments"
+                            formControlName="equipment"
+                            optionLabel="name"
+                        ></p-dropdown>
+                        <label for="equipment">{{'Equipment'|translate}}</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            equipmentItemForm.get('equipment').invalid &&
+                            (equipmentItemForm.get('equipment').dirty ||
+                                equipmentItemForm.get('equipment').touched)
+                        "
+                        class="p-error"
+                        >Equipment is required</small
+                    >
+                </div>
+                <div class="field col-6 md:col-6">
+                    <span class="p-float-label">
+                        <p-dropdown
+                            appendTo="body"
+                            id="gymBranch"
+                            [options]="gymBranchs"
+                            formControlName="gymBranch"
+                            optionLabel="name"
+                        ></p-dropdown>
+                        <label for="gymBranch">{{'GymBranch'|translate}}</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            equipmentItemForm.get('gymBranch').invalid &&
+                            (equipmentItemForm.get('gymBranch').dirty ||
+                                equipmentItemForm.get('gymBranch').touched)
+                        "
+                        class="p-error"
+                        >{{'GymBranch'|translate}} {{'isRequired'|translate}}</small
+                    >
+                </div>
+                <div class="field col-6 md:col-12">
+                    <span class="p-float-label">
+                        <p-calendar
+                            appendTo="body"
+                            type="date"
+                            pCalendar
+                            id="firstUseDate"
+                            formControlName="firstUseDate"
+                            [required]
+                            autofocus
+                        ></p-calendar>
+                        <label for="firstUseDate">{{'FirstUseDate'|translate}}</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            equipmentItemForm.get('firstUseDate').invalid &&
+                            (equipmentItemForm.get('firstUseDate').dirty ||
+                                equipmentItemForm.get('firstUseDate').touched)
+                        "
+                        class="p-error"
+                        >{{'FirstUseDate'|translate}} {{'isRequired'|translate}}</small
+                    >
+                </div>
+
+                <div class="field col-6 md:col-6">
+                    <span class="p-float-label">
+                        <p-inputNumber
+                            id="amortization"
+                            formControlName="amortization"
+                        ></p-inputNumber>
+                        <label htmlFor="amortization">{{'Amortization'|translate}} </label>
+                    </span>
+                </div>
+        
+                <div class="field col-6 md:col-6">
+                    <span class="p-float-label">
+                        <p-inputNumber
+                            id="safeMinValue"
+                            formControlName="safeMinValue"
+                        ></p-inputNumber>
+                        <label htmlFor="safeMinValue">{{'SafeMinValue'|translate}}</label>
+                    </span>
+                </div>
+                <div class="field col-6 md:col-12">
+                    <span class="p-float-label">
+                        <p-inputNumber
+                            id="price"
+                            formControlName="price"
+                        ></p-inputNumber>
+                        <label htmlFor="price">{{'price'|translate}} </label>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="{{'Cancel' | translate}}"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+        ></button>
+        <button
+        id="save"
+            pButton
+            pRipple
+            label="{{'Print' | translate}}"
+            icon="pi pi-check"
+            class="p-button-text"
+            [disabled]="equipmentItemForm.invalid"
+            (click)="saveEquipmentItemInput()"
+        ></button>
+    </ng-template>
+</p-dialog>
+<p-dialog
+    [(visible)]="showQrDialog"
+    [style]="{ width: '450px' }"
+    header="Subscription Details"
+    [modal]="true"
+    styleClass="p-fluid"
+>
+<div id="qrCard">
+    <p-card  class="QrCard" >
+        <ng-template pTemplate="header">
+            
+                <div class="flex  justify-content-center">
+                  
+                            <p class="qrInfos" *ngIf="equipmentItemInput.equipment!= undefined">
+                                {{'Name' | translate}} : {{equipmentItemInput.equipment.name}}
+                            </p>
+                </div>
+                <div class="flex  justify-content-center">
+                  
+                    <p class="qrInfos" *ngIf="equipmentItemInput.equipment!= undefined">
+                        {{'Description' | translate}} : {{equipmentItemInput.equipment.description}}
+                    </p>
+        </div>
+        </ng-template>
+        <div class="flex align-items-center justify-content-center">
+        <qr-code [value]="equipmentItemInput.bareCode" [size]="256"></qr-code>
+    </div>
+       
+    </p-card>
+</div>
+<ng-template pTemplate="footer">
+    <button
+        pButton
+        pRipple
+        label="{{'Cancel' | translate}}"
+        icon="pi pi-times"
+        class="p-button-text"
+        (click)="hideqrDialog()"
+    ></button>
+    <button
+        pButton
+        pRipple
+        label="{{'Print' | translate}}"
+        icon="pi pi-check"
+        class="p-button-text"
+        [useExistingCss]="true"
+        [printStyle]="{'.QrCard':{'backgroud-color':'#c4d5d5'}}"
+        printSectionId="qrCard" ngxPrint>
+        
+        
+    </button>
+</ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

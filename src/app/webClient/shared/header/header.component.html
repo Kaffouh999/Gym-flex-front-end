@@ -1,0 +1,106 @@
+ <!-- Offcanvas Menu Section Begin -->
+ <div class="offcanvas-menu-overlay"></div>
+ <div class="offcanvas-menu-wrapper">
+     <div class="canvas-close">
+         <i class="fa fa-close"></i>
+     </div>
+     <div class="canvas-search search-switch">
+         <i class="fa fa-search"></i>
+     </div>
+     <nav class="canvas-menu mobile-menu">
+         <ul>
+             <li routerLinkActive="active"><a routerLink="home">Home</a></li>
+             <li routerLinkActive="active"><a routerLink="about">About Us</a></li>
+             <li><span >Services</span>
+                <ul class="dropdown">
+                    <li><a routerLink="services">Training</a></li>
+                    <li><a routerLink="services">Our Store</a></li>
+                </ul>
+            </li>
+             <li routerLinkActive="active"><a routerLink="team">Our Team</a></li>
+             <li routerLinkActive="active"><a routerLink="blog">Our blog</a></li>
+             <li><span >My Space</span>
+                 <ul class="dropdown">
+                    <li><a routerLink="./class-timetable.html">My Orders</a></li>
+                    <li><a routerLink="./class-timetable.html">My Subscriptions</a></li>
+                     <li><a routerLink="./class-timetable.html">My payments</a></li>
+                     <li><a routerLink="./bmi-calculator.html">My Attendance</a></li>
+                     <li><a routerLink="./bmi-calculator.html">Bmi calculate</a></li>
+                 </ul>
+             </li>
+             <li routerLinkActive="active"><a routerLink="contact">Contact</a></li>
+         </ul>
+     </nav>
+     <div id="mobile-menu-wrap"></div>
+     <div class="canvas-social">
+        <app-social-media></app-social-media>
+     </div>
+ </div>
+ <!-- Offcanvas Menu Section End -->
+
+ <!-- Header Section Begin -->
+ <header class="header-section">
+     <div class="container-fluid">
+         <div class="row">
+             <div class="col-lg-2">
+                 <div class="logo">
+                     <a href="./index.html">
+                         <img src="../assets/img/logo.png" alt="">
+                     </a>
+                 </div>
+             </div>
+             <div class="col-lg-8">
+                 <nav class="nav-menu">
+                     <ul>
+                         <li routerLinkActive="active"><a routerLink="home">Home</a></li>
+                         <li routerLinkActive="active"><a routerLink="about">About Us</a></li>
+                         <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" ><span class="dropdownmenu">Services</span>
+                            <ul class="dropdown">
+                                <li routerLinkActive="active"><a routerLink="services">Training</a></li>
+                                <li><a href="services">Our Store</a></li>
+                            </ul>
+                        </li> 
+                        <li routerLinkActive="active"><a routerLink="team">Our Team</a></li>
+                         <li routerLinkActive="active"><a routerLink="blog">Our blog</a></li>
+
+                         <li><span class="dropdownmenu" >My Space</span>
+                            <ul class="dropdown">
+                               <li ><a href="./class-timetable.html">My Orders</a></li>
+                                <li *ngIf="isLoggedIn()"><a routerLink="paymnts">My payments</a></li>
+                                <li *ngIf="isLoggedIn()"><a routerLink="attndns">My Attendance</a></li>
+                                <li><a routerLink="bmiCalc">Bmi calculate</a></li>
+                            </ul>
+                        </li>
+                         <li style="margin-inline: 60px;" routerLinkActive="active"><a routerLink="contact">Contact</a></li>
+                     </ul>
+                 </nav>
+             </div>
+             <div class="col-lg-2">
+                <div class="sideBtns">
+                    <div>
+                        <p-button *ngIf="!isLoggedIn()" routerLink="login" label="Login" styleClass="p-button-outlined p-button-warning login"></p-button>
+                        <p-button *ngIf="!isLoggedIn()" routerLink="signup" label="Sign up" styleClass="p-button-warning p-button-text signUp"></p-button> 
+                        <p-button *ngIf="isLoggedIn() && hasWriteToDasboard()" routerLink="" label="Dashboard" styleClass="p-button-warning p-button-text signUp"></p-button>
+                        <p-button *ngIf="isLoggedIn()" (onClick)="logout()" label="Logout" styleClass="p-button-outlined p-button-warning login"></p-button>
+
+                    </div>
+                        
+                        <div class="top-option">
+                        <div class="to-social" *ngIf="isLoggedIn()" >
+                           <p-image src="{{ authUser.profilePicture }}?t={{ timeStamp }}" class="usreImage"></p-image>
+                            <p-badge value="2" style="color:brown"></p-badge>
+                            <i routerLink="my-account" class="pi pi-user" style="font-size: 2.5rem"></i>
+                            <i class="pi pi-spin pi-cog" routerLink="my-account" style="font-size: 2rem"></i>
+                          
+                        </div>
+                    </div>
+                </div>
+               
+             </div>
+         </div>
+         <div class="canvas-open">
+             <i class="fa fa-bars"></i>
+         </div>
+     </div>
+ </header>
+ <!-- Header End -->
