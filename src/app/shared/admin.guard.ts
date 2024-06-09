@@ -10,7 +10,8 @@ export class AdminGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): boolean {
-    if (this.authService.getRol().includes("ANALYTICS")) {
+    let roles = this.authService.getRol();
+    if (roles.includes("ANALYTICS")) {
       console.log(this.authService.getRol().includes("ANALYTICS"))
       return true;
     } else {

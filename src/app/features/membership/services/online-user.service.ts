@@ -1,37 +1,44 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { OnlineUser } from 'src/app/core/models/OnlineUser';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { OnlineUser } from "src/app/core/models/OnlineUser";
+import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: "root",
 })
 export class OnlineUserService {
+    onlineUserURL = environment.API_URL + "/online-users";
+    constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
+    public getAllUsers() {
+        return this.http.get(this.onlineUserURL);
+    }
 
-  public getAllUsers(){
-    return this.http.get('http://localhost:8080/api/online-users');
-  }
+    public getUserById(id: number) {
+        return this.http.get(this.onlineUserURL + "/" + id);
+    }
 
-  public getUserById(id:number){
-    return this.http.get('http://localhost:8080/api/online-users/'+id);
-  }
+    public addUser(onlineUser: OnlineUser) {
+        return this.http.post(this.onlineUserURL, onlineUser);
+    }
 
-  public addUser(onlineUser : OnlineUser){
-    return this.http.post('http://localhost:8080/api/online-users',onlineUser);
-  }
+    public updateUser(id: number, onlineUser: OnlineUser) {
+        return this.http.put(this.onlineUserURL + "/" + id, onlineUser);
+    }
 
-  public updateUser(id:number , onlineUser:OnlineUser){
-    return this.http.put('http://localhost:8080/api/online-users/'+id , onlineUser);
-  }
-
-  public deleteUser(id:number){
-    return this.http.delete('http://localhost:8080/api/online-users/'+id);
-  }
-  uploadImage(name : String,formData : FormData){
-    return  this.http.post('http://localhost:8080/api/membersProfile/upload/'+name, formData);
-}
-updateImage(id : number,formData : FormData){
-    return  this.http.put('http://localhost:8080/api/membersProfile/upload/'+id, formData);
-}
+    public deleteUser(id: number) {
+        return this.http.delete(this.onlineUserURL + "/" + id);
+    }
+    uploadImage(name: String, formData: FormData) {
+        return this.http.post(
+            environment.API_URL + "/membersProfile/upload/" + name,
+            formData
+        );
+    }
+    updateImage(id: number, formData: FormData) {
+        return this.http.put(
+            environment.API_URL + "/membersProfile/upload/" + id,
+            formData
+        );
+    }
 }

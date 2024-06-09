@@ -1,37 +1,38 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Member } from 'src/app/core/models/Member';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Member } from "src/app/core/models/Member";
+import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: "root",
 })
 export class MemberService {
+    memberURL = environment.API_URL + "/members";
+    constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
+    public getAllMembers() {
+        return this.http.get(this.memberURL);
+    }
+    public getEquipmentStatisics() {
+        return this.http.get(this.memberURL + "/statistics");
+    }
 
-  public getAllMembers(){
-    return this.http.get('http://localhost:8080/api/members');
-  }
-  public getEquipmentStatisics(){
-    return this.http.get('http://localhost:8080/api/members/statistics');
-  }
+    public getMemberById(id: number) {
+        return this.http.get(this.memberURL + "/" + id);
+    }
 
-  public getMemberById(id:number){
-    return this.http.get('http://localhost:8080/api/members/'+id);
-  }
+    public addMember(member: Member) {
+        return this.http.post(this.memberURL, member);
+    }
 
-  public addMember(member : Member){
-    return this.http.post('http://localhost:8080/api/members',member);
-  }
+    public updateMember(id: number, member: Member) {
+        return this.http.put(this.memberURL + "/" + id, member);
+    }
 
-  public updateMember(id:number , member:Member){
-    return this.http.put('http://localhost:8080/api/members/'+id , member);
-  }
-
-  public deleteMember(id:number){
-    return this.http.delete('http://localhost:8080/api/members/'+id);
-  }
-  public getMemberByUser(id:number){
-    return this.http.get('http://localhost:8080/api/members/user/'+id);
-  }
+    public deleteMember(id: number) {
+        return this.http.delete(this.memberURL + "/" + id);
+    }
+    public getMemberByUser(id: number) {
+        return this.http.get(this.memberURL + "/user/" + id);
+    }
 }

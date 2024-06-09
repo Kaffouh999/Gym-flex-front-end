@@ -1,30 +1,24 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Maintaining } from "src/app/core/models/Maintaining";
+import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: "root",
 })
 export class MaintainingService {
+    maintainingURL = environment.API_URL + "/maintinings";
     constructor(private http: HttpClient) {}
     getAllMaintainings() {
-        return this.http.get("http://localhost:8080/api/maintinings");
+        return this.http.get(this.maintainingURL);
     }
     addMaintaining(maintaining: Maintaining) {
-        return this.http.post(
-            "http://localhost:8080/api/maintinings",
-            maintaining
-        );
+        return this.http.post(this.maintainingURL, maintaining);
     }
     deleteMaintaining(maintaining: Maintaining) {
-        return this.http.delete(
-            "http://localhost:8080/api/maintinings/" + maintaining.id
-        );
+        return this.http.delete(this.maintainingURL + "/" + maintaining.id);
     }
     updateMaintaining(id: Number, maintaining: Maintaining) {
-        return this.http.put(
-            "http://localhost:8080/api/maintinings/" + id,
-            maintaining
-        );
+        return this.http.put(this.maintainingURL + "/" + id, maintaining);
     }
 }

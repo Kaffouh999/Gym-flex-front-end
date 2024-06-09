@@ -1,31 +1,32 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { GymBranch } from 'src/app/core/models/GymBranch';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { GymBranch } from "src/app/core/models/GymBranch";
+import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: "root",
 })
 export class GymBranchService {
+    gymBranchURL = environment.API_URL + "/gym-branches";
+    constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
+    public getALlBranches() {
+        return this.http.get(this.gymBranchURL);
+    }
 
-  public getALlBranches(){
-    return this.http.get('http://localhost:8080/api/gym-branches');
-  }
+    public getBranchById(id: number) {
+        return this.http.get(this.gymBranchURL + "/" + id);
+    }
 
-  public getBranchById(id:number){
-    return this.http.get('http://localhost:8080/api/gym-branches/'+id);
-  }
+    public addBranch(gymBranch: GymBranch) {
+        return this.http.post(this.gymBranchURL, gymBranch);
+    }
 
-  public addBranch(gymBranch : GymBranch){
-    return this.http.post('http://localhost:8080/api/gym-branches',gymBranch);
-  }
+    public updateBranch(id: number, gymBranch: GymBranch) {
+        return this.http.put(this.gymBranchURL + "/" + id, gymBranch);
+    }
 
-  public updateBranch(id:number , gymBranch:GymBranch){
-    return this.http.put('http://localhost:8080/api/gym-branches/'+id , gymBranch);
-  }
-
-  public deleteBranch(id:number){
-    return this.http.delete('http://localhost:8080/api/gym-branches/'+id);
-  }
+    public deleteBranch(id: number) {
+        return this.http.delete(this.gymBranchURL + "/" + id);
+    }
 }
