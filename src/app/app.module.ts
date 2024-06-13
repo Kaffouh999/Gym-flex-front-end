@@ -122,7 +122,7 @@ import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { PaymentComponent } from "./features/membership/components/payment/payment.component";
 import { SessionComponent } from "./features/training/components/session/session.component";
-import { MinutesDiffPipe } from "./core/models/MinutesDiffPipe";
+import { MinutesDiffPipe } from "./core/pipes/MinutesDiffPipe";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
 import { DialogService } from "primeng/dynamicdialog";
 import { RxStompService } from "./core/config/webSocket/rx-stomp.service";
@@ -142,7 +142,10 @@ import { DashboardComponent } from "./features/dashboard/dashboard.component";
 import { BlogsComponent } from "./features/blogs/components/blogs/blogs.component";
 import { EditorModule } from "primeng/editor";
 import { CategoryBlogComponent } from "./features/blogs/components/category-blog/category-blog.component";
-import { CombineNginxUrlPipe, CombineNginxUrlPipeModule } from "./core/pipes/CombineNginxUrlPipe";
+import {
+    CombineNginxUrlPipe,
+    CombineNginxUrlPipeModule,
+} from "./core/pipes/CombineNginxUrlPipe";
 
 @NgModule({
     declarations: [
@@ -281,14 +284,18 @@ import { CombineNginxUrlPipe, CombineNginxUrlPipeModule } from "./core/pipes/Com
             loader: {
                 provide: TranslateLoader,
                 useFactory: (http: HttpClient) => {
-                    return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+                    return new TranslateHttpLoader(
+                        http,
+                        "./assets/i18n/",
+                        ".json"
+                    );
                 },
                 deps: [HttpClient],
             },
         }),
         SharedModule,
         PagesModule,
-        CombineNginxUrlPipeModule
-    ]
+        CombineNginxUrlPipeModule,
+    ],
 })
 export class AppModule {}
