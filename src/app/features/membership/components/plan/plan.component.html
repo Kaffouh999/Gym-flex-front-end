@@ -126,7 +126,7 @@
                 <td>{{ plan.name }}</td>
                 <td id="image">
                     <p-image
-                        src="{{ plan.imageAds }}?t={{ timeStamp }}"
+                        src="{{ plan.imageAds | combineNginxUrl }}"
                         class="imageTable"
                         alt="Image"
                         [preview]="true"
@@ -297,7 +297,7 @@
 >
     <ng-template pTemplate="content">
         <p-image
-            src="{{ planInput.imageAds }}?t={{ timeStamp }}"
+            src="{{ planInput.imageAds | combineNginxUrl}}"
             class="imagebeforeupdate"
             alt="Image"
             [preview]="true"

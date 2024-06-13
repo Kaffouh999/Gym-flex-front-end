@@ -165,7 +165,7 @@
                 </td>
                 <td id="image">
                     <p-image
-                        src="{{ product.imageUrl }}?t={{ timeStamp }}"
+                        src="{{ product.imageUrl | combineNginxUrl }}"
                         class="imageTable"
                         alt="Image"
                         [preview]="true"
@@ -418,7 +418,7 @@
 >
     <ng-template pTemplate="content">
         <p-image
-            src="{{ productInput.imageUrl }}?t={{ timeStamp }}"
+            src="{{ productInput.imageUrl | combineNginxUrl }}"
             class="imagebeforeupdate"
             alt="Image"
             [preview]="true"

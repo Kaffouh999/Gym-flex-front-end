@@ -142,8 +142,47 @@ import { DashboardComponent } from "./features/dashboard/dashboard.component";
 import { BlogsComponent } from "./features/blogs/components/blogs/blogs.component";
 import { EditorModule } from "primeng/editor";
 import { CategoryBlogComponent } from "./features/blogs/components/category-blog/category-blog.component";
+import { CombineNginxUrlPipe, CombineNginxUrlPipeModule } from "./core/pipes/CombineNginxUrlPipe";
 
 @NgModule({
+    declarations: [
+        AppComponent,
+        AppMainComponent,
+        AppTopBarComponent,
+        AppConfigComponent,
+        AppMenuComponent,
+        AppMenuitemComponent,
+        CategoryComponent,
+        SubCategoryComponent,
+        GymBranchComponent,
+        PlanComponent,
+        EquipmentComponent,
+        MemberComponent,
+        EquipmentItemComponent,
+        AssuranceComponent,
+        SubscriptionComponent,
+        PaymentComponent,
+        SessionComponent,
+        MaintainingComponent,
+        ReformComponent,
+        ProductComponent,
+        LoginFirstComponent,
+        WebComponent,
+        RoleComponent,
+        DashboardComponent,
+        BlogsComponent,
+        CategoryBlogComponent,
+    ],
+    providers: [
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        { provide: RxStompService, useFactory: rxStompServiceFactory },
+        MenuService,
+        BreadcrumbService,
+        DialogService,
+        DatePipe,
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    ],
+    bootstrap: [AppComponent],
     imports: [
         BrowserModule,
         FormsModule,
@@ -242,56 +281,14 @@ import { CategoryBlogComponent } from "./features/blogs/components/category-blog
             loader: {
                 provide: TranslateLoader,
                 useFactory: (http: HttpClient) => {
-                    return new TranslateHttpLoader(
-                        http,
-                        "./assets/i18n/",
-                        ".json"
-                    );
+                    return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
                 },
                 deps: [HttpClient],
             },
         }),
         SharedModule,
         PagesModule,
-    ],
-
-    declarations: [
-        AppComponent,
-        AppMainComponent,
-        AppTopBarComponent,
-        AppConfigComponent,
-        AppMenuComponent,
-        AppMenuitemComponent,
-        CategoryComponent,
-        SubCategoryComponent,
-        GymBranchComponent,
-        PlanComponent,
-        EquipmentComponent,
-        MemberComponent,
-        EquipmentItemComponent,
-        AssuranceComponent,
-        SubscriptionComponent,
-        PaymentComponent,
-        SessionComponent,
-        MaintainingComponent,
-        ReformComponent,
-        ProductComponent,
-        LoginFirstComponent,
-        WebComponent,
-        RoleComponent,
-        DashboardComponent,
-        BlogsComponent,
-        CategoryBlogComponent,
-    ],
-    providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy },
-        { provide: RxStompService, useFactory: rxStompServiceFactory },
-        MenuService,
-        BreadcrumbService,
-        DialogService,
-        DatePipe,
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    ],
-    bootstrap: [AppComponent],
+        CombineNginxUrlPipeModule
+    ]
 })
 export class AppModule {}

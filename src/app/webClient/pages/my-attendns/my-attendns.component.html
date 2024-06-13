@@ -1,28 +1,26 @@
 <div>
-  <app-breadcrumb [pageName]="'My Payments'"></app-breadcrumb>
+    <app-breadcrumb [pageName]="'My Payments'"></app-breadcrumb>
 
     <!-- BMI Calculator Section Begin -->
     <section class="bmi-calculator-section spad">
-
-
-      <p-table
-        #dt
-        [value]="mySessions"
-        [rows]="10"
-        [paginator]="true"
-        [globalFilterFields]="['name', 'description', 'subCategory.name']"
-        [tableStyle]="{ 'min-width': '75rem' }"
-        [rowHover]="true"
-        dataKey="id"
-        styleClass="p-datatable-gridlines"
-        [resizableColumns]="true"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [showCurrentPageReport]="true"
-    >
-        <ng-template pTemplate="caption">
-            <div class="flex align-items-center justify-content-between">
-                <h5 class="m-0">My Sessions</h5>
-                <!-- <span class="p-input-icon-left">
+        <p-table
+            #dt
+            [value]="mySessions"
+            [rows]="10"
+            [paginator]="true"
+            [globalFilterFields]="['name', 'description', 'subCategory.name']"
+            [tableStyle]="{ 'min-width': '75rem' }"
+            [rowHover]="true"
+            dataKey="id"
+            styleClass="p-datatable-gridlines"
+            [resizableColumns]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true"
+        >
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center justify-content-between">
+                    <h5 class="m-0">My Sessions</h5>
+                    <!-- <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input
                         pInputText
@@ -33,58 +31,72 @@
                         placeholder="Search..."
                     />
                 </span> -->
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-          
-            
-                <th >
-                    Day 
-                </th>
-                <th >
-                    Enter/Leave 
-                </th>
-                <th >
-                    Duration
-                </th>
-                <th >
-                    GymBranch
-                </th>
-                <th  >
-                    Manager at the time
-                </th>
-           
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-session>
-            <tr>
-              
-               <td>{{  session.enteringTime| date :'dd/MM/yyyy'}}</td>
-                <td> <p-timeline [value]="[session.enteringTime,session.leavingTime]" layout="horizontal">
-                    <ng-template pTemplate="marker" let-event>
-                            <i class="pi pi-arrow-down-right" *ngIf="event != undefined"></i>
-                    </ng-template>
-                    <ng-template pTemplate="content"  let-event>
-                        {{ event | date :'HH:mm'}}
-                    </ng-template>
-              
-                </p-timeline> </td>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Day</th>
+                    <th>Enter/Leave</th>
+                    <th>Duration</th>
+                    <th>GymBranch</th>
+                    <th>Manager at the time</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-session>
+                <tr>
+                    <td>{{ session.enteringTime | date : "dd/MM/yyyy" }}</td>
+                    <td>
+                        <p-timeline
+                            [value]="[
+                                session.enteringTime,
+                                session.leavingTime
+                            ]"
+                            layout="horizontal"
+                        >
+                            <ng-template pTemplate="marker" let-event>
+                                <i
+                                    class="pi pi-arrow-down-right"
+                                    *ngIf="event != undefined"
+                                ></i>
+                            </ng-template>
+                            <ng-template pTemplate="content" let-event>
+                                {{ event | date : "HH:mm" }}
+                            </ng-template>
+                        </p-timeline>
+                    </td>
 
-                <td>{{ (session.leavingTime != undefined)? (session.enteringTime | minutesDiff: session.leavingTime) : 0  }} min</td>
-                <td>{{ session.gymBranch.name}}</td>
+                    <td>
+                        {{
+                            session.leavingTime != undefined
+                                ? (session.enteringTime
+                                  | minutesDiff : session.leavingTime)
+                                : 0
+                        }}
+                        min
+                    </td>
+                    <td>{{ session.gymBranch.name }}</td>
 
-                <td><p-image src="{{ session.managerAtTheTime.onlineUser.profilePicture }}" class="imageTable" alt="Image"  [preview]="true"></p-image> {{session.managerAtTheTime.onlineUser.firstName}} {{session.managerAtTheTime.onlineUser.lastName}}</td>
-               
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="summary">
-            <div class="flex align-items-center justify-content-between">
-                In total there are
-                {{ mySessions ? mySessions.length : 0 }} Sessions.
-            </div>
-        </ng-template>
-    </p-table>
+                    <td>
+                        <p-image
+                            src="{{
+                                session.managerAtTheTime.onlineUser
+                                    .profilePicture | combineNginxUrl
+                            }}"
+                            class="imageTable"
+                            alt="Image"
+                            [preview]="true"
+                        ></p-image>
+                        {{ session.managerAtTheTime.onlineUser.firstName }}
+                        {{ session.managerAtTheTime.onlineUser.lastName }}
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+                    In total there are
+                    {{ mySessions ? mySessions.length : 0 }} Sessions.
+                </div>
+            </ng-template>
+        </p-table>
     </section>
-  
 </div>

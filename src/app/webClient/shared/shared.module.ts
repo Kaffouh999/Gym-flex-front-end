@@ -22,50 +22,51 @@ import { FormsModule } from '@angular/forms';
 import { OurEquipmentsComponent } from './our-equipments/our-equipments.component';
 import { ImageModule } from 'primeng/image';
 import { BadgeModule } from 'primeng/badge';
+import { CombineNginxUrlPipe, CombineNginxUrlPipeModule } from 'src/app/core/pipes/CombineNginxUrlPipe';
 
 
 
 @NgModule({
-  declarations: [
-    BannerComponent,
-    BreadcrumbComponent,
-    ChoseUsComponent,
-    FooterComponent,
-    GalleryComponent,
-    GetInTouchComponent,
-    HeaderComponent,
-    PricingComponent,
-    SocialMediaComponent,
-    TeamComponentSection,
-    TimeTableComponent,
-    OurEquipmentsComponent
-    
-  ],
-
-  imports: [
-    CommonModule,
-    BrowserModule,
-    AppRoutingModule,
-    ButtonModule,
-    InputTextModule,
-    BrowserAnimationsModule,
-    CarouselModule,
-    RatingModule,
-    FormsModule,
-    ImageModule,
-    BadgeModule
-  ],
-  exports:[  BannerComponent,
-    BreadcrumbComponent,
-    ChoseUsComponent,
-    FooterComponent,
-    GalleryComponent,
-    GetInTouchComponent,
-    HeaderComponent,
-    PricingComponent,
-    SocialMediaComponent,
-    TeamComponentSection,
-    TimeTableComponent,
-  OurEquipmentsComponent]
+    declarations: [
+        BannerComponent,
+        BreadcrumbComponent,
+        ChoseUsComponent,
+        FooterComponent,
+        GalleryComponent,
+        GetInTouchComponent,
+        HeaderComponent,
+        PricingComponent,
+        SocialMediaComponent,
+        TeamComponentSection,
+        TimeTableComponent,
+        OurEquipmentsComponent,
+        //CombineNginxUrlPipe
+    ],
+    exports: [BannerComponent,
+        BreadcrumbComponent,
+        ChoseUsComponent,
+        FooterComponent,
+        GalleryComponent,
+        GetInTouchComponent,
+        HeaderComponent,
+        PricingComponent,
+        SocialMediaComponent,
+        TeamComponentSection,
+        TimeTableComponent,
+        OurEquipmentsComponent],
+    imports: [
+        CommonModule,
+        BrowserModule,
+        AppRoutingModule,
+        ButtonModule,
+        InputTextModule,
+        BrowserAnimationsModule,
+        CarouselModule,
+        RatingModule,
+        FormsModule,
+        ImageModule,
+        BadgeModule,
+        CombineNginxUrlPipeModule
+    ]
 })
 export class SharedModule { }

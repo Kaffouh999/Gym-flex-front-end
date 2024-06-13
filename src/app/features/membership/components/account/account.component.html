@@ -1,134 +1,173 @@
 <div>
     <p-image
-            src="{{ authMember.onlineUser.profilePicture }}?t={{ timeStamp }}"
-            class="imagebeforeupdate"
-            alt="Image"
-            [preview]="true"
-        ></p-image>
-        <form  [formGroup]="myAccountForm" class="p-fluid">
-            <div class="formgrid grid flex justify-content-center">
+        src="{{ authMember.onlineUser.profilePicture | combineNginxUrl }}"
+        class="imagebeforeupdate"
+        alt="Image"
+        [preview]="true"
+    ></p-image>
+    <form [formGroup]="myAccountForm" class="p-fluid">
+        <div class="formgrid grid flex justify-content-center">
             <div class="formgroup-inline col-3 md:col-3">
-                <label for="firstName"  >FirstName</label>
-                <p-inplace >
-                <ng-template pTemplate="display">
-                    <label for="firstName" > : </label>
-                    {{authMember.onlineUser.firstName}}
-                </ng-template>
-                <ng-template pTemplate="content">
-                    <input name = "firstName" type="text" formControlName="firstName" pInputText>
-                </ng-template>
-            </p-inplace></div>
-            <div class="formgroup-inline  col-3 md:col-3">
-                <label for="lastName" >LastName</label>
-                <p-inplace >
-                <ng-template pTemplate="display">
-                    <label for="lastName" > : </label>
-                    {{authMember.onlineUser.lastName}}
-                </ng-template>
-                <ng-template pTemplate="content">
-                    <input type="text" name="lastName" formControlName="lastName" pInputText>
-                </ng-template>
-            </p-inplace>
+                <label for="firstName">FirstName</label>
+                <p-inplace>
+                    <ng-template pTemplate="display">
+                        <label for="firstName"> : </label>
+                        {{ authMember.onlineUser.firstName }}
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <input
+                            name="firstName"
+                            type="text"
+                            formControlName="firstName"
+                            pInputText
+                        />
+                    </ng-template>
+                </p-inplace>
             </div>
-            <div class="formgroup-inline  col-6 md:col-6">
-                <label for="email" >Email</label>
-                <p-inplace >
-                <ng-template pTemplate="display">
-                    <label for="cin" >: </label>
-                    {{authMember.onlineUser.email}}
-                </ng-template>
-                <ng-template pTemplate="content">
-                    <input name="email" type="text" formControlName="email" pInputText>
-                </ng-template>
-            </p-inplace>
+            <div class="formgroup-inline col-3 md:col-3">
+                <label for="lastName">LastName</label>
+                <p-inplace>
+                    <ng-template pTemplate="display">
+                        <label for="lastName"> : </label>
+                        {{ authMember.onlineUser.lastName }}
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <input
+                            type="text"
+                            name="lastName"
+                            formControlName="lastName"
+                            pInputText
+                        />
+                    </ng-template>
+                </p-inplace>
             </div>
-            
-            <div class="formgroup-inline  col-5 md:col-5">
-                <label for="cin" >CIN</label>
-                <p-inplace >
-                <ng-template pTemplate="display">
-                    <label for="cin" > : </label>
-                    {{authMember.cin}}
-                </ng-template>
-                <ng-template pTemplate="content">
-                    <input type="text" name="cin" formControlName="cin" pInputText>
-                </ng-template>
-            </p-inplace>
+            <div class="formgroup-inline col-6 md:col-6">
+                <label for="email">Email</label>
+                <p-inplace>
+                    <ng-template pTemplate="display">
+                        <label for="cin">: </label>
+                        {{ authMember.onlineUser.email }}
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <input
+                            name="email"
+                            type="text"
+                            formControlName="email"
+                            pInputText
+                        />
+                    </ng-template>
+                </p-inplace>
             </div>
-            <div class="formgroup-inline  col-7 md:col-7">
-                <label for="adress" >Adress</label>
-                <p-inplace >
-                
-                <ng-template pTemplate="display">
-                    <label for="adress" > : </label>
-                    {{authMember.adress}}
-                </ng-template>
-                <ng-template pTemplate="content">
-                    <textarea type="text" name="adress" formControlName="adress"  pInputText ></textarea>
-                </ng-template>
-            </p-inplace>
+
+            <div class="formgroup-inline col-5 md:col-5">
+                <label for="cin">CIN</label>
+                <p-inplace>
+                    <ng-template pTemplate="display">
+                        <label for="cin"> : </label>
+                        {{ authMember.cin }}
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <input
+                            type="text"
+                            name="cin"
+                            formControlName="cin"
+                            pInputText
+                        />
+                    </ng-template>
+                </p-inplace>
             </div>
-            <div class="formgroup-inline  col-3 md:col-3">
-                <label for="age" >Age</label>
-                <p-inplace >
-                <ng-template pTemplate="display">
-                    <label for="age" >: </label>
-                    {{authMember.age}}
-                </ng-template>
-                <ng-template pTemplate="content">
-                    <input  pKeyFilter="int" pInputText name="cagein" formControlName="age" />   
-                      </ng-template>
-            </p-inplace>
+            <div class="formgroup-inline col-7 md:col-7">
+                <label for="adress">Adress</label>
+                <p-inplace>
+                    <ng-template pTemplate="display">
+                        <label for="adress"> : </label>
+                        {{ authMember.adress }}
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <textarea
+                            type="text"
+                            name="adress"
+                            formControlName="adress"
+                            pInputText
+                        ></textarea>
+                    </ng-template>
+                </p-inplace>
             </div>
-            <div class="formgroup-inline  col-3 md:col-3">
-                <label for="gymBranch" >GymBranch</label>
-                <p-inplace >
-                <ng-template pTemplate="display">
-                    <label for="gymBranch" > : </label>
-                   {{authMember.gymBranch.name}}
-                </ng-template>
-                <ng-template pTemplate="content">
-                   
-                    <p-dropdown
-                    appendTo="body"
-                    id="gymBranch"
-                    [options]="gymBranches"
-                    name="gymbranch"
-                    optionLabel="name"
-                    formControlName="gymBranch"
-                ></p-dropdown>
-                </ng-template>
-            </p-inplace>
+            <div class="formgroup-inline col-3 md:col-3">
+                <label for="age">Age</label>
+                <p-inplace>
+                    <ng-template pTemplate="display">
+                        <label for="age">: </label>
+                        {{ authMember.age }}
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <input
+                            pKeyFilter="int"
+                            pInputText
+                            name="cagein"
+                            formControlName="age"
+                        />
+                    </ng-template>
+                </p-inplace>
             </div>
-            <div class="formgroup-inline  col-3 md:col-3">
-                <label for="gender" >Gender</label>
-                <p-inplace >
-                <ng-template pTemplate="display">
-                    <label for="gender" > : </label>
-                    <span *ngIf="authMember.gender == true">Man</span>
-                    <span *ngIf="authMember.gender == false">Woman</span>
-                </ng-template>
-                <ng-template pTemplate="content">
-                    <p-toggleButton
-                  
-                    id="gender"
-                    onLabel="Man"
-                    offLabel="Women"
-                    formControlName="gender"
-                    name="gender"
-                    [style]="{ width: '10em' }"
-                ></p-toggleButton>                      </ng-template>
-            </p-inplace>
+            <div class="formgroup-inline col-3 md:col-3">
+                <label for="gymBranch">GymBranch</label>
+                <p-inplace>
+                    <ng-template pTemplate="display">
+                        <label for="gymBranch"> : </label>
+                        {{ authMember.gymBranch.name }}
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <p-dropdown
+                            appendTo="body"
+                            id="gymBranch"
+                            [options]="gymBranches"
+                            name="gymbranch"
+                            optionLabel="name"
+                            formControlName="gymBranch"
+                        ></p-dropdown>
+                    </ng-template>
+                </p-inplace>
             </div>
-            <div class="  col-4 md:col-4">
-            <p-fileUpload  [customUpload]="true" [auto]="true" accept="image/*"  (uploadHandler)="onUpload($event)" [maxFileSize]="1000000">
-       
-            </p-fileUpload>
+            <div class="formgroup-inline col-3 md:col-3">
+                <label for="gender">Gender</label>
+                <p-inplace>
+                    <ng-template pTemplate="display">
+                        <label for="gender"> : </label>
+                        <span *ngIf="authMember.gender == true">Man</span>
+                        <span *ngIf="authMember.gender == false">Woman</span>
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <p-toggleButton
+                            id="gender"
+                            onLabel="Man"
+                            offLabel="Women"
+                            formControlName="gender"
+                            name="gender"
+                            [style]="{ width: '10em' }"
+                        ></p-toggleButton>
+                    </ng-template>
+                </p-inplace>
+            </div>
+            <div class="col-4 md:col-4">
+                <p-fileUpload
+                    [customUpload]="true"
+                    [auto]="true"
+                    accept="image/*"
+                    (uploadHandler)="onUpload($event)"
+                    [maxFileSize]="1000000"
+                >
+                </p-fileUpload>
+            </div>
+            <div class="flex justify-content-end col-12 md:col-12">
+                <button
+                    pButton
+                    pRipple
+                    label="Save"
+                    (click)="saveMyAccount()"
+                    class="p-button-success"
+                ></button>
+            </div>
         </div>
-        <div class=" flex justify-content-end  col-12 md:col-12">
-                <button pButton pRipple label="Save" (click)="saveMyAccount()" class="p-button-success"></button>
-                </div>
-            </div>
-            </form>
-        
+    </form>
 </div>

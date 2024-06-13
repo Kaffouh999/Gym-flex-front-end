@@ -86,7 +86,7 @@
                             <p-multiSelect appendTo="body" [ngModel]="value" optionValue="id" [options]="members" placeholder="Any" (onChange)="filter($event.value)" optionLabel="onlineUser.firstName">
                                 <ng-template let-option pTemplate="item">
                                     <div class="inline-block vertical-align-middle">
-                                        <img [alt]="'member image'" src="{{option.onlineUser.profilePicture}}" width="30" height="30" style="border-radius: 50%;" class="vertical-align-middle" />
+                                        <img [alt]="'member image'" src="{{option.onlineUser.profilePicture | combineNginxUrl}}" width="30" height="30" style="border-radius: 50%;" class="vertical-align-middle" />
                                         <span class="ml-1 mt-1">{{ option.onlineUser.firstName+" "+ option.onlineUser.lastName}}</span>
                                     </div>
                                 </ng-template>
@@ -140,7 +140,7 @@
                             <p-multiSelect appendTo="body" [ngModel]="value" optionValue="id" [options]="members" placeholder="Any" (onChange)="filter($event.value)" optionLabel="onlineUser.firstName">
                                 <ng-template let-option pTemplate="item">
                                     <div class="inline-block vertical-align-middle">
-                                        <img [alt]="'member image'" src="{{option.onlineUser.profilePicture}}" width="30" height="30" style="border-radius: 50%;" class="vertical-align-middle" />
+                                        <img [alt]="'member image'" src="{{option.onlineUser.profilePicture | combineNginxUrl }}" width="30" height="30" style="border-radius: 50%;" class="vertical-align-middle" />
                                         <span class="ml-1 mt-1">{{ option.onlineUser.firstName+" "+ option.onlineUser.lastName}}</span>
                                     </div>
                                 </ng-template>
@@ -380,7 +380,7 @@
         <ng-template pTemplate="header">
             <div class="flex">
             <img
-                        src="{{ paymentInput.subscriptionMember.member.onlineUser.profilePicture }}"
+                        src="{{ paymentInput.subscriptionMember.member.onlineUser.profilePicture | combineNginxUrl }}"
                         class="imageQr m-3"
                         alt="Image"
                     />

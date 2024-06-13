@@ -44,80 +44,82 @@ import { AccountComponent } from 'src/app/features/membership/components/account
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { CombineNginxUrlPipeModule } from "../../core/pipes/CombineNginxUrlPipe";
 
 
 
 
 
 @NgModule({
-  declarations: [
-    AboutComponent,
-    BlogComponent,
-    BmiCalcComponent,
-    BolgDetailComponent,
-    ClassesComponent,
-    ContactComponent,
-    Error404Component,
-    HomeComponent,
-    LoginComponent,
-    ServicesComponent,
-    SignUpComponent,
-    TeamComponent,
-    MySubsComponent,
-    MyPaymntsComponent,
-    MyAttendnsComponent,
-    MinutesDiffPipe,
-    MyAccountComponent,
-    AccountComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ButtonModule,
-    InputTextModule,
-    BrowserAnimationsModule,
-    CarouselModule,
-    PasswordModule,
-    DialogModule,
-    ToggleButtonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule,
-    TableModule,
-    MultiSelectModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (http: HttpClient) => {
-          return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-        },
-        deps: [HttpClient]
-      }
-    }),
-    ToastModule,
-    TreeTableModule,
-    TimelineModule,
-    ImageModule,
-    InplaceModule,
-    DropdownModule,
-    FileUploadModule,
-    KeyFilterModule
-  ],
-  exports:[
-    AboutComponent,
-    BlogComponent,
-    BmiCalcComponent,
-    BolgDetailComponent,
-    ClassesComponent,
-    ContactComponent,
-    Error404Component,
-    HomeComponent,
-    LoginComponent,
-    ServicesComponent,
-    SignUpComponent,
-    TeamComponent,
-    MinutesDiffPipe,
-    AccountComponent
-  ]
+    declarations: [
+        AboutComponent,
+        BlogComponent,
+        BmiCalcComponent,
+        BolgDetailComponent,
+        ClassesComponent,
+        ContactComponent,
+        Error404Component,
+        HomeComponent,
+        LoginComponent,
+        ServicesComponent,
+        SignUpComponent,
+        TeamComponent,
+        MySubsComponent,
+        MyPaymntsComponent,
+        MyAttendnsComponent,
+        MinutesDiffPipe,
+        MyAccountComponent,
+        AccountComponent
+    ],
+    exports: [
+        AboutComponent,
+        BlogComponent,
+        BmiCalcComponent,
+        BolgDetailComponent,
+        ClassesComponent,
+        ContactComponent,
+        Error404Component,
+        HomeComponent,
+        LoginComponent,
+        ServicesComponent,
+        SignUpComponent,
+        TeamComponent,
+        MinutesDiffPipe,
+        AccountComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ButtonModule,
+        InputTextModule,
+        BrowserAnimationsModule,
+        CarouselModule,
+        PasswordModule,
+        DialogModule,
+        ToggleButtonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SharedModule,
+        TableModule,
+        MultiSelectModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (http: HttpClient) => {
+                    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+                },
+                deps: [HttpClient]
+            }
+        }),
+        ToastModule,
+        TreeTableModule,
+        TimelineModule,
+        ImageModule,
+        InplaceModule,
+        DropdownModule,
+        FileUploadModule,
+        KeyFilterModule,
+        CombineNginxUrlPipeModule
+    ]
 })
 export class PagesModule { }

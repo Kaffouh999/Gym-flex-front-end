@@ -89,7 +89,7 @@
                             <p-multiSelect appendTo="body" [ngModel]="value" optionValue="id" [options]="members" placeholder="Any" (onChange)="filter($event.value)" optionLabel="onlineUser.firstName">
                                 <ng-template let-option pTemplate="item">
                                     <div class="inline-block vertical-align-middle">
-                                        <img [alt]="'member image'" src="{{option.onlineUser.profilePicture}}" width="30" height="30" style="border-radius: 50%;" class="vertical-align-middle" />
+                                        <img [alt]="'member image'" src="{{option.onlineUser.profilePicture | combineNginxUrl}}" width="30" height="30" style="border-radius: 50%;" class="vertical-align-middle" />
                                         <span class="ml-1 mt-1">{{ option.onlineUser.firstName+" "+ option.onlineUser.lastName}}</span>
                                     </div>
                                 </ng-template>
@@ -136,7 +136,7 @@
                 <td id="image">
                     <div class="flex align-items-center">
                     <p-image
-                        src="{{ assurance.member.onlineUser.profilePicture }}?t={{ timeStamp }}"
+                        src="{{ assurance.member.onlineUser.profilePicture | combineNginxUrl}}"
                         class="imageTable"
                         alt="Image"
                         [preview]="true"

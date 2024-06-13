@@ -195,7 +195,7 @@
                     <p-tableCheckbox [value]="member"></p-tableCheckbox>
                 </td>
                 <td id="image">
-                    <p-image src="{{ member.onlineUser.profilePicture }}?t={{ timeStamp }}" class="imageTable" alt="Image"  [preview]="true"></p-image></td>
+                    <p-image src="{{ member.onlineUser.profilePicture | combineNginxUrl }}" class="imageTable" alt="Image"  [preview]="true"></p-image></td>
 
                 <td>{{ member.onlineUser.firstName }}</td>
                 <td>{{ member.onlineUser.lastName }}</td>
@@ -551,7 +551,7 @@
     styleClass="p-fluid"
 >
     <ng-template pTemplate="content">
-        <p-image src="{{ memberInput.onlineUser.profilePicture }}?t={{ timeStamp }}" class="imagebeforeupdate" alt="Image"  [preview]="true"></p-image>
+        <p-image src="{{ memberInput.onlineUser.profilePicture | combineNginxUrl }}" class="imagebeforeupdate" alt="Image"  [preview]="true"></p-image>
         <p-fileUpload  [customUpload]="true" [auto]="true" accept="image/*" (uploadHandler)="onUpload($event)"  [maxFileSize]="1000000">
    
         </p-fileUpload>

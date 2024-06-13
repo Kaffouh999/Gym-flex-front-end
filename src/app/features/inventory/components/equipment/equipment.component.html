@@ -115,7 +115,7 @@
                 <td><span class="p-column-title">Description : </span>{{ equipment.description }}</td>
                 <td id="image"><span class="p-column-title">Image : </span>
                     <p-image
-                        src="{{ equipment.imageUrl }}?t={{ timeStamp }}"
+                        src="{{ equipment.imageUrl | combineNginxUrl }}"
                         class="imageTable"
                         alt="Image"
                         [preview]="true"
@@ -259,7 +259,7 @@
 >
     <ng-template pTemplate="content">
         <p-image
-            src="{{ equipmentInput.imageUrl }}?t={{ timeStamp }}"
+            src="{{ equipmentInput.imageUrl | combineNginxUrl}}"
             class="imagebeforeupdate"
             alt="Image"
             [preview]="true"

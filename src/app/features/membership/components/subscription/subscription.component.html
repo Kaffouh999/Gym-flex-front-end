@@ -318,7 +318,7 @@
         <ng-template pTemplate="header">
             <div class="flex">
             <img
-                        src="{{ subscriptionInput.member.onlineUser.profilePicture }}"
+                        src="{{ subscriptionInput.member.onlineUser.profilePicture | combineNginxUrl }}"
                         class="imageQr  m-3"
                         alt="Image"
                        
