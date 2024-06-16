@@ -33,7 +33,7 @@ GymFlex is an Angular and PrimeNG-based application designed for gym management,
 #### Prerequisites
 
 - Node.js
-- Nginx
+- Backend API (GymFlex API)
 
 #### Installation Steps
 
