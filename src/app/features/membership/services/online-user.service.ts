@@ -31,13 +31,13 @@ export class OnlineUserService {
     }
     uploadImage(name: String, formData: FormData) {
         return this.http.post(
-            environment.API_URL + "/membersProfile/upload/" + name,
+            environment.API_URL + "/online-users/upload/" + name,
             formData
         );
     }
     updateImage(id: number, formData: FormData) {
         return this.http.put(
-            environment.API_URL + "/membersProfile/upload/" + id,
+            environment.API_URL + "/online-users/upload/" + id,
             formData
         );
     }
