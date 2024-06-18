@@ -72,72 +72,42 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th >
+                <th>
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th pSortableColumn="name" >
+                <th pSortableColumn="name">
                     Name<p-sortIcon field="name"></p-sortIcon>
+                    <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
                 </th>
                 <th pSortableColumn="adress">
                     adress<p-sortIcon field="adress"></p-sortIcon>
+                    <p-columnFilter type="text" field="adress" display="menu"></p-columnFilter>
                 </th>
-                <th pSortableColumn="email" >
+                <th pSortableColumn="email">
                     Email<p-sortIcon field="email"></p-sortIcon>
+                    <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
                 </th>
                 <th pSortableColumn="appPassword">
                     appPassword <p-sortIcon field="appPassword"></p-sortIcon>
+                    <p-columnFilter type="text" field="appPasswordEmail" display="menu"></p-columnFilter>
                 </th>
-                <th pSortableColumn="phoneNumber" >
+                <th pSortableColumn="phoneNumber">
                     phone Number<p-sortIcon field="phoneNumber"></p-sortIcon>
+                    <p-columnFilter type="text" field="phoneNumber" display="menu"></p-columnFilter>
                 </th>
-                <th pSortableColumn="openingDate" >
+                <th pSortableColumn="openingDate">
                     opening Date<p-sortIcon field="openingDate"></p-sortIcon>
+                    <!-- If there's a filter for openingDate, it should go here -->
                 </th>
-                <th pSortableColumn="closingDate" >
+                <th pSortableColumn="closingDate">
                     closing Date<p-sortIcon field="closingDate"></p-sortIcon>
+                    <!-- If there's a filter for closingDate, it should go here -->
                 </th>
-                <th
-                    pSortableColumn="sessionDurationAllowed"
-                   
-                >
-                    session Duration<p-sortIcon
-                        field="sessionDurationAllowed"
-                    ></p-sortIcon>
-                </th>
-
-                <th></th>
-            </tr>
-            <tr>
-                <th></th>
-                <th>
-                    <p-columnFilter type="text" field="name"></p-columnFilter>
-                </th>
-                <th>
-                    <p-columnFilter type="text" field="adress"></p-columnFilter>
-                </th>
-                <th>
-                    <p-columnFilter type="text" field="email"></p-columnFilter>
-                </th>
-                <th>
-                    <p-columnFilter
-                        type="text"
-                        field="appPasswordEmail"
-                    ></p-columnFilter>
-                </th>
-                <th>
-                    <p-columnFilter
-                        type="text"
-                        field="phoneNumber"
-                    ></p-columnFilter>
+                <th pSortableColumn="sessionDurationAllowed">
+                    session Duration<p-sortIcon field="sessionDurationAllowed"></p-sortIcon>
+                    <p-columnFilter type="text" field="sessionDurationAllowed" display="menu"></p-columnFilter>
                 </th>
                 <th></th>
-                <th></th>
-                <th>
-                    <p-columnFilter
-                        type="text"
-                        field="sessionDurationAllowed"
-                    ></p-columnFilter>
-                </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-gymBranch>
@@ -150,8 +120,8 @@
                 <td>{{ gymBranch.email }}</td>
                 <td>{{ gymBranch.appPasswordEmail }}</td>
                 <td>{{ gymBranch.phoneNumber }}</td>
-                <td>{{ gymBranch.openingDate | date: "shortTime" }}</td>
-                <td>{{ gymBranch.closingDate | date: "shortTime" }}</td>
+                <td>{{ gymBranch.openingDate | date : "shortTime" }}</td>
+                <td>{{ gymBranch.closingDate | date : "shortTime" }}</td>
                 <td>{{ gymBranch.sessionDurationAllowed }}</td>
                 <td>
                     <button

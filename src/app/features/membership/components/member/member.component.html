@@ -8,10 +8,10 @@
                 pRipple
                 label="{{ 'New' | translate }}"
                 icon="pi pi-plus"
-                class=" mx-2"
+                class="mx-2"
                 (click)="openNew()"
             ></button>
-            
+
             <button
                 pButton
                 pRipple
@@ -54,7 +54,8 @@
         [resizableColumns]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [showCurrentPageReport]="true"
-        responsiveLayout="stack" [breakpoint]="'960px'"
+        responsiveLayout="stack"
+        [breakpoint]="'960px'"
     >
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
@@ -77,108 +78,160 @@
                         placeholder="Search..."
                     />
                 </span> -->
-    <p-toolbar>
-    <div class="p-toolbar-group-start">
-        <button [disabled]="!selectedMembers || !selectedMembers.length" type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
-        <button [disabled]="!selectedMembers || !selectedMembers.length" type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mx-2" pTooltip="PDF" tooltipPosition="bottom"></button>        <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
-        selectedItemsLabel="{0} columns selected" [style]="{'min-width': '200px'}" placeholder="Choose Columns"></p-multiSelect>    </div>
-    </p-toolbar>
+                <p-toolbar>
+                    <div class="p-toolbar-group-start">
+                        <button
+                            [disabled]="
+                                !selectedMembers || !selectedMembers.length
+                            "
+                            type="button"
+                            pButton
+                            pRipple
+                            icon="pi pi-file-excel"
+                            (click)="exportExcel()"
+                            class="p-button-success mr-2"
+                            pTooltip="XLS"
+                            tooltipPosition="bottom"
+                        ></button>
+                        <button
+                            [disabled]="
+                                !selectedMembers || !selectedMembers.length
+                            "
+                            type="button"
+                            pButton
+                            pRipple
+                            icon="pi pi-file-pdf"
+                            (click)="exportPdf()"
+                            class="p-button-warning mx-2"
+                            pTooltip="PDF"
+                            tooltipPosition="bottom"
+                        ></button>
+                        <p-multiSelect
+                            [options]="cols"
+                            [(ngModel)]="selectedColumns"
+                            optionLabel="header"
+                            selectedItemsLabel="{0} columns selected"
+                            [style]="{ 'min-width': '200px' }"
+                            placeholder="Choose Columns"
+                        ></p-multiSelect>
+                    </div>
+                </p-toolbar>
             </div>
         </ng-template>
-        <ng-template pTemplate="header" >
+        <ng-template pTemplate="header">
             <tr>
                 <th style="width: 4rem">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th>{{ 'Image' | translate }}</th>
-                <th pSortableColumn="onlineUser.firstName" >
-                    {{ 'FirstName' | translate }}<p-sortIcon field="onlineUser.firstName"></p-sortIcon>
+                <th>{{ "Image" | translate }}</th>
+                <th pSortableColumn="onlineUser.firstName">
+                    {{ "FirstName" | translate
+                    }}<p-sortIcon field="onlineUser.firstName"></p-sortIcon>
                     <p-columnFilter
-                    class="filterIcon"
-                    type="text"
-                    field="onlineUser.firstName"
-                    display="menu"
-                ></p-columnFilter>
+                        class="filterIcon"
+                        type="text"
+                        field="onlineUser.firstName"
+                        display="menu"
+                    ></p-columnFilter>
                 </th>
                 <th pSortableColumn="onlineUser.lastName">
-                    {{ 'LastName' | translate }}<p-sortIcon
+                    {{ "LastName" | translate
+                    }}<p-sortIcon field="onlineUser.lastName"></p-sortIcon>
+                    <p-columnFilter
+                        class="filterIcon"
+                        type="text"
                         field="onlineUser.lastName"
-                    ></p-sortIcon>
+                        display="menu"
+                    ></p-columnFilter>
+                </th>
+                <th pSortableColumn="onlineUser.email">
+                    {{ "Email" | translate
+                    }}<p-sortIcon field="onlineUser.email"></p-sortIcon>
                     <p-columnFilter
-                    class="filterIcon"
-                    type="text"
-                    field="onlineUser.lastName"
-                    display="menu"
-                    
-                ></p-columnFilter>
+                        class="filterIcon"
+                        type="text"
+                        field="onlineUser.email"
+                        display="menu"
+                    ></p-columnFilter>
                 </th>
-                <th pSortableColumn="onlineUser.email" >
-                    {{ 'Email' | translate }}<p-sortIcon field="onlineUser.email"></p-sortIcon>
+                <th pSortableColumn="cin">
+                    {{ "CIN" | translate }}<p-sortIcon field="cin"></p-sortIcon>
                     <p-columnFilter
-                    class="filterIcon"
-                    type="text"
-                    field="onlineUser.email"
-                    display="menu"
-                ></p-columnFilter>
+                        class="filterIcon"
+                        type="text"
+                        field="cin"
+                        display="menu"
+                    ></p-columnFilter>
                 </th>
-                <th pSortableColumn="cin" >
-                   {{ 'CIN' | translate }}<p-sortIcon field="cin"></p-sortIcon>
-                   <p-columnFilter
-                   class="filterIcon"
-                   type="text"
-                   field="cin"
-                   display="menu"
-                   
-               ></p-columnFilter>
-                </th>
-                <th pSortableColumn="age" >
-                    {{ 'Age' | translate }}<p-sortIcon field="age"></p-sortIcon>
+                <th pSortableColumn="age">
+                    {{ "Age" | translate }}<p-sortIcon field="age"></p-sortIcon>
                     <p-columnFilter
-                    class="filterIcon"
-                    type="numeric"
-                    field="age"
-                    display="menu"
-                    
-                ></p-columnFilter>
+                        class="filterIcon"
+                        type="numeric"
+                        field="age"
+                        display="menu"
+                    ></p-columnFilter>
                 </th>
-                <th pSortableColumn="gender" >
-                    {{ 'Gender' | translate }}<p-sortIcon field="gender"></p-sortIcon>
+                <th pSortableColumn="gender">
+                    {{ "Gender" | translate
+                    }}<p-sortIcon field="gender"></p-sortIcon>
                     <p-columnFilter
-                    class="filterIcon"
-                    type="boolean"
-                    field="gender"
-                    display="menu"  >
-            
-            </p-columnFilter>
-         
+                        class="filterIcon"
+                        type="boolean"
+                        field="gender"
+                        display="menu"
+                    >
+                    </p-columnFilter>
                 </th>
-                <th pSortableColumn="adress" >
-                    {{ 'Adress' | translate }}<p-sortIcon field="adress"></p-sortIcon>
+                <th pSortableColumn="adress">
+                    {{ "Adress" | translate
+                    }}<p-sortIcon field="adress"></p-sortIcon>
                     <p-columnFilter
-                    class="filterIcon"
-                    type="text"
-                    field="adress"
-                    display="menu"
-        
-                ></p-columnFilter>
+                        class="filterIcon"
+                        type="text"
+                        field="adress"
+                        display="menu"
+                    ></p-columnFilter>
                 </th>
-                <th pSortableColumn="login" >
-                    {{ 'Login' | translate }}<p-sortIcon field="login"></p-sortIcon>
+                <th pSortableColumn="login">
+                    {{ "Login" | translate
+                    }}<p-sortIcon field="login"></p-sortIcon>
                     <p-columnFilter
-                    class="filterIcon"
-                    type="text"
-                    field="login"
-                    display="menu"
-                ></p-columnFilter>
+                        class="filterIcon"
+                        type="text"
+                        field="login"
+                        display="menu"
+                    ></p-columnFilter>
                 </th>
-                <th pSortableColumn="gymBranch" >
-                    {{ 'GymBranch' | translate }}<p-sortIcon field="gymBranch"></p-sortIcon>
-                    <p-columnFilter field="gymBranch.id" matchMode="in" [showMenu]="false" >
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect appendTo="body" [ngModel]="value" optionValue="id" [options]="gymBranches" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
+                <th pSortableColumn="gymBranch">
+                    {{ "GymBranch" | translate
+                    }}<p-sortIcon field="gymBranch"></p-sortIcon>
+                    <p-columnFilter
+                        field="gymBranch.id"
+                        matchMode="in"
+                        [showMenu]="false"
+                    >
+                        <ng-template
+                            pTemplate="filter"
+                            let-value
+                            let-filter="filterCallback"
+                        >
+                            <p-multiSelect
+                                appendTo="body"
+                                [ngModel]="value"
+                                optionValue="id"
+                                [options]="gymBranches"
+                                placeholder="Any"
+                                (onChange)="filter($event.value)"
+                                optionLabel="name"
+                            >
                                 <ng-template let-option pTemplate="item">
-                                    <div class="inline-block vertical-align-middle">
-                                        <span class="ml-1 mt-1">{{ option.name }}</span>
+                                    <div
+                                        class="inline-block vertical-align-middle"
+                                    >
+                                        <span class="ml-1 mt-1">{{
+                                            option.name
+                                        }}</span>
                                     </div>
                                 </ng-template>
                             </p-multiSelect>
@@ -195,7 +248,15 @@
                     <p-tableCheckbox [value]="member"></p-tableCheckbox>
                 </td>
                 <td id="image">
-                    <p-image src="{{ member.onlineUser.profilePicture | combineNginxUrl }}" class="imageTable" alt="Image"  [preview]="true"></p-image></td>
+                    <p-image
+                        src="{{
+                            member.onlineUser.profilePicture | combineNginxUrl
+                        }}"
+                        class="imageTable"
+                        alt="Image"
+                        [preview]="true"
+                    ></p-image>
+                </td>
 
                 <td>{{ member.onlineUser.firstName }}</td>
                 <td>{{ member.onlineUser.lastName }}</td>
@@ -209,17 +270,17 @@
 
                 <td>
                     <button
-                    pButton
-                    pRipple
-                    icon="pi pi-upload"
-                    class="p-button-rounded p-button-secondary mr-2"
-                    (click)="editImage(member)"
-                ></button>
+                        pButton
+                        pRipple
+                        icon="pi pi-upload"
+                        class="p-button-rounded p-button-secondary mr-2"
+                        (click)="editImage(member)"
+                    ></button>
                     <button
                         pButton
                         pRipple
                         icon="pi pi-pencil"
-                        class="p-button-rounded  mr-2"
+                        class="p-button-rounded mr-2"
                         (click)="editMemberInput(member)"
                     ></button>
                     <button
@@ -262,16 +323,16 @@
                             [autoDisplayFirst]="false"
                             (onChange)="fillUserFields()"
                         >
-                        <ng-template let-option pTemplate>
-                            <div *ngIf="option === null">
-                                Select Nothing
-                            </div>
-                            <div *ngIf="option !== null">
-                                {{ option.firstName }}
-                            </div>
-                        </ng-template>
-                    </p-dropdown>
-                        <label for="user"> {{ 'User' | translate }}</label>
+                            <ng-template let-option pTemplate>
+                                <div *ngIf="option === null">
+                                    Select Nothing
+                                </div>
+                                <div *ngIf="option !== null">
+                                    {{ option.firstName }}
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <label for="user"> {{ "User" | translate }}</label>
                     </span>
                     <small
                         *ngIf="
@@ -280,7 +341,9 @@
                                 membersForm.get('role').touched)
                         "
                         class="p-error"
-                        > {{ 'role' | translate }} {{ 'isRequired' | translate }}</small
+                    >
+                        {{ "role" | translate }}
+                        {{ "isRequired" | translate }}</small
                     >
                 </div>
                 <div class="field col-12 md:col-6">
@@ -388,9 +451,8 @@
                             formControlName="role"
                             optionLabel="name"
                             [autoDisplayFirst]="false"
-
                         ></p-dropdown>
-                        <label for="role"> {{ 'role' | translate }}</label>
+                        <label for="role"> {{ "role" | translate }}</label>
                     </span>
                     <small
                         *ngIf="
@@ -399,15 +461,16 @@
                                 membersForm.get('role').touched)
                         "
                         class="p-error"
-                        > {{ 'role' | translate }} {{ 'isRequired' | translate }}</small
+                    >
+                        {{ "role" | translate }}
+                        {{ "isRequired" | translate }}</small
                     >
                 </div>
-             
 
                 <div class="field col-12 md:col-12">
                     <span class="p-float-label">
                         <textarea
-                        id="adress"
+                            id="adress"
                             [rows]="5"
                             [cols]="30"
                             pInputTextarea
@@ -472,15 +535,14 @@
                             formControlName="login"
                             required
                             [disabled]="onlineuserInput != undefined"
-                            
                         />
                         <label htmlFor="login">Login</label>
                     </span>
                     <small
                         *ngIf="
-                        membersForm.get('login').invalid &&
+                            membersForm.get('login').invalid &&
                             (membersForm.get('login').dirty ||
-                            membersForm.get('login').touched)
+                                membersForm.get('login').touched)
                         "
                         class="p-error"
                         >login is required</small
@@ -488,37 +550,27 @@
                 </div>
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
-                        <p-password 
-                         
-                        [toggleMask]="true"
+                        <p-password
+                            [toggleMask]="true"
                             id="password"
                             formControlName="password"
                             required
                             [disabled]="onlineuserInput != undefined"
-                            
                         ></p-password>
                         <label htmlFor="password">Password</label>
                     </span>
                     <small
                         *ngIf="
-                        membersForm.get('password').invalid &&
+                            membersForm.get('password').invalid &&
                             (membersForm.get('password').dirty ||
-                            membersForm.get('password').touched)
+                                membersForm.get('password').touched)
                         "
                         class="p-error"
                         >password is required</small
                     >
                 </div>
-               
-         
-           
-         
-      </div>
-    </form>
-    
-
- 
-
+            </div>
+        </form>
     </ng-template>
 
     <ng-template pTemplate="footer">
@@ -531,7 +583,7 @@
             (click)="hideDialog()"
         ></button>
         <button
-        id="save"
+            id="save"
             pButton
             pRipple
             label="Save"
@@ -551,9 +603,19 @@
     styleClass="p-fluid"
 >
     <ng-template pTemplate="content">
-        <p-image src="{{ memberInput.onlineUser.profilePicture | combineNginxUrl }}" class="imagebeforeupdate" alt="Image"  [preview]="true"></p-image>
-        <p-fileUpload  [customUpload]="true" [auto]="true" accept="image/*" (uploadHandler)="onUpload($event)"  [maxFileSize]="1000000">
-   
+        <p-image
+            src="{{ memberInput.onlineUser.profilePicture | combineNginxUrl }}"
+            class="imagebeforeupdate"
+            alt="Image"
+            [preview]="true"
+        ></p-image>
+        <p-fileUpload
+            [customUpload]="true"
+            [auto]="true"
+            accept="image/*"
+            (uploadHandler)="onUpload($event)"
+            [maxFileSize]="1000000"
+        >
         </p-fileUpload>
         <button
             pButton
@@ -563,7 +625,7 @@
             class="p-button-text updateimagebtn"
             (click)="updateImage()"
         ></button>
-        </ng-template>
-    </p-dialog>
+    </ng-template>
+</p-dialog>
 
 <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
