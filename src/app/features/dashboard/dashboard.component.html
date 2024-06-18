@@ -4,19 +4,19 @@
         <h4 class="m-0">
             {{memberEquipmentStatistics.numberOfEquipments}} Equipment 
         </h4>
-        <h5 style="position:relative;left:50%;"> {{memberEquipmentStatistics.numberOfEquipmentItems}} Items</h5>
+        <h5 style="float: right;"> {{memberEquipmentStatistics.numberOfEquipmentItems}} Items</h5>
     </p-card>
     <p-card class="col-4 nums" header="Members in our gym">
         <h4 class="m-0">
             {{memberEquipmentStatistics.numberOfMen + memberEquipmentStatistics.numberOfWomen}} Member
         </h4>
-        <h5 style="position:relative;left:50%;">11 Live right now</h5>
+        <h5 style="float: right;">11 Live right now</h5>
     </p-card>
     <p-card class="col-4 nums" header="Monthly Payments">
         <h4 class="m-0" >
             {{totalNumPayment}} Payment
         </h4>
-        <h5 style="position:relative;left:50%;">Total earned {{totalNumIncome}} DH</h5>
+        <h5 style="float: right;">Total earned {{totalNumIncome}} DH</h5>
     </p-card>
     <div class="col-4 chart card flex justify-content-center">
         <p-chart (onDataSelect)="handleDataSelect($event)"  type="pie" [data]="genderData" [options]="genderOptions"></p-chart>
