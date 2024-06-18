@@ -146,6 +146,7 @@ import {
     CombineNginxUrlPipe,
     CombineNginxUrlPipeModule,
 } from "./core/pipes/CombineNginxUrlPipe";
+import { OnlineUserComponent } from './features/settings/components/online-user/online-user.component';
 
 @NgModule({
     declarations: [
@@ -175,6 +176,7 @@ import {
         DashboardComponent,
         BlogsComponent,
         CategoryBlogComponent,
+        OnlineUserComponent,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
