@@ -93,7 +93,7 @@
                 <td id="image">
                     <div class="flex align-items-center">
                    <div><p-image
-                        [src]="session.subscriptionMember.member.onlineUser.profilePicture "
+                        [src]="session.subscriptionMember.member.onlineUser.profilePicture | combineNginxUrl "
                         class="imageTable"
                         alt="Image"
                         [preview]="true"
