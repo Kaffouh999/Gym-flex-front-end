@@ -32,13 +32,13 @@
             <p-dropdown [options]="members" class="seachDrop" [autoDisplayFirst]="false" [(ngModel)]="selectedMember"  [showClear]="true" placeholder="Select a Member">
                 <ng-template  pTemplate="selectedItem">
                     <div class="flex align-items-center gap-2" *ngIf="selectedMember">
-                        <img [src]="selectedMember.onlineUser.profilePicture" style="width: 18px"/>
+                        <img [src]="selectedMember.onlineUser.profilePicture | combineNginxUrl" style="width: 18px"/>
                         <div>{{ selectedMember.onlineUser.firstName }}</div>
                     </div>
                 </ng-template>
                 <ng-template let-member pTemplate="item">
                     <div class="flex align-items-center gap-2">
-                        <img [src]="member.onlineUser.profilePicture"  style="width: 18px"/>
+                        <img [src]="member.onlineUser.profilePicture | combineNginxUrl"  style="width: 18px"/>
                         <div>{{ member.onlineUser.firstName}}</div>
                     </div>
                 </ng-template>
@@ -47,13 +47,13 @@
             <p-dropdown [options]="plans" class="seachDrop" [autoDisplayFirst]="false" [(ngModel)]="selectedPlan"  [showClear]="true" placeholder="Select a Plan">
                 <ng-template let-plan pTemplate="selectedItem">
                     <div class="flex align-items-center gap-2" *ngIf="selectedPlan">
-                        <img [src]="plan.imageAds" style="width: 18px"/>
+                        <img [src]="plan.imageAds | combineNginxUrl" style="width: 18px"/>
                         <div>{{ plan.name }}</div>
                     </div>
                 </ng-template>
                 <ng-template let-plan pTemplate="item">
                     <div class="flex align-items-center gap-2">
-                        <img [src]="plan.imageAds"  style="width: 18px"/>
+                        <img [src]="plan.imageAds | combineNginxUrl"  style="width: 18px"/>
                         <div>{{ plan.name}}</div>
                     </div>
                 </ng-template>
@@ -70,7 +70,7 @@
     <ng-template let-subscription pTemplate="listItem">
         <div class="col-12">
             <div class="flex flex-row xl:flex-row xl:align-items-start p-4 gap-4">
-                <img class="w-9 h-6rem sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" [src]="subscription.member.onlineUser.profilePicture" [alt]="'member image'" />
+                <img class="w-9 h-6rem sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" [src]="subscription.member.onlineUser.profilePicture | combineNginxUrl" [alt]="'member image'" />
                 <div class="flex flex-row sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                     <div class="flex flex-row align-items-center sm:align-items-start gap-3">
                         <div class="text-2xl font-bold text-900">{{ subscription.member.onlineUser.firstName }}</div>
@@ -124,7 +124,7 @@
                     
                 </div>
                 <div class="flex flex-column align-items-center gap-3 py-5">
-                    <img class="w-9 h-10rem shadow-2 border-round" [src]="subscription.member.onlineUser.profilePicture" [alt]="'member image'" />
+                    <img class="w-9 h-10rem shadow-2 border-round" [src]="subscription.member.onlineUser.profilePicture | combineNginxUrl" [alt]="'member image'" />
                     <div class="text-2xl font-bold">{{ subscription.member.onlineUser.firstName }}</div>
                 </div>
                 <div class="flex align-items-center justify-content-between">
@@ -182,14 +182,14 @@
                     >
                     <ng-template pTemplate="selectedItem">
                         <div class="flex align-items-center gap-2" *ngIf="subscriptionForm.get('member').value">
-                            <img [src]="subscriptionForm.get('member').value.onlineUser.profilePicture" class="imageDropdown" />
+                            <img [src]="subscriptionForm.get('member').value.onlineUser.profilePicture | combineNginxUrl" class="imageDropdown" />
                             <div>{{ subscriptionForm.get('member').value.onlineUser.firstName }}</div>
                         </div>
                     </ng-template>
                    
                     <ng-template let-mmeber pTemplate="item">
                         <div class="flex align-items-center gap-2">
-                            <img [src]="mmeber.onlineUser.profilePicture" class="imageDropdown"  />
+                            <img [src]="mmeber.onlineUser.profilePicture | combineNginxUrl" class="imageDropdown"  />
                             <div>{{ mmeber.onlineUser.firstName }}</div>
                         </div>
                     </ng-template>

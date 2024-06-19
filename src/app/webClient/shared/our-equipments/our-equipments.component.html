@@ -17,7 +17,7 @@
                 <ng-container *ngFor="let equipment of equipments">
                 <ng-template class="item"  carouselSlide>
                 <div class="col-lg-4">
-                    <div class="ts-item" [ngStyle]="{ 'background-image': 'url(' + equipment.imageUrl + ')' }">
+                    <div class="ts-item" [ngStyle]="{ 'background-image': 'url(' + (equipment.imageUrl | combineNginxUrl) + ')' }">
                         <div class="ts_text">
                             <h4>{{equipment.name}}</h4>
                             <span>{{equipment.description}}</span>

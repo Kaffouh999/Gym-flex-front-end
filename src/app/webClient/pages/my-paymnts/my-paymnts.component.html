@@ -34,7 +34,7 @@
                         <button type="button" pButton pRipple [pRowToggler]="sub" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                     </td>
                     <td>{{ sub.startDate | date:"dd/MM/yyyy"}}</td>
-                    <td > <img [src]="sub.plan.imageAds" style="width:80px;height:50px;border-radius:5%" /> {{ sub.plan.name}} + ( {{sub.plan.duration}} days )</td>
+                    <td > <img [src]="sub.plan.imageAds | combineNginxUrl" style="width:80px;height:50px;border-radius:5%" /> {{ sub.plan.name}} + ( {{sub.plan.duration}} days )</td>
                     <td>{{ sub.endDate | date:"dd/MM/yyyy"}}</td>
 
                 </tr>

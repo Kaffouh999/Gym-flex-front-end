@@ -200,14 +200,14 @@
                     >
                     <ng-template pTemplate="selectedItem">
                         <div class="flex align-items-center gap-2" *ngIf="assuranceForm.get('member').value">
-                            <img [src]="assuranceForm.get('member').value.onlineUser.profilePicture" class="imageDropdown" />
+                            <img [src]="assuranceForm.get('member').value.onlineUser.profilePicture | combineNginxUrl" class="imageDropdown" />
                             <div>{{ assuranceForm.get('member').value.onlineUser.firstName }}</div>
                         </div>
                     </ng-template>
                    
                     <ng-template let-mmeber pTemplate="item">
                         <div class="flex align-items-center gap-2">
-                            <img [src]="mmeber.onlineUser.profilePicture" class="imageDropdown"  />
+                            <img [src]="mmeber.onlineUser.profilePicture | combineNginxUrl" class="imageDropdown"  />
                             <div>{{ mmeber.onlineUser.firstName }}</div>
                         </div>
                     </ng-template>

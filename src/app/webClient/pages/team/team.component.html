@@ -19,7 +19,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-sm-6" *ngFor="let member of members">
-                <div class="ts-item " [ngStyle]="{ 'background-image': 'url(' + member.onlineUser.profilePicture +'?t='+timeStamp+' )' }">
+                <div class="ts-item" [ngStyle]="{ 'background-image': 'url(' + (member.onlineUser.profilePicture | combineNginxUrl) + ')' }">
                     <div class="ts_text">
                         <h4>{{member.onlineUser.firstName}} {{member.onlineUser.lastName}}</h4>
                         <span>{{member.onlineUser.role.name}}</span>

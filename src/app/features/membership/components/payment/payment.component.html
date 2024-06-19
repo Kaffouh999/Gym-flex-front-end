@@ -162,7 +162,7 @@
                 <td id="image">
                     <div class="flex align-items-center">
                     <p-image
-                        [src]="payment.subscriptionMember.member.onlineUser.profilePicture"
+                        [src]="payment.subscriptionMember.member.onlineUser.profilePicture | combineNginxUrl"
                         class="imageTable"
                         alt="Image"
                         [preview]="true"
@@ -242,7 +242,7 @@
                     >
                     <ng-template pTemplate="selectedItem">
                         <div class="flex align-items-center gap-2" *ngIf="PaymentForm.get('subscriptionMember').value">
-                            <img [src]="PaymentForm.get('subscriptionMember').value.member.onlineUser.profilePicture" class="imageDropdown" />
+                            <img [src]="PaymentForm.get('subscriptionMember').value.member.onlineUser.profilePicture | combineNginxUrl" class="imageDropdown" />
                             <div>{{ PaymentForm.get('subscriptionMember').value.member.onlineUser.firstName }}</div>
                             <div *ngIf="PaymentForm.get('subscriptionMember').value.endDate != undefined">{{ PaymentForm.get('subscriptionMember').value.endDate | date :'dd/MM/yyyy'}}</div>
                             <div *ngIf="PaymentForm.get('subscriptionMember').value.endDate == undefined">{{'NotPayedYet' | translate}}</div>
@@ -252,7 +252,7 @@
                    
                     <ng-template let-subscription pTemplate="item">
                         <div class="flex align-items-center gap-2">
-                            <img [src]="subscription.member.onlineUser.profilePicture" class="imageDropdown"  />
+                            <img [src]="subscription.member.onlineUser.profilePicture | combineNginxUrl" class="imageDropdown"  />
                             <div>{{ subscription.member.onlineUser.firstName }}</div>
                             <div>{{subscription.startDate | date :'dd/MM/yyyy'}}</div>
                             <div>{{ subscription.plan.name}}</div>
