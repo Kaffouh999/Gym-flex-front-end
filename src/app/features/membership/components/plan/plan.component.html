@@ -95,7 +95,7 @@
                 ></p-columnFilter>
                 </th>
                 <th pSortableColumn="duration" style="min-width: 10rem">
-                    {{ 'duration' | translate }}<p-sortIcon field="duration"></p-sortIcon>
+                    {{ 'duration' | translate }} (Days)<p-sortIcon field="duration"></p-sortIcon>
                     <p-columnFilter
                     class="filterIcon"
                     type="numeric"
@@ -226,7 +226,7 @@
                         <p-inputNumber
                             id="duration"
                             formControlName="duration"
-                            suffix=" min"
+                            suffix=" Days"
                         ></p-inputNumber>
                         <label htmlFor="duration">{{ 'duration' | translate }}</label>
                     </span>

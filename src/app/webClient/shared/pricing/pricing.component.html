@@ -18,7 +18,7 @@
                         <span>{{plan.duration}} Days</span>
                         <p>{{plan.description}}</p>
                     </div>
-                   <img [src]="plan.imageAds" alt="plan image"/>
+                   <img [src]="plan.imageAds | combineNginxUrl" alt="plan image"/>
                     <a href="#" class="primary-btn pricing-btn">Enroll now</a>
                     <a href="#" class="thumb-icon"><i class="fa fa-picture-o"></i></a>
                     <p-rating

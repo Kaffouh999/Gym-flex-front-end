@@ -17,7 +17,7 @@
                 <ng-container *ngFor="let member of teams">
                 <ng-template class="item"  carouselSlide>
                 <div class="col-lg-4">
-                    <div class="ts-item" [ngStyle]="{ 'background-image': 'url(' + member.onlineUser.profilePicture + ')' }">
+                    <div class="ts-item" [ngStyle]="{ 'background-image': 'url(' + (member.onlineUser.profilePicture | combineNginxUrl) + ')' }">
                         <div class="ts_text">
                             <h4>{{member.onlineUser.firstName}} {{member.onlineUser.lastName}}</h4>
                             <span>{{member.onlineUser.role.name}}</span>
