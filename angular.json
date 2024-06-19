@@ -24,7 +24,9 @@
                             "rgbcolor",
                             "file-saver",
                             "qrious",
-                            "es"
+                            "es",
+                            "core-js",
+                            "quill-delta"
 
                          ],
                         "outputPath": "dist/omega-ng",
