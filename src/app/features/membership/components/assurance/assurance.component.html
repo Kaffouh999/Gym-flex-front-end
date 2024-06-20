@@ -227,14 +227,16 @@
             </div>
             <div class="field col-12 md:col-6">
                 <span class="p-float-label">
-                    <input
+                    <!-- <input
                         type="text"
                         pInputText
                         id="assurancAgency"
                         formControlName="assurancAgency"
                         ng-required="true"
                         autofocus
-                    />
+                    /> -->
+                    <p-autoComplete formControlName="assurancAgency" [dropdown]="true" [suggestions]="filteredAssuranceAgencies" (completeMethod)="filterAssuranceAgency($event)"></p-autoComplete>
+
                     <label for="assurancAgency">{{ 'assurancAgency' | translate }}</label>
                 </span>
             </div>
