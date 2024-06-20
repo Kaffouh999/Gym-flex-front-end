@@ -40,6 +40,7 @@ import { MyAccountComponent } from "./webClient/pages/my-account/my-account.comp
 import { DashboardComponent } from "./features/dashboard/dashboard.component";
 import { BlogsComponent } from "./features/blogs/components/blogs/blogs.component";
 import { CategoryBlogComponent } from "./features/blogs/components/category-blog/category-blog.component";
+import { OnlineUserComponent } from "./features/settings/components/online-user/online-user.component";
 
 @NgModule({
     imports: [
@@ -101,6 +102,7 @@ import { CategoryBlogComponent } from "./features/blogs/components/category-blog
                         component: GymBranchComponent,
                     },
                     { path: "settings/role", component: RoleComponent },
+                    {path: "settings/user", component: OnlineUserComponent},
                     { path: "membership/member", component: MemberComponent },
                     { path: "membership/plan", component: PlanComponent },
                     {
