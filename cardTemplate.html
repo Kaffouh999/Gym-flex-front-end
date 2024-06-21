@@ -16,12 +16,34 @@
         .card {
             width: 350px;
             height: 200px;
-            background-color: #00CED1;
+            background-color: #B8860B; /* Changed to gold/brown */
             border-radius: 15px;
             padding: 20px;
             font-family: Arial, sans-serif;
             position: relative;
             overflow: hidden;
+            display: flex;
+        }
+        .qr-section {
+            width: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .main-section {
+            flex-grow: 1;
         }
         .logo-section {
             display: flex;
@@ -30,7 +52,7 @@
         .logo-icon {
             width: 40px;
             height: 40px;
-            background-color: #FF6347;
+            background-color: #FFA500; /* Changed to orange */
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -40,21 +62,12 @@
         .logo-text {
             font-size: 24px;
             font-weight: bold;
-            color: #FF6347;
-        }
-        .label {
-            background-color: #000;
-            color: #fff;
-            padding: 5px 15px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-top: 15px;
-            font-size: 14px;
+            color: #FFA500; /* Changed to orange */
         }
         .member-info {
-                margin-top: 70px;
-                color: #fff;
-                float: right;
+            margin-top: 70px;
+            color: #fff;
+            float: right;
         }
         .vip-number {
             font-size: 24px;
@@ -78,7 +91,7 @@
             position: absolute;
             width: 150px;
             height: 150px;
-            background-color: #FF6347;
+            background-color: #FFA500; /* Changed to orange */
             bottom: -75px;
             right: -75px;
             border-radius: 50%;
@@ -87,20 +100,19 @@
 </head>
 <body>
     <div class="card">
-        <div class="logo-section">
-            
+        <div class="main-section">
+            <div class="logo-section">
                 <img class="logo-icon" src="https://media.istockphoto.com/id/1331186720/vector/dumbbell.jpg?s=612x612&w=0&k=20&c=ztAKf6ZaSrWTBQVW7Nj2yrEbGM0FxitFrze39W-HdMs=" alt="logo" width="30px" height="30px">
-                <!-- Icon placeholder -->
-            
-            <div class="logo-text">GYMFLEX</div>
+                <div class="logo-text">GYMFLEX</div>
+            </div>
+            <div class="member-info">
+                <div class="vip-number">Othman KAFFOUH</div>
+                <div class="expiry">N° : 009</div>
+            </div>
+            <img class="photo-placeholder" src="https://media.istockphoto.com/id/1331186720/vector/dumbbell.jpg?s=612x612&w=0&k=20&c=ztAKf6ZaSrWTBQVW7Nj2yrEbGM0FxitFrze39W-HdMs=" alt="logo" width="30px" height="30px">
+            <div class="orange-accent"></div>
+            <div class="qr-code">QR Code Placeholder</div>
         </div>
-        <!--<div class="label">MEMBERSHIP CARD</div>-->
-        <div class="member-info">
-            <div class="vip-number">Othman KAFFOUH</div>
-            <div class="expiry">N° : 009</div>
-        </div>
-        <div class="photo-placeholder"></div>
-        <div class="orange-accent"></div>
     </div>
 </body>
 </html>
