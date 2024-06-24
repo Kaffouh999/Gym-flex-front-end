@@ -12,6 +12,7 @@
         <div>
             <p-dropdown [options]="translationService.languages" (onChange)="swichLanguage()" [(ngModel)]="selectedLanguage"></p-dropdown>
         </div>
+        <button (click)="generateReport()">Generate Report</button>
     </div>
 
     <a id="options-menu-button" href="#" (click)="appMain.toggleTopMenu($event)">

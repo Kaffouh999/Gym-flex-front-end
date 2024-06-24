@@ -1,5 +1,4 @@
 :host ::ng-deep {
-  
     button.p-confirm-dialog-accept {
         position: relative;
         right: 99px;
@@ -18,53 +17,50 @@
     button.p-confirm-dialog-reject:hover {
         background-color: rgb(138, 16, 40);
     }
-  
-        .imageTable > .p-image-preview-container > img{
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-        }
-        .p-card-header img{
-            width: 40%;
-            border-radius: 10%;
-        }
-        .p-card {
-            background-color: #dcf2f2;
-          }
-     
-        .imageQr{
-            width: 50%;
-        }
-        .col-12.sm\:col-6.lg\:col-12.xl\:col-4.p-2 {
-            width: 294px;
-          }
-          .seachDrop .p-dropdown{
-            background-color: azure;
-            width: 18%;
-            margin-inline: 10px;
-          }
-          .seachDate .p-calendar {
-            width: 20%;
-            margin-inline: 10px;
-            input {
-                background-color: azure;
-            }
-            
-          }
-          .searchbtn{
-           .p-button.p-component {
-                width: 15%;
-              }
-              .p-button.p-component:hover {
-                background-color: gray;
-                color: azure;
-              }
-              margin: 3%;
-          }
 
-  
+    .imageTable > .p-image-preview-container > img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+    .p-card-header img {
+        width: 40%;
+        border-radius: 10%;
+    }
+    .p-card {
+        background-color: #dcf2f2;
+    }
+
+    .imageQr {
+        width: 50%;
+    }
+    .col-12.sm\:col-6.lg\:col-12.xl\:col-4.p-2 {
+        width: 294px;
+    }
+    .seachDrop .p-dropdown {
+        background-color: azure;
+        width: 18%;
+        margin-inline: 10px;
+    }
+    .seachDate .p-calendar {
+        width: 20%;
+        margin-inline: 10px;
+        input {
+            background-color: azure;
+        }
+    }
+    .searchbtn {
+        .p-button.p-component {
+            width: 15%;
+        }
+        .p-button.p-component:hover {
+            background-color: gray;
+            color: azure;
+        }
+        margin: 3%;
+    }
 }
-.imageDropdown{
+.imageDropdown {
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -72,30 +68,157 @@
 .field {
     margin-top: 20px;
 }
-.QrCard{
-    margin:15px;
+.QrCard {
+    margin: 15px;
 }
-.qrInfos{
-    font-family: 'Times New Roman', Times, serif;
+.qrInfos {
+    font-family: "Times New Roman", Times, serif;
     font-size: 18px;
     margin: 15px;
-
 }
-@media print{
-  
- 
-    .qrInfos{
+@media print {
+    .qrInfos {
         font-weight: bold;
-        font-family: 'Times New Roman', Times, serif;
+        font-family: "Times New Roman", Times, serif;
         font-size: 18px;
         color: rgb(2, 8, 21);
         margin: 15px;
     }
-  
- 
-  
-      .imageQr{
+
+    .imageQr {
         width: 40%;
         border-radius: 10%;
     }
+}
+
+/* body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: 'Poppins', sans-serif;
+        } */
+
+.cardd {
+    width: 420px;
+    height: 245px;
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    border-radius: 15px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    color: #ecf0f1;
+    display: flex;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.main-section {
+    flex-grow: 1;
+    z-index: 2;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+.logo-text {
+    font-size: 32px;
+    font-weight: 700;
+    color: #f39c12;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.member-info {
+    margin-top: 0px;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.number {
+    font-size: 16px;
+    margin-top: 5px;
+    color: #bdc3c7;
+}
+
+.photo-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+}
+
+.photo-placeholder i {
+    font-size: 40px;
+    color: #2c3e50;
+}
+
+.qr-code {
+    width: 110px;
+    height: 110px;
+    background-color: #fff;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.silhouette {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    z-index: 2;
+}
+
+.quote {
+    position: absolute;
+    bottom: 20px;
+    left: 80px;
+    font-size: 12px;
+    font-style: italic;
+    max-width: 160px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    color: #bdc3c7;
+}
+
+.accent {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(
+        135deg,
+        rgba(243, 156, 18, 0.3),
+        rgba(243, 156, 18, 0)
+    );
+    top: -100px;
+    right: -100px;
+    border-radius: 50%;
+    z-index: 1;
 }

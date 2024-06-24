@@ -9,6 +9,7 @@ import { TranslationService } from './shared/services/translation.service';
 import { RxStompService } from './core/config/webSocket/rx-stomp.service';
 import { NotificationService } from './shared/services/notification.service';
 import { Notification } from './core/models/Notification';
+import { ReportService } from './shared/services/report.service';
 
 @Component({
     selector: 'app-topbar',
@@ -25,7 +26,7 @@ export class AppTopBarComponent implements OnDestroy,OnInit{
 
     selectedLanguage:string;
 
-    constructor(public breadcrumbService: BreadcrumbService,private rxStompService: RxStompService,private messageService: MessageService, private notifiService:NotificationService,public app: AppComponent, public appMain: AppMainComponent , public translationService : TranslationService ) {
+    constructor(private reportService: ReportService,public breadcrumbService: BreadcrumbService,private rxStompService: RxStompService,private messageService: MessageService, private notifiService:NotificationService,public app: AppComponent, public appMain: AppMainComponent , public translationService : TranslationService ) {
         this.subscription = breadcrumbService.itemsHandler.subscribe(response => {
             this.items = response;
         });
@@ -38,6 +39,21 @@ export class AppTopBarComponent implements OnDestroy,OnInit{
         }
        
     }
+
+    generateReport() {
+        const reportName = 'welcoming.jrxml';
+        const parameters = { param1: 'value1', param2: 'value2' };
+    
+        this.reportService.getReport(reportName, parameters).subscribe(
+          (data: Blob) => {
+            const file = new Blob([data], { type: 'application/pdf' });
+            const fileURL = URL.createObjectURL(file);
+            window.open(fileURL);
+          },
+          error => console.error('Error generating report:', error)
+        );
+      }
+
     ngOnInit(): void {
         this.getallNotifs();
 
