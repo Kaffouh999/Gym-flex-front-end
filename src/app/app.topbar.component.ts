@@ -41,7 +41,7 @@ export class AppTopBarComponent implements OnDestroy,OnInit{
     }
 
     generateReport() {
-        const reportName = 'welcoming.jrxml';
+        const reportName = 'GymflexMemberCard.jrxml';
         const parameters = { param1: 'value1', param2: 'value2' };
     
         this.reportService.getReport(reportName, parameters).subscribe(
