@@ -41,6 +41,7 @@
                             *ngIf="selectedMember"
                         >
                             <img
+                                alt="member"
                                 [src]="
                                     selectedMember.onlineUser.profilePicture
                                         | combineNginxUrl
@@ -53,6 +54,7 @@
                     <ng-template let-member pTemplate="item">
                         <div class="flex align-items-center gap-2">
                             <img
+                                alt="member"
                                 [src]="
                                     member.onlineUser.profilePicture
                                         | combineNginxUrl
@@ -78,6 +80,7 @@
                             *ngIf="selectedPlan"
                         >
                             <img
+                                alt="plan"
                                 [src]="plan.imageAds | combineNginxUrl"
                                 style="width: 18px"
                             />
@@ -87,6 +90,7 @@
                     <ng-template let-plan pTemplate="item">
                         <div class="flex align-items-center gap-2">
                             <img
+                                alt="plan"
                                 [src]="plan.imageAds | combineNginxUrl"
                                 style="width: 18px"
                             />
@@ -125,7 +129,7 @@
                             subscription.member.onlineUser.profilePicture
                                 | combineNginxUrl
                         "
-                        [alt]="'member image'"
+                        [alt]="'member'"
                     />
                     <div
                         class="flex flex-row sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4"
@@ -134,7 +138,8 @@
                             class="flex flex-row align-items-center sm:align-items-start gap-3"
                         >
                             <div class="text-2xl font-bold text-900">
-                                {{ subscription.member.onlineUser.firstName }} {{ subscription.member.onlineUser.lastName }}
+                                {{ subscription.member.onlineUser.firstName }}
+                                {{ subscription.member.onlineUser.lastName }}
                             </div>
 
                             <div class="flex align-items-center gap-3">
@@ -202,7 +207,7 @@
                                 subscription.member.onlineUser.profilePicture
                                     | combineNginxUrl
                             "
-                            [alt]="'member image'"
+                            [alt]="'member'"
                         />
                         <div class="text-2xl font-bold">
                             {{ subscription.member.onlineUser.firstName }}
@@ -272,6 +277,7 @@
                                     *ngIf="subscriptionForm.get('member').value"
                                 >
                                     <img
+                                        alt="member"
                                         [src]="
                                             subscriptionForm.get('member').value
                                                 .onlineUser.profilePicture
@@ -291,6 +297,7 @@
                             <ng-template let-mmeber pTemplate="item">
                                 <div class="flex align-items-center gap-2">
                                     <img
+                                        alt="member"
                                         [src]="
                                             mmeber.onlineUser.profilePicture
                                                 | combineNginxUrl
@@ -419,98 +426,53 @@
 
 <p-dialog
     [(visible)]="showQrDialog"
-    [style]="{ width: '600px'}"
+    [style]="{ width: '600px' }"
     header="Subscription Card"
     [modal]="true"
     styleClass="p-fluid"
     id="qrDialog"
 >
-    <!-- <div id="qrCard">
-        <p-card class="QrCard">
-            <ng-template pTemplate="header">
-                <div class="flex">
-                    <img
-                        src="{{
-                            subscriptionInput.member.onlineUser.profilePicture
-                                | combineNginxUrl
-                        }}"
-                        class="imageQr m-3"
-                        alt="Image"
-                    />
-
-                    <div>
-                        <p class="qrInfos">
-                            {{ "CIN" | translate }} :
-                            {{ subscriptionInput.member.cin }}
-                        </p>
-
-                        <p class="qrInfos">
-                            {{ "Plan" | translate }} :
-                            {{ subscriptionInput.plan.name }}
-                        </p>
-
-                        <p class="qrInfos">
-                            {{ "startDate" | translate }} :
-                            {{
-                                subscriptionInput.startDate
-                                    | date : "dd/MM/yyyy"
-                            }}
-                        </p>
-
-                        <p class="qrInfos">
-                            {{ "endDate" | translate }} :
-                            {{
-                                subscriptionInput.endDate | date : "dd/MM/yyyy"
-                            }}
-                        </p>
-                    </div>
+    <div id="cardContainer">
+        <div
+            class="gymflex-member-card"
+            id="gymflex-member-card"
+            style="margin: 0 auto"
+        >
+            <div class="accent"></div>
+            <div class="main-section">
+                <div class="logo-section">
+                    <div class="logo-text">GoldGYM</div>
                 </div>
-                <div class="flex justify-content-center">
-                    <p class="qrInfos">
-                        {{ "FullName" | translate }} :
+                <div class="member-info">
+                    <div class="name">
                         {{ subscriptionInput.member.onlineUser.firstName }}
                         {{ subscriptionInput.member.onlineUser.lastName }}
-                    </p>
+                    </div>
+                    <div class="number">
+                        CIN: {{ subscriptionInput.member.cin }}
+                    </div>
+                    <div class="number">Member N°:</div>
                 </div>
-            </ng-template>
-            <div class="flex align-items-center justify-content-center">
+                <div class="quote">
+                    "Don't limit your challenge, challenge your limit"
+                </div>
+            </div>
+            <img
+                class="photo-placeholder"
+                src="{{
+                    subscriptionInput.member.onlineUser.profilePicture
+                        | combineNginxUrl
+                }}"
+                alt=""
+            />
+            <div class="qr-code">
                 <qr-code
-                    [value]="subscriptionInput.codeSubscription"
-                    [size]="256"
-                ></qr-code>
-            </div>
-        </p-card>
-    </div> -->
-    <div id="cardContainer">
-    <div class="gymflex-member-card" id="gymflex-member-card" style="margin: 0 auto;">
-        <div class="accent"></div>
-        <div class="main-section">
-            <div class="logo-section">
-                <div class="logo-text">GoldGYM</div>
-            </div>
-            <div class="member-info">
-                <div class="name">{{ subscriptionInput.member.onlineUser.firstName }} {{ subscriptionInput.member.onlineUser.lastName }}</div>
-                <div class="number">CIN: {{ subscriptionInput.member.cin }}</div>
-                <div class="number">Member N°: </div>
-            </div>
-            <!-- <svg class="silhouette" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="48" fill="#f39c12"/>
-                <path d="M50 25 L30 75 L70 75 Z" fill="#2c3e50"/>
-            </svg> -->
-            <div class="quote">"Don't limit your challenge, challenge your limit"</div>
-        </div>
-            <img class="photo-placeholder" src="{{
-                subscriptionInput.member.onlineUser.profilePicture
-                    | combineNginxUrl
-            }}" alt="">
-        <div class="qr-code">
-            <qr-code
                     [value]="subscriptionInput.codeSubscription"
                     [size]="109"
                 ></qr-code>
+            </div>
         </div>
     </div>
-</div>
     <ng-template pTemplate="footer">
         <button
             pButton
@@ -520,27 +482,6 @@
             class="p-button-text"
             (click)="hideqrDialog()"
         ></button>
-        <!-- <button
-            pButton
-            pRipple
-            label="{{ 'Print' | translate }}"
-            icon="pi pi-check"
-            class="p-button-text"
-            [useExistingCss]="true"
-            [printStyle]="{ '.card': { 'width': '420px',
-            'height': '245px',
-            'background': 'linear-gradient(135deg, #2c3e50, #34495e)',
-            'border-radius': '15px',
-            'padding': '20px',
-            'position': 'relative',
-            'overflow': 'hidden',
-            'color': '#ecf0f1',
-            'display': 'flex',
-            'box-shadow': '0 10px 20px rgba(0, 0, 0, 0.2)',
-            'transition': 'transform 0.3s ease'} }"
-            printSectionId="cardContainer"
-            ngxPrint
-        ></button> -->
         <button
             id="print"
             pButton

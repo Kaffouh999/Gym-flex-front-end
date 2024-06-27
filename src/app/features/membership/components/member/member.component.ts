@@ -7,12 +7,10 @@ import { OnlineUser } from "src/app/core/models/OnlineUser";
 import { GymBranchService } from "src/app/features/settings/services/gym-branch.service";
 import { MemberService } from "../../services/member.service";
 import { OnlineUserService } from "../../services/online-user.service";
-import { saveAs } from 'file-saver';
 import { ExporterService } from "src/app/shared/services/exporter.service";
 import { Table } from "primeng/table";
 import { Role } from "src/app/core/models/Role";
 import { RoleService } from "src/app/features/settings/services/role.service";
-
 
 @Component({
     selector: "app-member",
@@ -25,14 +23,12 @@ import { RoleService } from "src/app/features/settings/services/role.service";
     ],
 })
 export class MemberComponent {
-  
-
     memberDialog: boolean;
 
     members: Member[];
     gymBranches: GymBranch[];
-    roles:Role[];
-    users:OnlineUser[];
+    roles: Role[];
+    users: OnlineUser[];
 
     memberInput: Member;
     onlineuserInput: OnlineUser;
@@ -41,10 +37,10 @@ export class MemberComponent {
     membersForm: FormGroup;
 
     formData: FormData = new FormData();
-    isAdd: Boolean;
-    userImageDialog: Boolean = false;
+    isAdd: boolean;
+    userImageDialog: boolean = false;
     timeStamp: number = 0;
-    items:any[]=[];
+    items: any[] = [];
     selectedMembers: any[];
     cols: any[];
     _selectedColumns: any[];
@@ -54,10 +50,10 @@ export class MemberComponent {
         private onlineUserService: OnlineUserService,
         private memberService: MemberService,
         private gymbranchService: GymBranchService,
-        private roleService:RoleService,
+        private roleService: RoleService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
-        private exporterService:ExporterService
+        private exporterService: ExporterService
     ) {}
 
     @Input() get selectedColumns(): any[] {
@@ -67,7 +63,7 @@ export class MemberComponent {
     set selectedColumns(val: any[]) {
         //restore original order
         this._selectedColumns = this.cols.filter((col) => val.includes(col));
-    } 
+    }
 
     ngOnInit() {
         this.getAllMembers();
@@ -87,39 +83,40 @@ export class MemberComponent {
             password: ["", Validators.required],
             profilePicture: [""],
             cin: ["", Validators.required],
-            role:[""],
+            role: [""],
             age: [""],
             adress: [""],
             gender: [""],
             gymBranch: ["", Validators.required],
-            onlineuserInput:[""]
+            onlineuserInput: [""],
         });
 
         this.cols = [
-            { dataKey: 'firstName', header: 'FirstName' },
-            { dataKey: 'lastName', header: 'LastName' },
-            { dataKey: 'email', header: 'Email' },
-            { dataKey: 'cin', header: 'Cin' },
-            { dataKey: 'age', header: 'Age' },
-            { dataKey: 'adress', header: 'Adress' },
-            { dataKey: 'login', header: 'Login' },
-            { dataKey: 'gymbranch', header: 'Gymbranch' },
+            { dataKey: "firstName", header: "FirstName" },
+            { dataKey: "lastName", header: "LastName" },
+            { dataKey: "email", header: "Email" },
+            { dataKey: "cin", header: "Cin" },
+            { dataKey: "age", header: "Age" },
+            { dataKey: "adress", header: "Adress" },
+            { dataKey: "login", header: "Login" },
+            { dataKey: "gymbranch", header: "Gymbranch" },
         ];
 
-        this.items=[
+        this.items = [
             {
-                label: 'Open New',
-                icon: 'pi pi-fw pi-file',
-                command:() => this.openNew()
-            }, {
-                label: 'from Registered User',
-                icon: 'pi pi-qrcode',
-                command:() => this.openNew()
-            }];
+                label: "Open New",
+                icon: "pi pi-fw pi-file",
+                command: () => this.openNew(),
+            },
+            {
+                label: "from Registered User",
+                icon: "pi pi-qrcode",
+                command: () => this.openNew(),
+            },
+        ];
     }
 
     openNew() {
-        let date: Date = new Date();
         this.onlineuserInput = {
             id: undefined,
             firstName: "",
@@ -128,7 +125,7 @@ export class MemberComponent {
             email: "",
             password: "",
             profilePicture: "",
-            role:this.roles[0]
+            role: this.roles[0],
         };
         this.memberInput = {
             id: undefined,
@@ -168,18 +165,17 @@ export class MemberComponent {
             header: "Confirm",
             icon: "pi pi-exclamation-triangle",
             accept: () => {
-                this.memberService
-                    .deleteMember(member.id)
-                    .subscribe((res: any) => {
+                this.memberService.deleteMember(member.id).subscribe({
+                    next: (res: any) => {
                         this.getAllMembers();
                         this.messageService.add({
                             severity: "success",
                             summary: "Successful",
-                            detail: "member Deleted",
+                            detail: "Member Deleted",
                             life: 3000,
                         });
-                    },(error : any) => {
-
+                    },
+                    error: (error: any) => {
                         if (error.status === 409) {
                             // Display error message from the response body to the user
                             const errorMessage = error.error;
@@ -189,18 +185,16 @@ export class MemberComponent {
                                 detail: errorMessage,
                                 life: 10000,
                             });
-                            // Display error message to the user using appropriate UI components
-                          } else {
+                        } else {
                             this.messageService.add({
                                 severity: "error",
                                 summary: "Error",
-                                detail: "there is an error in our server , please report here",
-                               
+                                detail: "There is an error in our server, please report here",
                             });
-                          }
-
-                    });
-          
+                        }
+                    },
+                    complete: () => console.info("Delete operation complete"),
+                });
             },
         });
     }
@@ -216,59 +210,47 @@ export class MemberComponent {
     saveMember() {
         this.fillMember();
         if (this.memberInput.id === undefined) {
-            let fullName =this.memberInput.onlineUser.email;
-                        this.memberInput.onlineUser.profilePicture =this.memberInput.onlineUser.email+ ".jpg";
-                        this.memberService
-                            .addMember(this.memberInput)
-                            .subscribe((res: any) => {
-                                this.getAllMembers();
-                                this.hideDialog();
-                                this.messageService.add({
-                                    severity: "success",
-                                    summary: "Successful",
-                                    detail: "member added successfuly",
-                                    life: 3000,
-                                });
-                            },(error:any) => {
-                                console.log(error)
-                                if (error.status === 400) {
-                                    // Display error message from the response body to the user
-                                    
-                                    const errorMessage = error.error;
-                                    this.messageService.add({
-                                        severity: "error",
-                                        summary: "Error",
-                                        detail: errorMessage,
-                                        life: 3000,
-                                    });
-                                    // Display error message to the user using appropriate UI components
-                                  } else {
-                                    const errorMessage = error.error;
-
-                                    this.messageService.add({
-                                        severity: "error",
-                                        summary: "Error",
-                                        detail: errorMessage,
-                                       life:3000
-                                    });
-                                  }
-                            });
-             
-        } else {
-            this.memberService
-                .updateMember(this.memberInput.id, this.memberInput)
-                .subscribe((res: any) => {
+            this.memberInput.onlineUser.profilePicture =
+                this.memberInput.onlineUser.email + ".jpg";
+            this.memberService.addMember(this.memberInput).subscribe({
+                next: (res: any) => {
                     this.getAllMembers();
                     this.hideDialog();
                     this.messageService.add({
                         severity: "success",
                         summary: "Successful",
-                        detail: "member updated successfuly",
+                        detail: "Member added successfully",
                         life: 3000,
                     });
-                },(error:any) => {
-                     if (error.status === 409) {
-                            // Display error message from the response body to the user
+                },
+                error: (error: any) => {
+                    console.log(error);
+                    const errorMessage = error.error;
+                    this.messageService.add({
+                        severity: "error",
+                        summary: "Error",
+                        detail: errorMessage,
+                        life: 3000,
+                    });
+                },
+                complete: () => console.info("Member addition complete"),
+            });
+        } else {
+            this.memberService
+                .updateMember(this.memberInput.id, this.memberInput)
+                .subscribe({
+                    next: (res: any) => {
+                        this.getAllMembers();
+                        this.hideDialog();
+                        this.messageService.add({
+                            severity: "success",
+                            summary: "Successful",
+                            detail: "Member updated successfully",
+                            life: 3000,
+                        });
+                    },
+                    error: (error: any) => {
+                        if (error.status === 409) {
                             const errorMessage = error.error;
                             this.messageService.add({
                                 severity: "error",
@@ -276,15 +258,15 @@ export class MemberComponent {
                                 detail: errorMessage,
                                 life: 10000,
                             });
-                            // Display error message to the user using appropriate UI components
-                          } else {
+                        } else {
                             this.messageService.add({
                                 severity: "error",
                                 summary: "Error",
-                                detail: "there is an error in our server , please report here",
-                               
+                                detail: "There is an error in our server, please report here",
                             });
-                          }
+                        }
+                    },
+                    complete: () => console.info("Member update complete"),
                 });
         }
 
@@ -292,49 +274,49 @@ export class MemberComponent {
     }
 
     getAllMembers() {
-        this.memberService.getAllMembers().subscribe(
-            (res: any) => {
+        this.memberService.getAllMembers().subscribe({
+            next: (res: any) => {
                 this.members = res as Member[];
                 console.log(this.members);
                 this.getTimeStamp();
             },
-            (err: Error) => {
+            error: (err: Error) => {
                 console.log(err.message);
-            }
-        );
+            },
+        });
     }
     getAllUsers() {
-        this.onlineUserService.getAllUsers().subscribe(
-            (res: any) => {
+        this.onlineUserService.getAllUsers().subscribe({
+            next: (res: any) => {
                 this.users = res as OnlineUser[];
                 this.users.unshift(null);
             },
-            (err: Error) => {
+            error: (err: Error) => {
                 console.log(err.message);
-            }
-        );
+            },
+        });
     }
 
     getAllGymBranches() {
-        this.gymbranchService.getALlBranches().subscribe(
-            (res: any) => {
+        this.gymbranchService.getALlBranches().subscribe({
+            next: (res: any) => {
                 this.gymBranches = res as GymBranch[];
             },
-            (err: Error) => {
+            error: (err: Error) => {
                 console.log(err.message);
-            }
-        );
+            },
+        });
     }
 
     getAllRoles() {
-        this.roleService.getAllRoles().subscribe(
-            (res: any) => {
+        this.roleService.getAllRoles().subscribe({
+            next: (res: any) => {
                 this.roles = res as Role[];
             },
-            (err: Error) => {
+            error: (err: Error) => {
                 console.log(err.message);
-            }
-        );
+            },
+        });
     }
 
     fillMember(): void {
@@ -346,7 +328,7 @@ export class MemberComponent {
             email: this.membersForm.get("email").value,
             password: this.membersForm.get("password").value,
             profilePicture: this.memberInput.onlineUser.profilePicture,
-            role:this.membersForm.get("role").value
+            role: this.membersForm.get("role").value,
         };
 
         this.memberInput = {
@@ -379,27 +361,35 @@ export class MemberComponent {
             email: member.onlineUser.email,
             password: member.onlineUser.password,
             profilePicture: member.onlineUser.profilePicture,
-            role:member.onlineUser.role,
+            role: member.onlineUser.role,
             cin: member.cin,
             age: member.age,
             gender: member.gender,
             adress: member.adress,
             gymBranch: member.gymBranch,
-            onlineuserInput:member.onlineUser
+            onlineuserInput: member.onlineUser,
         });
     }
 
-    fillUserFields(){
-        
+    fillUserFields() {
         this.onlineuserInput = this.membersForm.get("onlineuserInput").value;
-        if(this.onlineuserInput != null){
+        if (this.onlineuserInput != null) {
             this.membersForm.get("firstName")?.disable();
             this.membersForm.get("lastName")?.disable();
             this.membersForm.get("login")?.disable();
             this.membersForm.get("email")?.disable();
             this.membersForm.get("password")?.disable();
-        }else{
-            this.onlineuserInput={id:undefined,email:"",firstName:"",lastName:"",login:"",password:"",profilePicture:"",role:undefined};
+        } else {
+            this.onlineuserInput = {
+                id: undefined,
+                email: "",
+                firstName: "",
+                lastName: "",
+                login: "",
+                password: "",
+                profilePicture: "",
+                role: undefined,
+            };
         }
         this.membersForm.patchValue({
             firstName: this.onlineuserInput.firstName,
@@ -408,9 +398,7 @@ export class MemberComponent {
             email: this.onlineuserInput.email,
             password: this.onlineuserInput.password,
             profilePicture: this.onlineuserInput.profilePicture,
-         
         });
-     
     }
 
     onUpload(event: any) {
@@ -423,17 +411,16 @@ export class MemberComponent {
 
     updateImage() {
         let id: number = this.memberInput.onlineUser.id;
-        this.onlineUserService.updateImage(id, this.formData).subscribe(
-            (response) => {
+        this.onlineUserService.updateImage(id, this.formData).subscribe({
+            next: (response) => {
                 console.log("File uploaded successfully:", response);
                 this.getAllMembers();
-
                 this.userImageDialog = false;
             },
-            (err) => {
+            error: (err) => {
                 console.log(err);
-            }
-        );
+            },
+        });
     }
 
     getTimeStamp() {
@@ -441,9 +428,8 @@ export class MemberComponent {
     }
 
     exportExcel() {
-   
-        let selectedMembers = this.selectedMembers.map((col:Member) => ( {
-            cin:col.cin ,
+        let selectedMembers = this.selectedMembers.map((col: Member) => ({
+            cin: col.cin,
             age: col.age,
             adress: col.adress,
             firstName: col.onlineUser.firstName,
@@ -452,25 +438,30 @@ export class MemberComponent {
             login: col.onlineUser.login,
             gymbranch: col.gymBranch.name,
         }));
-   this.exporterService.exportExcel(selectedMembers , this._selectedColumns,"Members");
+        this.exporterService.exportExcel(
+            selectedMembers,
+            this._selectedColumns,
+            "Members"
+        );
     }
- 
 
     exportPdf() {
+        let selectedMembers = this.selectedMembers.map((col: Member) => ({
+            cin: col.cin,
+            age: col.age,
+            adress: col.adress,
+            firstName: col.onlineUser.firstName,
+            lastName: col.onlineUser.lastName,
+            email: col.onlineUser.email,
+            login: col.onlineUser.login,
+            gymbranch: col.gymBranch.name,
+        }));
 
-        let selectedMembers = this.selectedMembers.map((col:Member) => ( {
-        cin:col.cin ,
-        age: col.age,
-        adress: col.adress,
-        firstName: col.onlineUser.firstName,
-        lastName: col.onlineUser.lastName,
-        email: col.onlineUser.email,
-        login: col.onlineUser.login,
-        gymbranch: col.gymBranch.name,
-    }));
-
-    this.exporterService.exportPdf(selectedMembers,this._selectedColumns,"Members");
-
+        this.exporterService.exportPdf(
+            selectedMembers,
+            this._selectedColumns,
+            "Members"
+        );
     }
     clear(table: Table) {
         table.clear();

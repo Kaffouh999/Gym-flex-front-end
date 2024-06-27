@@ -152,8 +152,8 @@ export class SubscriptionComponent {
             accept: () => {
                 this.subscriptionService
                     .deleteSubscription(assurance.id)
-                    .subscribe(
-                        (respense: any) => {
+                    .subscribe({
+                        next: (response: any) => {
                             this.getAllSubscriptions();
                             this.messageService.add({
                                 severity: "success",
@@ -162,10 +162,8 @@ export class SubscriptionComponent {
                                 life: 3000,
                             });
                         },
-                        (error: any) => {
+                        error: (error: any) => {
                             if (error.status === 409) {
-                                // Category deletion failed due to associated subcategories
-                                // Display error message from the response body to the user
                                 const errorMessage = error.error;
                                 this.messageService.add({
                                     severity: "error",
@@ -173,17 +171,16 @@ export class SubscriptionComponent {
                                     detail: errorMessage,
                                     life: 3000,
                                 });
-                                // Display error message to the user using appropriate UI components
                             } else {
                                 this.messageService.add({
                                     severity: "error",
                                     summary: "Error",
-                                    detail: "there is an error in our server , please report here",
+                                    detail: "There is an error in our server, please report here",
                                     life: 3000,
                                 });
                             }
-                        }
-                    );
+                        },
+                    });
             },
         });
     }
@@ -286,7 +283,7 @@ export class SubscriptionComponent {
             .getMemberCard(this.subscriptionInput.member.id)
             .subscribe((res: any) => {
                 let file = new Blob([res], { type: "application/pdf" });
-                var fileURL = URL.createObjectURL(file);
+                let fileURL = URL.createObjectURL(file);
                 window.open(fileURL);
             });
     }
