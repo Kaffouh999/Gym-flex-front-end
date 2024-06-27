@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Subscription } from "src/app/core/models/Subscription";
@@ -18,7 +18,7 @@ export class SubscriptionService {
     public getSubscriptionById(id: number) {
         return this.http.get(this.subscriptionURL + "/" + id);
     }
-    public getSubscriptionByQrCode(qrCode: String) {
+    public getSubscriptionByQrCode(qrCode: string) {
         return this.http.get(this.subscriptionURL + "/qrcode/" + qrCode);
     }
 

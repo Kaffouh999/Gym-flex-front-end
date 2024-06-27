@@ -1,4 +1,3 @@
-import { O } from "@fullcalendar/core/internal-common";
 import { GymBranch } from "./GymBranch";
 import { OnlineUser } from "./OnlineUser";
 
