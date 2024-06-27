@@ -20,8 +20,8 @@ export class SubCategoryService {
     deleteSubCategory(subcategory: SubCategory) {
         return this.http.delete(this.subCategoryURL + "/" + subcategory.id);
     }
-    
-    updateSubCategory(id: Number, subcategory: SubCategory) {
+
+    updateSubCategory(id: number, subcategory: SubCategory) {
         return this.http.put(this.subCategoryURL + "/" + id, subcategory);
     }
 }

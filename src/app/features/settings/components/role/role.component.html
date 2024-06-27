@@ -27,143 +27,136 @@
 >
     <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
-            <h5 class="m-0">{{ 'Manage' | translate }} {{ 'roles' | translate }}</h5>
+            <h5 class="m-0">
+                {{ "Manage" | translate }} {{ "roles" | translate }}
+            </h5>
             <button
-                    pButton
-                    label="Clear"
-                    class="p-button-outlined clearButton"
-                    icon="pi pi-filter-slash"
-                    (click)="clear(dt)"
-                ></button>
-            <!-- <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input
-                    pInputText
-                    type="text"
-                    (input)="dt.filterGlobal($event.target.value, 'contains')"
-                    placeholder="Search..."
-                />
-            </span> -->
+                pButton
+                label="Clear"
+                class="p-button-outlined clearButton"
+                icon="pi pi-filter-slash"
+                (click)="clear(dt)"
+            ></button>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th style="width: 4rem">
+            <th scope="col" style="width: 4rem">
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th pSortableColumn="name" style="min-width: 15rem">
-                {{ 'Name' | translate }} <p-sortIcon field="name"></p-sortIcon>
+            <th scope="col" pSortableColumn="name" style="min-width: 15rem">
+                {{ "Name" | translate }} <p-sortIcon field="name"></p-sortIcon>
                 <p-columnFilter
-                class="filterIcon"
-                type="text"
-                field="name"
-                display="menu"
-            ></p-columnFilter>
+                    class="filterIcon"
+                    type="text"
+                    field="name"
+                    display="menu"
+                ></p-columnFilter>
             </th>
-            <th pSortableColumn="description" style="min-width: 15rem">
-                {{ 'Description' | translate }}
+            <th scope="col" pSortableColumn="description" style="min-width: 15rem">
+                {{ "Description" | translate }}
                 <p-sortIcon field="description"></p-sortIcon>
                 <p-columnFilter
-                class="filterIcon"
-                type="text"
-                field="description"
-                display="menu"
-            ></p-columnFilter>
+                    class="filterIcon"
+                    type="text"
+                    field="description"
+                    display="menu"
+                ></p-columnFilter>
             </th>
-            <th pSortableColumn="Analytics" style="min-width: 15rem">
-                {{ 'analytics' | translate }} <p-sortIcon field="analytics"></p-sortIcon>
+            <th scope="col" pSortableColumn="Analytics" style="min-width: 15rem">
+                {{ "analytics" | translate }}
+                <p-sortIcon field="analytics"></p-sortIcon>
                 <p-columnFilter
-                class="filterIcon"
-                type="boolean"
-                field="analytics"
-                display="menu"
-            ></p-columnFilter>
+                    class="filterIcon"
+                    type="boolean"
+                    field="analytics"
+                    display="menu"
+                ></p-columnFilter>
             </th>
-            <th pSortableColumn="membership" style="min-width: 15rem">
-                {{ 'membership' | translate }}
+            <th scope="col" pSortableColumn="membership" style="min-width: 15rem">
+                {{ "membership" | translate }}
                 <p-sortIcon field="membership"></p-sortIcon>
                 <p-columnFilter
-                class="filterIcon"
-                type="boolean"
-                field="membership"
-                display="menu"
-            ></p-columnFilter>
+                    class="filterIcon"
+                    type="boolean"
+                    field="membership"
+                    display="menu"
+                ></p-columnFilter>
             </th>
-            <th pSortableColumn="payments" style="min-width: 15rem">
-                {{ 'payments' | translate }}
+            <th scope="col" pSortableColumn="payments" style="min-width: 15rem">
+                {{ "payments" | translate }}
                 <p-sortIcon field="payments"></p-sortIcon>
                 <p-columnFilter
-                class="filterIcon"
-                type="boolean"
-                field="payments"
-                display="menu"
-            ></p-columnFilter>
+                    class="filterIcon"
+                    type="boolean"
+                    field="payments"
+                    display="menu"
+                ></p-columnFilter>
             </th>
-            <th pSortableColumn="inventory" style="min-width: 15rem">
-                {{ 'inventory' | translate }}
+            <th scope="col" pSortableColumn="inventory" style="min-width: 15rem">
+                {{ "inventory" | translate }}
                 <p-sortIcon field="inventory"></p-sortIcon>
                 <p-columnFilter
-                class="filterIcon"
-                type="boolean"
-                field="inventory"
-                display="menu"
-            ></p-columnFilter>
+                    class="filterIcon"
+                    type="boolean"
+                    field="inventory"
+                    display="menu"
+                ></p-columnFilter>
             </th>
-            <th pSortableColumn="training" style="min-width: 15rem">
-                {{ 'training' | translate }}
+            <th scope="col" pSortableColumn="training" style="min-width: 15rem">
+                {{ "training" | translate }}
                 <p-sortIcon field="training"></p-sortIcon>
                 <p-columnFilter
-                class="filterIcon"
-                type="boolean"
-                field="training"
-                display="menu"
-            ></p-columnFilter>
+                    class="filterIcon"
+                    type="boolean"
+                    field="training"
+                    display="menu"
+                ></p-columnFilter>
             </th>
-            <th pSortableColumn="settings" style="min-width: 15rem">
-                {{ 'settings' | translate }}
+            <th scope="col" pSortableColumn="settings" style="min-width: 15rem">
+                {{ "settings" | translate }}
                 <p-sortIcon field="settings"></p-sortIcon>
                 <p-columnFilter
-                class="filterIcon"
-                type="boolean"
-                field="settings"
-                display="menu"
-            ></p-columnFilter>
+                    class="filterIcon"
+                    type="boolean"
+                    field="settings"
+                    display="menu"
+                ></p-columnFilter>
             </th>
-            <th pSortableColumn="preferences" style="min-width: 15rem">
-                {{ 'preferences' | translate }}
+            <th scope="col" pSortableColumn="preferences" style="min-width: 15rem">
+                {{ "preferences" | translate }}
                 <p-sortIcon field="preferences"></p-sortIcon>
                 <p-columnFilter
-                class="filterIcon"
-                type="boolean"
-                field="preferences"
-                display="menu"
-            ></p-columnFilter>
+                    class="filterIcon"
+                    type="boolean"
+                    field="preferences"
+                    display="menu"
+                ></p-columnFilter>
             </th>
-            <th pSortableColumn="manageWebSite" style="min-width: 15rem">
-                {{ 'manageWebSite' | translate }}
+            <th scope="col" pSortableColumn="manageWebSite" style="min-width: 15rem">
+                {{ "manageWebSite" | translate }}
                 <p-sortIcon field="manageWebSite"></p-sortIcon>
                 <p-columnFilter
-                class="filterIcon"
-                type="boolean"
-                field="manageWebSite"
-                display="menu"
-            ></p-columnFilter>
+                    class="filterIcon"
+                    type="boolean"
+                    field="manageWebSite"
+                    display="menu"
+                ></p-columnFilter>
             </th>
 
-               <th pSortableColumn="coach" style="min-width: 15rem">
-                {{ 'Coach' | translate }}
+            <th scope="col" pSortableColumn="coach" style="min-width: 15rem">
+                {{ "Coach" | translate }}
                 <p-sortIcon field="coach"></p-sortIcon>
                 <p-columnFilter
-                class="filterIcon"
-                type="boolean"
-                field="coach"
-                display="menu"
-            ></p-columnFilter>
+                    class="filterIcon"
+                    type="boolean"
+                    field="coach"
+                    display="menu"
+                ></p-columnFilter>
             </th>
 
-            <th></th>
+            <th scope="col"></th>
         </tr>
-    
     </ng-template>
     <ng-template pTemplate="body" let-role>
         <tr>
@@ -218,76 +211,131 @@
     <ng-template pTemplate="content">
         <form [formGroup]="roleForm" class="p-fluid">
             <div class="formgrid grid">
-            <div class="field col-12 md:col-5">
-                <span class="p-float-label">
-                    <input
-                        type="text"
-                        pInputText
-                        id="name"
-                        formControlName="name"
-                        required
-                        autofocus
-                    />
-                    <label for="name">{{ 'Name' | translate }}</label>
-                </span>
-                <small
-                    *ngIf="
-                        roleForm.get('name').invalid &&
-                        (roleForm.get('name').dirty ||
-                            roleForm.get('name').touched)
-                    "
-                    class="p-error"
-                    >{{ 'Name' | translate }} {{ 'isRequired' | translate }}</small
-                >
+                <div class="field col-12 md:col-5">
+                    <span class="p-float-label">
+                        <input
+                            type="text"
+                            pInputText
+                            id="name"
+                            formControlName="name"
+                            required
+                            autofocus
+                        />
+                        <label for="name">{{ "Name" | translate }}</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            roleForm.get('name').invalid &&
+                            (roleForm.get('name').dirty ||
+                                roleForm.get('name').touched)
+                        "
+                        class="p-error"
+                        >{{ "Name" | translate }}
+                        {{ "isRequired" | translate }}</small
+                    >
+                </div>
+                <div class="field col-12 md:col-7">
+                    <span class="p-float-label">
+                        <input
+                            type="text"
+                            pInputText
+                            id="description"
+                            formControlName="description"
+                        />
+                        <label for="description">{{
+                            "Description" | translate
+                        }}</label>
+                    </span>
+                </div>
+                <div class="field col-3 md:col-4">
+                    <p-toggleButton
+                        formControlName="analytics"
+                        onLabel="{{ 'analytics' | translate }}"
+                        offLabel="No"
+                    ></p-toggleButton>
+                    <label for="analytics"
+                        >&nbsp; {{ "analytics" | translate }}</label
+                    >
+                </div>
+                <div class="field col-3 md:col-4">
+                    <p-toggleButton
+                        formControlName="membership"
+                        onLabel="{{ 'membership' | translate }}"
+                        offLabel="No"
+                    ></p-toggleButton>
+                    <label for="membership"
+                        >&nbsp; {{ "membership" | translate }}</label
+                    >
+                </div>
+                <div class="field col-3 md:col-4">
+                    <p-toggleButton
+                        formControlName="payments"
+                        onLabel="{{ 'payments' | translate }}"
+                        offLabel="No"
+                    ></p-toggleButton>
+                    <label for="payments"
+                        >&nbsp; {{ "payments" | translate }}</label
+                    >
+                </div>
+                <div class="field col-3 md:col-4">
+                    <p-toggleButton
+                        formControlName="inventory"
+                        onLabel="{{ 'inventory' | translate }}"
+                        offLabel="No"
+                    ></p-toggleButton>
+                    <label for="inventory"
+                        >&nbsp; {{ "inventory" | translate }}</label
+                    >
+                </div>
+                <div class="field col-3 md:col-4">
+                    <p-toggleButton
+                        formControlName="training"
+                        onLabel="{{ 'training' | translate }}"
+                        offLabel="No"
+                    ></p-toggleButton>
+                    <label for="training"
+                        >&nbsp; {{ "training" | translate }}</label
+                    >
+                </div>
+                <div class="field col-3 md:col-4">
+                    <p-toggleButton
+                        formControlName="settings"
+                        onLabel="{{ 'settings' | translate }}"
+                        offLabel="No"
+                    ></p-toggleButton>
+                    <label for="settings"
+                        >&nbsp; {{ "settings" | translate }}</label
+                    >
+                </div>
+                <div class="field col-3 md:col-4">
+                    <p-toggleButton
+                        formControlName="preferences"
+                        onLabel="{{ 'preferences' | translate }}"
+                        offLabel="No"
+                    ></p-toggleButton>
+                    <label for="preferences"
+                        >&nbsp; {{ "preferences" | translate }}</label
+                    >
+                </div>
+                <div class="field col-3 md:col-4">
+                    <p-toggleButton
+                        formControlName="manageWebSite"
+                        onLabel="{{ 'manageWebSite' | translate }}"
+                        offLabel="No"
+                    ></p-toggleButton>
+                    <label for="manageWebSite"
+                        >&nbsp; {{ "manageWebSite" | translate }}</label
+                    >
+                </div>
+                <div class="field col-3 md:col-4">
+                    <p-toggleButton
+                        formControlName="coach"
+                        onLabel="{{ 'coach' | translate }}"
+                        offLabel="No"
+                    ></p-toggleButton>
+                    <label for="coach">&nbsp; {{ "coach" | translate }}</label>
+                </div>
             </div>
-            <div class="field col-12 md:col-7">
-                <span class="p-float-label">
-                    <input
-                        type="text"
-                        pInputText
-                        id="description"
-                        formControlName="description"
-                    />
-                    <label for="description">{{ 'Description' | translate }}</label>
-                </span>
-            </div>
-            <div class="field col-3 md:col-4">
-                <p-toggleButton formControlName="analytics" onLabel="{{ 'analytics' | translate }}" offLabel="No"></p-toggleButton>
-                <label for="analytics">&nbsp; {{ 'analytics' | translate }}</label>
-            </div>
-            <div class="field col-3 md:col-4">
-                <p-toggleButton formControlName="membership" onLabel="{{ 'membership' | translate }}" offLabel="No"></p-toggleButton>
-                <label for="membership">&nbsp; {{ 'membership' | translate }}</label>
-            </div>
-            <div class="field col-3 md:col-4">
-                <p-toggleButton formControlName="payments" onLabel="{{ 'payments' | translate }}" offLabel="No"></p-toggleButton>
-                <label for="payments">&nbsp; {{ 'payments' | translate }}</label>
-            </div>
-            <div class="field col-3 md:col-4">
-                <p-toggleButton formControlName="inventory" onLabel="{{ 'inventory' | translate }}" offLabel="No"></p-toggleButton>
-                <label for="inventory">&nbsp; {{ 'inventory' | translate }}</label>
-            </div>
-            <div class="field col-3 md:col-4">
-                <p-toggleButton formControlName="training" onLabel="{{ 'training' | translate }}" offLabel="No"></p-toggleButton>
-                <label for="training">&nbsp; {{ 'training' | translate }}</label>
-            </div>
-            <div class="field col-3 md:col-4">
-                <p-toggleButton formControlName="settings" onLabel="{{ 'settings' | translate }}" offLabel="No"></p-toggleButton>
-                <label for="settings">&nbsp; {{ 'settings' | translate }}</label>
-            </div>
-            <div class="field col-3 md:col-4">
-                <p-toggleButton formControlName="preferences" onLabel="{{ 'preferences' | translate }}" offLabel="No"></p-toggleButton>
-                <label for="preferences">&nbsp; {{ 'preferences' | translate }}</label>
-            </div>
-            <div class="field col-3 md:col-4">
-                <p-toggleButton formControlName="manageWebSite" onLabel="{{ 'manageWebSite' | translate }}" offLabel="No"></p-toggleButton>
-                <label for="manageWebSite">&nbsp; {{ 'manageWebSite' | translate }}</label>
-            </div>
-            <div class="field col-3 md:col-4">
-                <p-toggleButton formControlName="coach" onLabel="{{ 'coach' | translate }}" offLabel="No"></p-toggleButton>
-                <label for="coach">&nbsp; {{ 'coach' | translate }}</label>
-            </div>
-        </div>
         </form>
     </ng-template>
 
@@ -306,7 +354,6 @@
             label="{{ 'Save' | translate }}"
             icon="pi pi-check"
             class="p-button-text"
-           
             (click)="addRole()"
         ></button>
     </ng-template>

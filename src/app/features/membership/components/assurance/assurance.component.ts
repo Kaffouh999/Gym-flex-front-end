@@ -5,7 +5,6 @@ import { ConfirmationService, MessageService } from "primeng/api";
 import { Table } from "primeng/table";
 import { AssuranceMember } from "src/app/core/models/AssuranceMember";
 import { Member } from "src/app/core/models/Member";
-import { GymBranchComponent } from "src/app/features/settings/components/gym-branch/gym-branch.component";
 import { ExporterService } from "src/app/shared/services/exporter.service";
 import { AssuranceService } from "../../services/assurance.service";
 import { MemberService } from "../../services/member.service";
@@ -37,10 +36,10 @@ export class AssuranceComponent {
     assurances: AssuranceMember[] = [];
     filteredAssuranceAgencies: any[];
     assuranceDialog: boolean = false;
-    assuranceImageDialog: Boolean = false;
+    assuranceImageDialog: boolean = false;
     assuranceForm: FormGroup;
     formData: FormData = new FormData();
-    isAdd: Boolean;
+    isAdd: boolean;
     timeStamp: number = 0;
     selectedAssurances: AssuranceMember[] = [];
 
@@ -125,8 +124,8 @@ export class AssuranceComponent {
         this.fillassurance();
 
         if (this.assuranceInput.id === undefined) {
-            this.assuranceService.addAssurance(this.assuranceInput).subscribe(
-                (res: any) => {
+            this.assuranceService.addAssurance(this.assuranceInput).subscribe({
+                next: (res: any) => {
                     this.getAllAssurances();
                     this.hideDialog();
                     this.messageService.add({
@@ -136,7 +135,7 @@ export class AssuranceComponent {
                         life: 3000,
                     });
                 },
-                (error: any) => {
+                error: (error: any) => {
                     if (error.status == 409) {
                         this.messageService.add({
                             severity: "error",
@@ -145,15 +144,15 @@ export class AssuranceComponent {
                             life: 3000,
                         });
                     }
-                }
-            );
+                },
+            });
         } else {
             this.assuranceService
                 .updateAssurance(this.assuranceInput.id, this.assuranceInput)
-                .subscribe(
-                    (res: any) => {
+                .subscribe({
+                    next: (data: any) => {
                         this.getAllAssurances();
-
+                        this.hideDialog();
                         this.messageService.add({
                             severity: "success",
                             summary: "Successful",
@@ -161,7 +160,7 @@ export class AssuranceComponent {
                             life: 3000,
                         });
                     },
-                    (error: any) => {
+                    error: (error: any) => {
                         if (error.status == 409) {
                             this.messageService.add({
                                 severity: "error",
@@ -170,8 +169,8 @@ export class AssuranceComponent {
                                 life: 3000,
                             });
                         }
-                    }
-                );
+                    },
+                });
         }
     }
 
@@ -288,11 +287,8 @@ export class AssuranceComponent {
 
         let query = event.query;
 
-        for (let i = 0; i < assurancAgencies.length; i++) {
-            let assuranceAgency = assurancAgencies[i];
-            if (
-                assuranceAgency.toLowerCase().indexOf(query.toLowerCase()) == 0
-            ) {
+        for (const assuranceAgency of assurancAgencies) {
+            if (assuranceAgency.toLowerCase().startsWith(query.toLowerCase())) {
                 filtered.push(assuranceAgency);
             }
         }

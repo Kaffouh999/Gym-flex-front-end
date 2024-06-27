@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-web',
-  templateUrl: './web.component.html',
-  styleUrls: ['./web.component.scss']
+    selector: "app-web",
+    templateUrl: "./web.component.html",
+    styleUrls: ["./web.component.scss"],
 })
-export class WebComponent {
-
-}
+export class WebComponent {}

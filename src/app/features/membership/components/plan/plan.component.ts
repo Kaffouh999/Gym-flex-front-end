@@ -1,4 +1,4 @@
-import { Component, forwardRef, OnInit } from "@angular/core";
+import { Component, forwardRef } from "@angular/core";
 import { FormBuilder, FormGroup, NgControl, Validators } from "@angular/forms";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { Plan } from "src/app/core/models/Plan";
@@ -23,19 +23,18 @@ export class PlanComponent {
     }
 
     planDialog: boolean;
-    planImageDialog : Boolean = false;
-
+    planImageDialog: boolean = false;
 
     plans: Plan[];
 
     planInput: Plan;
 
     selectedplans: Plan[];
-    isAdd:Boolean;
+    isAdd: boolean;
     submitted: boolean;
     plansFrom: FormGroup;
-    formData : FormData= new FormData();
-    timeStamp :number=0;
+    formData: FormData = new FormData();
+    timeStamp: number = 0;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -51,20 +50,19 @@ export class PlanComponent {
             description: [""],
             duration: ["", Validators.required],
             price: ["", Validators.required],
-            imageAds:[""]
+            imageAds: [""],
         });
     }
 
     openNew() {
-        let date: Date = new Date();
         this.planInput = {
             id: undefined,
             name: "",
             description: "",
             duration: 0,
             price: 0,
-            ratingPer5:0,
-            imageAds:""
+            ratingPer5: 0,
+            imageAds: "",
         };
         this.remplirForm(this.planInput);
         this.submitted = false;
@@ -84,20 +82,20 @@ export class PlanComponent {
             header: "Confirm",
             icon: "pi pi-exclamation-triangle",
             accept: () => {
-                this.planService.deletePlan(plan.id).subscribe((res: any) => {
-                    this.getAllPlans();
-                    this.messageService.add({
-                        severity: "success",
-                        summary: "Successful",
-                        detail: "plan Deleted",
-                        life: 3000,
-                    });
-                    },(error : any) => {
-                       
-                            this.handleError(error);
-                 
+                this.planService.deletePlan(plan.id).subscribe({
+                    next: (res: any) => {
+                        this.getAllPlans();
+                        this.messageService.add({
+                            severity: "success",
+                            summary: "Successful",
+                            detail: "plan Deleted",
+                            life: 3000,
+                        });
+                    },
+                    error: (error: any) => {
+                        this.handleError(error);
+                    },
                 });
-             
             },
         });
     }
@@ -112,51 +110,53 @@ export class PlanComponent {
 
         this.submitted = true;
         if (this.planInput.id === undefined) {
-     
-                this.planInput.imageAds =this.planInput.name;
-                console.log(this.planInput.imageAds)
-            this.planService.addPlan(this.planInput).subscribe((res: any) => {
-                this.getAllPlans();
-                this.messageService.add({
-                    severity: "success",
-                    summary: "Successful",
-                    detail: "plan added successfuly",
-                    life: 3000,
-                });
-            },(error:any) => {
-                this.handleError(error);
-            })
-       
-        } else {
-            this.planService
-                .updatePlan(this.planInput.id, this.planInput)
-                .subscribe((res: any) => {
+            this.planInput.imageAds = this.planInput.name;
+            console.log(this.planInput.imageAds);
+            this.planService.addPlan(this.planInput).subscribe({
+                next: (res: any) => {
                     this.getAllPlans();
-                    
                     this.messageService.add({
                         severity: "success",
                         summary: "Successful",
-                        detail: "plan updated successfuly",
+                        detail: "plan added successfuly",
                         life: 3000,
                     });
-                },(error:any) => {
+                },
+                error: (error: any) => {
                     this.handleError(error);
+                },
+            });
+        } else {
+            this.planService
+                .updatePlan(this.planInput.id, this.planInput)
+                .subscribe({
+                    next: (res: any) => {
+                        this.getAllPlans();
+                        this.messageService.add({
+                            severity: "success",
+                            summary: "Successful",
+                            detail: "plan updated successfuly",
+                            life: 3000,
+                        });
+                    },
+                    error: (error: any) => {
+                        this.handleError(error);
+                    },
                 });
         }
         this.hideDialog();
-        }
+    }
 
     getAllPlans() {
-        this.planService.getAllPlans().subscribe(
-            (res: any) => {
+        this.planService.getAllPlans().subscribe({
+            next: (res: any) => {
                 this.getTimeStamp();
                 this.plans = res as Plan[];
-               
             },
-            (err: Error) => {
-                console.log(err.message);
-            }
-        );
+            error: (error: any) => {
+                this.handleError(error);
+            },
+        });
     }
 
     remplirplan(): void {
@@ -166,8 +166,8 @@ export class PlanComponent {
             description: this.plansFrom.get("description").value,
             duration: this.plansFrom.get("duration").value,
             price: this.plansFrom.get("price").value,
-            ratingPer5:this.planInput.ratingPer5,
-            imageAds:this.plansFrom.get("imageAds").value,
+            ratingPer5: this.planInput.ratingPer5,
+            imageAds: this.plansFrom.get("imageAds").value,
         };
     }
 
@@ -178,8 +178,8 @@ export class PlanComponent {
             description: "",
             duration: 0,
             price: 0,
-            ratingPer5:0,
-            imageAds:""
+            ratingPer5: 0,
+            imageAds: "",
         };
 
         this.plansFrom.patchValue({
@@ -187,44 +187,49 @@ export class PlanComponent {
             description: plan.description,
             duration: plan.duration,
             price: plan.price,
-            imageAds:plan.imageAds
+            imageAds: plan.imageAds,
         });
     }
     clear(table: Table) {
         table.clear();
     }
 
-    onUpload(event : any) {
-
-        for(let file of event.files) {
-          console.log(file)
-          this.formData = new FormData();
-          this.formData.append('file', file);
-      }
-      
-      }
-
-      updateImage(){
-        let id:number = this.planInput.id;
-        this.planService.updateImage(id,this.formData).subscribe((response) => {
-            console.log('File uploaded successfully:', response);
-            this.getAllPlans();
-            this.planImageDialog = false;
-          },
-          (err) => {
-            console.log(err);
-          }); }
-          editImage(plan : Plan){
-            this.planInput = {...plan};
+    onUpload(event: any) {
+        for (let file of event.files) {
+            console.log(file);
             this.formData = new FormData();
-            this.planImageDialog = true;
+            this.formData.append("file", file);
         }
-          getTimeStamp(){
-            this.timeStamp = new Date().getTime();
-          }
+    }
 
+    updateImage() {
+        let id: number = this.planInput.id;
+        this.planService.updateImage(id, this.formData).subscribe({
+            next: (res: any) => {
+                this.getAllPlans();
+                this.messageService.add({
+                    severity: "success",
+                    summary: "Successful",
+                    detail: "Image updated successfuly",
+                    life: 3000,
+                });
+                this.planImageDialog = false;
+            },
+            error: (error: any) => {
+                this.handleError(error);
+            },
+        });
+    }
+    editImage(plan: Plan) {
+        this.planInput = { ...plan };
+        this.formData = new FormData();
+        this.planImageDialog = true;
+    }
+    getTimeStamp() {
+        this.timeStamp = new Date().getTime();
+    }
 
-    handleError(error:any){
+    handleError(error: any) {
         if (error.status === 409) {
             // Display error message from the response body to the user
             const errorMessage = error.error;
@@ -235,13 +240,13 @@ export class PlanComponent {
                 life: 3000,
             });
             // Display error message to the user using appropriate UI components
-          } else {
+        } else {
             this.messageService.add({
                 severity: "error",
                 summary: "Error",
                 detail: "there is an error in our server , please report here",
                 life: 3000,
             });
-          }
+        }
     }
 }

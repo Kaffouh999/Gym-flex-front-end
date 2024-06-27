@@ -67,17 +67,6 @@
                     icon="pi pi-filter-slash"
                     (click)="clear(dt)"
                 ></button>
-                <!-- <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input
-                        pInputText
-                        type="text"
-                        (input)="
-                            dt.filterGlobal($event.target.value, 'contains')
-                        "
-                        placeholder="Search..."
-                    />
-                </span> -->
                 <p-toolbar>
                     <div class="p-toolbar-group-start">
                         <button
@@ -120,11 +109,11 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="width: 4rem">
+                <th scope="col" style="width: 4rem">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th>{{ "Image" | translate }}</th>
-                <th pSortableColumn="onlineUser.firstName">
+                <th scope="col">{{ "Image" | translate }}</th>
+                <th scope="col" pSortableColumn="onlineUser.firstName">
                     {{ "FirstName" | translate
                     }}<p-sortIcon field="onlineUser.firstName"></p-sortIcon>
                     <p-columnFilter
@@ -134,7 +123,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th pSortableColumn="onlineUser.lastName">
+                <th scope="col" pSortableColumn="onlineUser.lastName">
                     {{ "LastName" | translate
                     }}<p-sortIcon field="onlineUser.lastName"></p-sortIcon>
                     <p-columnFilter
@@ -144,7 +133,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th pSortableColumn="onlineUser.email">
+                <th scope="col" pSortableColumn="onlineUser.email">
                     {{ "Email" | translate
                     }}<p-sortIcon field="onlineUser.email"></p-sortIcon>
                     <p-columnFilter
@@ -154,7 +143,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th pSortableColumn="cin">
+                <th scope="col" pSortableColumn="cin">
                     {{ "CIN" | translate }}<p-sortIcon field="cin"></p-sortIcon>
                     <p-columnFilter
                         class="filterIcon"
@@ -163,7 +152,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th pSortableColumn="age">
+                <th scope="col" pSortableColumn="age">
                     {{ "Age" | translate }}<p-sortIcon field="age"></p-sortIcon>
                     <p-columnFilter
                         class="filterIcon"
@@ -172,7 +161,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th pSortableColumn="gender">
+                <th scope="col" pSortableColumn="gender">
                     {{ "Gender" | translate
                     }}<p-sortIcon field="gender"></p-sortIcon>
                     <p-columnFilter
@@ -183,7 +172,7 @@
                     >
                     </p-columnFilter>
                 </th>
-                <th pSortableColumn="adress">
+                <th scope="col" pSortableColumn="adress">
                     {{ "Adress" | translate
                     }}<p-sortIcon field="adress"></p-sortIcon>
                     <p-columnFilter
@@ -193,7 +182,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th pSortableColumn="login">
+                <th scope="col" pSortableColumn="login">
                     {{ "Login" | translate
                     }}<p-sortIcon field="login"></p-sortIcon>
                     <p-columnFilter
@@ -203,7 +192,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th pSortableColumn="gymBranch">
+                <th scope="col" pSortableColumn="gymBranch">
                     {{ "GymBranch" | translate
                     }}<p-sortIcon field="gymBranch"></p-sortIcon>
                     <p-columnFilter
@@ -239,7 +228,7 @@
                     </p-columnFilter>
                 </th>
 
-                <th></th>
+                <th scope="col"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-member>

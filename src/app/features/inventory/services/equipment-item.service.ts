@@ -19,7 +19,7 @@ export class EquipmentItemService {
     deleteEquipmentItem(equipmentItem: EquipemntItem) {
         return this.http.delete(this.equipmentItemURL + "/" + equipmentItem.id);
     }
-    updateEquipmentItem(id: Number, equipmentItem: EquipemntItem) {
+    updateEquipmentItem(id: number, equipmentItem: EquipemntItem) {
         return this.http.put(this.equipmentItemURL + "/" + id, equipmentItem);
     }
 

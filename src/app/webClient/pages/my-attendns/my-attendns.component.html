@@ -20,26 +20,15 @@
             <ng-template pTemplate="caption">
                 <div class="flex align-items-center justify-content-between">
                     <h5 class="m-0">My Sessions</h5>
-                    <!-- <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input
-                        pInputText
-                        type="text"
-                        (input)="
-                            dt.filterGlobal($event.target.value, 'contains')
-                        "
-                        placeholder="Search..."
-                    />
-                </span> -->
                 </div>
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Day</th>
-                    <th>Enter/Leave</th>
-                    <th>Duration</th>
-                    <th>GymBranch</th>
-                    <th>Manager at the time</th>
+                    <th scope="col">Day</th>
+                    <th scope="col">Enter/Leave</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">GymBranch</th>
+                    <th scope="col">Manager at the time</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-session>

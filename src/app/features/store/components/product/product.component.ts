@@ -24,7 +24,7 @@ import { Table } from "primeng/table";
 export class ProductComponent implements OnInit {
     productDialog: boolean;
 
-    userImageDialog: Boolean = false;
+    userImageDialog: boolean = false;
 
     products: Product[];
 
@@ -83,7 +83,6 @@ export class ProductComponent implements OnInit {
         private confirmationService: ConfirmationService
     ) {}
     openNew() {
-        let date: Date = new Date();
         this.productInput = {
             id: undefined,
             name: "",
@@ -162,9 +161,9 @@ export class ProductComponent implements OnInit {
                 this.productInput.name +
                 "_" +
                 this.productInput.subCategory.name;
-            this.productservice.uploadImage(fullName, this.formData).subscribe(
-                (response: any) => {
-                    this.productInput.imageUrl = response.message;
+            this.productservice.uploadImage(fullName, this.formData).subscribe({
+                next: (res: any) => {
+                    this.productInput.imageUrl = res.message;
                     this.productservice
                         .addProduct(this.productInput)
                         .subscribe((res: any) => {
@@ -178,10 +177,15 @@ export class ProductComponent implements OnInit {
                             });
                         });
                 },
-                (err) => {
-                    console.log(err);
-                }
-            );
+                error: (error: any) => {
+                    this.messageService.add({
+                        severity: "error",
+                        summary: "Error",
+                        detail: error.error.message,
+                        life: 3000,
+                    });
+                },
+            });
         } else {
             this.productservice
                 .updateProduct(this.productInput.id, this.productInput)
@@ -200,27 +204,25 @@ export class ProductComponent implements OnInit {
         this.hideDialog();
     }
     getAllProducts() {
-        this.productservice.getAllProducts().subscribe(
-            (res: any) => {
-                this.products = res as Product[];
-                  
-            this.getTimeStamp(); 
+        this.productservice.getAllProducts().subscribe({
+            next: (data: any) => {
+                this.products = data;
             },
-            (err: Error) => {
-                console.log(err.message);
-            }
-        );
+            error: (error: any) => {
+                console.log(error);
+            },
+        });
     }
 
     getAllSubCategories() {
-        this.subCategoryService.getAllSubCategories().subscribe(
-            (res: any) => {
-                this.subCategories = res as SubCategory[];
+        this.subCategoryService.getAllSubCategories().subscribe({
+            next: (data: any) => {
+                this.subCategories = data;
             },
-            (err: Error) => {
-                console.log(err.message);
-            }
-        );
+            error: (error: any) => {
+                console.log(error);
+            },
+        });
     }
     fillProduct(): void {
         this.productInput = {
@@ -269,17 +271,20 @@ export class ProductComponent implements OnInit {
     updateImage() {
         this.productservice
             .updateImage(this.productInput.id, this.formData)
-            .subscribe(
-                (response) => {
-                    console.log("File uploaded successfully:", response);
+            .subscribe({
+                next: (res: any) => {
                     this.getAllProducts();
-
                     this.userImageDialog = false;
                 },
-                (err) => {
-                    console.log(err);
-                }
-            );
+                error: (error: any) => {
+                    this.messageService.add({
+                        severity: "error",
+                        summary: "Error",
+                        detail: error.error.message,
+                        life: 3000,
+                    });
+                },
+            });
     }
 
     getTimeStamp() {

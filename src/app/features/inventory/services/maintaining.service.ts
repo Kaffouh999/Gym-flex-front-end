@@ -18,7 +18,7 @@ export class MaintainingService {
     deleteMaintaining(maintaining: Maintaining) {
         return this.http.delete(this.maintainingURL + "/" + maintaining.id);
     }
-    updateMaintaining(id: Number, maintaining: Maintaining) {
+    updateMaintaining(id: number, maintaining: Maintaining) {
         return this.http.put(this.maintainingURL + "/" + id, maintaining);
     }
 }

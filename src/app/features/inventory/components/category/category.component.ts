@@ -47,35 +47,40 @@ export class CategoryComponent implements OnInit {
     categoryForm: FormGroup;
     ngOnInit(): void {
         this.getAllCategories();
-   
     }
 
     getAllCategories() {
-        this.categoryService.getAllCategories().subscribe((data: any) => {
-            this.categories = data;
-        },(error : any) => {
-            console.error(error)
+        this.categoryService.getAllCategories().subscribe({
+            next: (data: any) => {
+                this.categories = data;
+            },
+            error: (error: any) => {
+                this.handleError(error);
+            },
         });
     }
 
     addCategory() {
         this.fillCategory();
         if (this.categoryInserted.id === undefined) {
-            this.categoryService
-                .addCategory(this.categoryInserted)
-                .subscribe((res: any) => {
+            this.categoryService.addCategory(this.categoryInserted).subscribe({
+                next: (data: any) => {
                     this.getAllCategories();
-                },(err:any) => {
-                    this.handleError(err);
-                });
+                },
+                error: (error: any) => {
+                    this.handleError(error);
+                },
+            });
         } else {
             this.categoryService
                 .updateCategory(this.categoryInserted.id, this.categoryInserted)
-                .subscribe((res: any) => {
-                    this.getAllCategories();
-                },
-                (err:any) => {
-                    this.handleError(err);
+                .subscribe({
+                    next: (data: any) => {
+                        this.getAllCategories();
+                    },
+                    error: (error: any) => {
+                        this.handleError(error);
+                    },
                 });
         }
 
@@ -88,24 +93,20 @@ export class CategoryComponent implements OnInit {
         this.addDialog = true;
     }
 
-
-    
-
-    delete(category:Category){
-        this.categoryService
-        .deleteCategory(category)
-        .subscribe((respense: any) => {
-            this.getAllCategories();
-            this.messageService.add({
-                severity: "success",
-                summary: "Successful",
-                detail: "category Deleted",
-                life: 3000,
-            });
-        },(error:any) => {
-
-            this.handleError(error);
-
+    delete(category: Category) {
+        this.categoryService.deleteCategory(category).subscribe({
+            next: (data: any) => {
+                this.getAllCategories();
+                this.messageService.add({
+                    severity: "success",
+                    summary: "Successful",
+                    detail: "category Deleted",
+                    life: 3000,
+                });
+            },
+            error: (error: any) => {
+                this.handleError(error);
+            },
         });
     }
 
@@ -116,9 +117,7 @@ export class CategoryComponent implements OnInit {
             icon: "pi pi-exclamation-triangle",
             reject: () => {},
             accept: () => {
-         
                 this.delete(category);
-               
             },
         });
     }
@@ -167,8 +166,7 @@ export class CategoryComponent implements OnInit {
         table.clear();
     }
 
-
-    handleError(error:any){
+    handleError(error: any) {
         if (error.status === 409) {
             // Display error message from the response body to the user
             const errorMessage = error.error;
@@ -179,13 +177,13 @@ export class CategoryComponent implements OnInit {
                 life: 3000,
             });
             // Display error message to the user using appropriate UI components
-          } else {
+        } else {
             this.messageService.add({
                 severity: "error",
                 summary: "Error",
                 detail: "there is an error in our server , please report here",
                 life: 3000,
             });
-          }
+        }
     }
 }

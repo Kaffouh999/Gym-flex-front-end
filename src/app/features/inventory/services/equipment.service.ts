@@ -24,10 +24,10 @@ export class EquipmentService {
     deleteEquipment(equipment: Equipemnt) {
         return this.http.delete(this.equipmentURL + "/" + equipment.id);
     }
-    updateEquipment(id: Number, equipment: Equipemnt) {
+    updateEquipment(id: number, equipment: Equipemnt) {
         return this.http.put(this.equipmentURL + "/" + id, equipment);
     }
-    uploadImage(name: String, formData: FormData) {
+    uploadImage(name: string, formData: FormData) {
         return this.http.post(this.equipmentURL + "/upload/" + name, formData);
     }
     updateImage(id: number, formData: FormData) {

@@ -57,57 +57,72 @@
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
                 <h5 class="m-0">Manage GYM Branches</h5>
-                <!-- <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input
-                        pInputText
-                        type="text"
-                        (input)="
-                            dt.filterGlobal($event.target.value, 'contains')
-                        "
-                        placeholder="Search..."
-                    />
-                </span> -->
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th>
+                <th scope="col">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th pSortableColumn="name">
+                <th scope="col" pSortableColumn="name">
                     Name<p-sortIcon field="name"></p-sortIcon>
-                    <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                    <p-columnFilter
+                        type="text"
+                        field="name"
+                        display="menu"
+                    ></p-columnFilter>
                 </th>
-                <th pSortableColumn="adress">
+                <th scope="col" pSortableColumn="adress">
                     adress<p-sortIcon field="adress"></p-sortIcon>
-                    <p-columnFilter type="text" field="adress" display="menu"></p-columnFilter>
+                    <p-columnFilter
+                        type="text"
+                        field="adress"
+                        display="menu"
+                    ></p-columnFilter>
                 </th>
-                <th pSortableColumn="email">
+                <th scope="col" pSortableColumn="email">
                     Email<p-sortIcon field="email"></p-sortIcon>
-                    <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
+                    <p-columnFilter
+                        type="text"
+                        field="email"
+                        display="menu"
+                    ></p-columnFilter>
                 </th>
-                <th pSortableColumn="appPassword">
+                <th scope="col" pSortableColumn="appPassword">
                     appPassword <p-sortIcon field="appPassword"></p-sortIcon>
-                    <p-columnFilter type="text" field="appPasswordEmail" display="menu"></p-columnFilter>
+                    <p-columnFilter
+                        type="text"
+                        field="appPasswordEmail"
+                        display="menu"
+                    ></p-columnFilter>
                 </th>
-                <th pSortableColumn="phoneNumber">
+                <th scope="col" pSortableColumn="phoneNumber">
                     phone Number<p-sortIcon field="phoneNumber"></p-sortIcon>
-                    <p-columnFilter type="text" field="phoneNumber" display="menu"></p-columnFilter>
+                    <p-columnFilter
+                        type="text"
+                        field="phoneNumber"
+                        display="menu"
+                    ></p-columnFilter>
                 </th>
-                <th pSortableColumn="openingDate">
+                <th scope="col" pSortableColumn="openingDate">
                     opening Date<p-sortIcon field="openingDate"></p-sortIcon>
                     <!-- If there's a filter for openingDate, it should go here -->
                 </th>
-                <th pSortableColumn="closingDate">
+                <th scope="col" pSortableColumn="closingDate">
                     closing Date<p-sortIcon field="closingDate"></p-sortIcon>
                     <!-- If there's a filter for closingDate, it should go here -->
                 </th>
-                <th pSortableColumn="sessionDurationAllowed">
-                    session Duration<p-sortIcon field="sessionDurationAllowed"></p-sortIcon>
-                    <p-columnFilter type="text" field="sessionDurationAllowed" display="menu"></p-columnFilter>
+                <th scope="col" pSortableColumn="sessionDurationAllowed">
+                    session Duration<p-sortIcon
+                        field="sessionDurationAllowed"
+                    ></p-sortIcon>
+                    <p-columnFilter
+                        type="text"
+                        field="sessionDurationAllowed"
+                        display="menu"
+                    ></p-columnFilter>
                 </th>
-                <th></th>
+                <th scope="col"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-gymBranch>

@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     Component,
     forwardRef,
     OnInit,
@@ -23,7 +22,7 @@ import { SessionService } from "../../services/session.service";
         { provide: NgControl, useExisting: forwardRef(() => SessionComponent) },
     ],
 })
-export class SessionComponent implements OnInit, AfterViewInit {
+export class SessionComponent implements OnInit {
     barcodeFormat: any = [];
     @ViewChild("scanner") scanner: ZXingScannerComponent | undefined =
         undefined;
@@ -34,7 +33,6 @@ export class SessionComponent implements OnInit, AfterViewInit {
         private sessionService: SessionService,
         private messageService: MessageService
     ) {}
-    ngAfterViewInit(): void {}
     ngOnInit(): void {
         this.getAllSessionMembers();
         this.barcodeFormat.push(BarcodeFormat.QR_CODE);
@@ -47,9 +45,9 @@ export class SessionComponent implements OnInit, AfterViewInit {
         });
     }
 
-    startScanner() {
+    startScanner(event: any) {
         // Start the scanner
-        this.scanner!.scanStart();
+        this.scanner.scanStart();
         this.overlayPanel.toggle(event);
     }
 
@@ -92,7 +90,7 @@ export class SessionComponent implements OnInit, AfterViewInit {
         // Close the scanner after a successful scan
 
         setTimeout(() => {
-            this.scanner!.scanStart();
+            this.scanner.scanStart();
         }, 5000);
     }
 }

@@ -88,11 +88,11 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="width: 4rem">
+                <th scope="col" style="width: 4rem">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th>Image</th>
-                <th pSortableColumn="name">
+                <th scope="col">Image</th>
+                <th scope="col" pSortableColumn="name">
                     Name<p-sortIcon field="name"></p-sortIcon>
                     <p-columnFilter
                         class="filterIcon"
@@ -101,7 +101,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th pSortableColumn="description">
+                <th scope="col" pSortableColumn="description">
                     Description<p-sortIcon field="description"></p-sortIcon>
                     <p-columnFilter
                         class="filterIcon"
@@ -110,7 +110,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th pSortableColumn="price">
+                <th scope="col" pSortableColumn="price">
                     Price<p-sortIcon field="price"></p-sortIcon>
                     <p-columnFilter
                         class="filterIcon"
@@ -120,7 +120,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th pSortableColumn="subCategory.name">
+                <th scope="col" pSortableColumn="subCategory.name">
                     SubCategory<p-sortIcon
                         field="subCategory.name"
                     ></p-sortIcon>
@@ -130,9 +130,8 @@
                         field="subCategory.name"
                         display="menu"
                     ></p-columnFilter>
-            
                 </th>
-                <th pSortableColumn="qteinSTock">
+                <th scope="col" pSortableColumn="qteinSTock">
                     Qte in STock<p-sortIcon field="qteinSTock"></p-sortIcon>
                     <p-columnFilter
                         class="filterIcon"
@@ -141,10 +140,10 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th pSortableColumn="rating">
+                <th scope="col" pSortableColumn="rating">
                     Rating<p-sortIcon field="rating"></p-sortIcon>
                 </th>
-                <th pSortableColumn="discount">
+                <th scope="col" pSortableColumn="discount">
                     Discount<p-sortIcon field="discount"></p-sortIcon>
                     <p-columnFilter
                         class="filterIcon"
@@ -155,7 +154,7 @@
                     ></p-columnFilter>
                 </th>
 
-                <th></th>
+                <th scope="col"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product>

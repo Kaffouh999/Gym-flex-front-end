@@ -1,5 +1,5 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
     HttpClient,
     HttpClientModule,
@@ -109,7 +109,6 @@ import { MenuService } from "./app.menu.service";
 import { CategoryComponent } from "./features/inventory/components/category/category.component";
 import { SubCategoryComponent } from "./features/inventory/components/sub-category/sub-category.component";
 import { GymBranchComponent } from "./features/settings/components/gym-branch/gym-branch.component";
-import { ReactiveFormsModule } from "@angular/forms";
 import { PlanComponent } from "./features/membership/components/plan/plan.component";
 import { EquipmentComponent } from "./features/inventory/components/equipment/equipment.component";
 import { MemberComponent } from "./features/membership/components/member/member.component";
@@ -122,7 +121,6 @@ import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { PaymentComponent } from "./features/membership/components/payment/payment.component";
 import { SessionComponent } from "./features/training/components/session/session.component";
-import { MinutesDiffPipe } from "./core/pipes/MinutesDiffPipe";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
 import { DialogService } from "primeng/dynamicdialog";
 import { RxStompService } from "./core/config/webSocket/rx-stomp.service";
@@ -137,16 +135,12 @@ import { SharedModule } from "./webClient/shared/shared.module";
 import { PagesModule } from "./webClient/pages/pages.module";
 import { WebComponent } from "./webClient/web/web.component";
 import { RoleComponent } from "./features/settings/components/role/role.component";
-import { AccountComponent } from "./features/membership/components/account/account.component";
 import { DashboardComponent } from "./features/dashboard/dashboard.component";
 import { BlogsComponent } from "./features/blogs/components/blogs/blogs.component";
 import { EditorModule } from "primeng/editor";
 import { CategoryBlogComponent } from "./features/blogs/components/category-blog/category-blog.component";
-import {
-    CombineNginxUrlPipe,
-    CombineNginxUrlPipeModule,
-} from "./core/pipes/CombineNginxUrlPipe";
-import { OnlineUserComponent } from './features/settings/components/online-user/online-user.component';
+import { CombineNginxUrlPipeModule } from "./core/pipes/CombineNginxUrlPipe";
+import { OnlineUserComponent } from "./features/settings/components/online-user/online-user.component";
 
 @NgModule({
     declarations: [

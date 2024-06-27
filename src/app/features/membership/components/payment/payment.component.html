@@ -11,7 +11,12 @@
                 class="p-button-success mx-2"
                 (click)="menu.toggle($event)"
             ></button>
-            <p-tieredMenu class="overlay" #menu [model]="items" [popup]="true"></p-tieredMenu>
+            <p-tieredMenu
+                class="overlay"
+                #menu
+                [model]="items"
+                [popup]="true"
+            ></p-tieredMenu>
         </ng-template>
 
         <ng-template pTemplate="right">
@@ -26,17 +31,17 @@
     </p-toolbar>
     <p-overlayPanel #op (onHide)="stopScanner()">
         <zxing-scanner
- class="qrScanner"
-  (scanSuccess)="onScanSuccess($event)"
-  [formats]="barcodeFormat"
-  [torch]="false"
-  [tryHarder]="false"
-  #scanner
-  [autofocusEnabled]="true"
-  [enable]="false"
-  [delayBetweenScanSuccess]="7000"
-></zxing-scanner>
-</p-overlayPanel>
+            class="qrScanner"
+            (scanSuccess)="onScanSuccess($event)"
+            [formats]="barcodeFormat"
+            [torch]="false"
+            [tryHarder]="false"
+            #scanner
+            [autofocusEnabled]="true"
+            [enable]="false"
+            [delayBetweenScanSuccess]="7000"
+        ></zxing-scanner>
+    </p-overlayPanel>
     <p-table
         #dt
         [value]="payments"
@@ -55,93 +60,200 @@
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
                 <h5 class="m-0">Manage Payments</h5>
-                <!-- <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input
-                        pInputText
-                        type="text"
-                        (input)="
-                            dt.filterGlobal($event.target.value, 'contains')
-                        "
-                        placeholder="Search..."
-                    />
-                </span> -->
                 <p-toolbar>
                     <div class="p-toolbar-group-start">
-                        <button [disabled]="!selectedPyaments || !selectedPyaments.length" type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
-                        <button [disabled]="!selectedPyaments || !selectedPyaments.length" type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mx-2" pTooltip="PDF" tooltipPosition="bottom"></button>        <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
-                        selectedItemsLabel="{0} columns selected" [style]="{'min-width': '200px'}" placeholder="Choose Columns"></p-multiSelect>    </div>
-                    </p-toolbar>
+                        <button
+                            [disabled]="
+                                !selectedPyaments || !selectedPyaments.length
+                            "
+                            type="button"
+                            pButton
+                            pRipple
+                            icon="pi pi-file-excel"
+                            (click)="exportExcel()"
+                            class="p-button-success mr-2"
+                            pTooltip="XLS"
+                            tooltipPosition="bottom"
+                        ></button>
+                        <button
+                            [disabled]="
+                                !selectedPyaments || !selectedPyaments.length
+                            "
+                            type="button"
+                            pButton
+                            pRipple
+                            icon="pi pi-file-pdf"
+                            (click)="exportPdf()"
+                            class="p-button-warning mx-2"
+                            pTooltip="PDF"
+                            tooltipPosition="bottom"
+                        ></button>
+                        <p-multiSelect
+                            [options]="cols"
+                            [(ngModel)]="selectedColumns"
+                            optionLabel="header"
+                            selectedItemsLabel="{0} columns selected"
+                            [style]="{ 'min-width': '200px' }"
+                            placeholder="Choose Columns"
+                        ></p-multiSelect>
+                    </div>
+                </p-toolbar>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="width: 4rem">
+                <th scope="col" style="width: 4rem">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th >
-                    Member 
-                    <p-columnFilter field="subscriptionMember.member.id" matchMode="in" [showMenu]="false" >
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect appendTo="body" [ngModel]="value" optionValue="id" [options]="members" placeholder="Any" (onChange)="filter($event.value)" optionLabel="onlineUser.firstName">
+                <th scope="col">
+                    Member
+                    <p-columnFilter
+                        field="subscriptionMember.member.id"
+                        matchMode="in"
+                        [showMenu]="false"
+                    >
+                        <ng-template
+                            pTemplate="filter"
+                            let-value
+                            let-filter="filterCallback"
+                        >
+                            <p-multiSelect
+                                appendTo="body"
+                                [ngModel]="value"
+                                optionValue="id"
+                                [options]="members"
+                                placeholder="Any"
+                                (onChange)="filter($event.value)"
+                                optionLabel="onlineUser.firstName"
+                            >
                                 <ng-template let-option pTemplate="item">
-                                    <div class="inline-block vertical-align-middle">
-                                        <img [alt]="'member image'" src="{{option.onlineUser.profilePicture | combineNginxUrl}}" width="30" height="30" style="border-radius: 50%;" class="vertical-align-middle" />
-                                        <span class="ml-1 mt-1">{{ option.onlineUser.firstName+" "+ option.onlineUser.lastName}}</span>
+                                    <div
+                                        class="inline-block vertical-align-middle"
+                                    >
+                                        <img
+                                            [alt]="'member'"
+                                            src="{{
+                                                option.onlineUser.profilePicture
+                                                    | combineNginxUrl
+                                            }}"
+                                            width="30"
+                                            height="30"
+                                            style="border-radius: 50%"
+                                            class="vertical-align-middle"
+                                        />
+                                        <span class="ml-1 mt-1">{{
+                                            option.onlineUser.firstName +
+                                                " " +
+                                                option.onlineUser.lastName
+                                        }}</span>
                                     </div>
                                 </ng-template>
                             </p-multiSelect>
                         </ng-template>
                     </p-columnFilter>
                 </th>
-                <th  >
-                    Subscription 
-                </th>
-                <th pSortableColumn="plan">
-                    Plan <p-sortIcon field="subscriptionMember.plan.name"></p-sortIcon>
-                    <p-columnFilter field="subscriptionMember.plan.id" matchMode="in" [showMenu]="false" >
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect appendTo="body" [ngModel]="value" optionValue="id" [options]="plans" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
-                                <ng-template let-option pTemplate="item">
-                                    <div class="inline-block vertical-align-middle">
-                                        <span class="ml-1 mt-1">{{ option.name}}</span>
-                                    </div>
-                                </ng-template>
-                            </p-multiSelect>
-                        </ng-template>
-                    </p-columnFilter>
-                </th>
-                <th pSortableColumn="paymentDate" >
-                    Payment Date<p-sortIcon
-                        field="paymentDate"
-                    ></p-sortIcon>
-                    <p-columnFilter type="date" field="paymentDate" display="menu"></p-columnFilter>
-                </th>
-                <th  >
-                    Should payed
-                </th>
-                <th pSortableColumn="amountPayed">
-                    Amount payed<p-sortIcon
-                        field="amountPayed"
+                <th scope="col">Subscription</th>
+                <th scope="col" pSortableColumn="plan">
+                    Plan
+                    <p-sortIcon
+                        field="subscriptionMember.plan.name"
                     ></p-sortIcon>
                     <p-columnFilter
-                    class="filterIcon"
-                    type="numeric"
-                    field="amountPayed"
-                    display="menu"
-                ></p-columnFilter>
+                        field="subscriptionMember.plan.id"
+                        matchMode="in"
+                        [showMenu]="false"
+                    >
+                        <ng-template
+                            pTemplate="filter"
+                            let-value
+                            let-filter="filterCallback"
+                        >
+                            <p-multiSelect
+                                appendTo="body"
+                                [ngModel]="value"
+                                optionValue="id"
+                                [options]="plans"
+                                placeholder="Any"
+                                (onChange)="filter($event.value)"
+                                optionLabel="name"
+                            >
+                                <ng-template let-option pTemplate="item">
+                                    <div
+                                        class="inline-block vertical-align-middle"
+                                    >
+                                        <span class="ml-1 mt-1">{{
+                                            option.name
+                                        }}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
                 </th>
-                <th pSortableColumn="payedMember.onlineUser.firstName" >
+                <th scope="col" pSortableColumn="paymentDate">
+                    Payment Date<p-sortIcon field="paymentDate"></p-sortIcon>
+                    <p-columnFilter
+                        type="date"
+                        field="paymentDate"
+                        display="menu"
+                    ></p-columnFilter>
+                </th>
+                <th scope="col">Should payed</th>
+                <th scope="col" pSortableColumn="amountPayed">
+                    Amount payed<p-sortIcon field="amountPayed"></p-sortIcon>
+                    <p-columnFilter
+                        class="filterIcon"
+                        type="numeric"
+                        field="amountPayed"
+                        display="menu"
+                    ></p-columnFilter>
+                </th>
+                <th
+                    scope="col"
+                    pSortableColumn="payedMember.onlineUser.firstName"
+                >
                     Payed member<p-sortIcon
                         field="payedMember.onlineUser.firstName"
                     ></p-sortIcon>
-                    <p-columnFilter field="payedMember.id" matchMode="in" [showMenu]="false" >
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect appendTo="body" [ngModel]="value" optionValue="id" [options]="members" placeholder="Any" (onChange)="filter($event.value)" optionLabel="onlineUser.firstName">
+                    <p-columnFilter
+                        field="payedMember.id"
+                        matchMode="in"
+                        [showMenu]="false"
+                    >
+                        <ng-template
+                            pTemplate="filter"
+                            let-value
+                            let-filter="filterCallback"
+                        >
+                            <p-multiSelect
+                                appendTo="body"
+                                [ngModel]="value"
+                                optionValue="id"
+                                [options]="members"
+                                placeholder="Any"
+                                (onChange)="filter($event.value)"
+                                optionLabel="onlineUser.firstName"
+                            >
                                 <ng-template let-option pTemplate="item">
-                                    <div class="inline-block vertical-align-middle">
-                                        <img [alt]="'member image'" src="{{option.onlineUser.profilePicture | combineNginxUrl }}" width="30" height="30" style="border-radius: 50%;" class="vertical-align-middle" />
-                                        <span class="ml-1 mt-1">{{ option.onlineUser.firstName+" "+ option.onlineUser.lastName}}</span>
+                                    <div
+                                        class="inline-block vertical-align-middle"
+                                    >
+                                        <img
+                                            [alt]="'member'"
+                                            src="{{
+                                                option.onlineUser.profilePicture
+                                                    | combineNginxUrl
+                                            }}"
+                                            width="30"
+                                            height="30"
+                                            style="border-radius: 50%"
+                                            class="vertical-align-middle"
+                                        />
+                                        <span class="ml-1 mt-1">{{
+                                            option.onlineUser.firstName +
+                                                " " +
+                                                option.onlineUser.lastName
+                                        }}</span>
                                     </div>
                                 </ng-template>
                             </p-multiSelect>
@@ -149,50 +261,70 @@
                     </p-columnFilter>
                 </th>
 
-                <th></th>
+                <th scope="col"></th>
             </tr>
-     
         </ng-template>
         <ng-template pTemplate="body" let-payment>
             <tr>
                 <td>
                     <p-tableCheckbox [value]="payment"></p-tableCheckbox>
                 </td>
-            
+
                 <td id="image">
                     <div class="flex align-items-center">
-                    <p-image
-                        [src]="payment.subscriptionMember.member.onlineUser.profilePicture | combineNginxUrl"
-                        class="imageTable"
-                        alt="Image"
-                        [preview]="true"
-                    ></p-image>
-                    <p class="m-3 font-semibold">{{payment.subscriptionMember.member.onlineUser.firstName}} {{payment.subscriptionMember.member.onlineUser.lastName}}</p>
-                 
-                </div>
-
+                        <p-image
+                            [src]="
+                                payment.subscriptionMember.member.onlineUser
+                                    .profilePicture | combineNginxUrl
+                            "
+                            class="imageTable"
+                            alt="Image"
+                            [preview]="true"
+                        ></p-image>
+                        <p class="m-3 font-semibold">
+                            {{
+                                payment.subscriptionMember.member.onlineUser
+                                    .firstName
+                            }}
+                            {{
+                                payment.subscriptionMember.member.onlineUser
+                                    .lastName
+                            }}
+                        </p>
+                    </div>
                 </td>
-                <td ><button
-                    pButton
-                    pRipple
-                    icon="pi pi-qrcode"
-                    class="p-button-rounded p-button-secondary mr-2"
-                    (click)="showQrCode(payment)"
-                    ></button></td>
-                <td><p class="m-3 font-semibold">{{ payment.subscriptionMember.plan.name}}</p></td>
-              
-                <td>{{ payment.paymentDate | date :'dd/MM/yyyy' }}</td>
-                <td>{{payment.shouldPay}} DH</td>
-                <td>{{ payment.amountPayed}} DH</td>
-                <td><p class="m-3 font-semibold">{{ payment.payedMember.onlineUser.firstName}} {{ payment.payedMember.onlineUser.lastName}}</p></td>
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-qrcode"
+                        class="p-button-rounded p-button-secondary mr-2"
+                        (click)="showQrCode(payment)"
+                    ></button>
+                </td>
+                <td>
+                    <p class="m-3 font-semibold">
+                        {{ payment.subscriptionMember.plan.name }}
+                    </p>
+                </td>
+
+                <td>{{ payment.paymentDate | date : "dd/MM/yyyy" }}</td>
+                <td>{{ payment.shouldPay }} DH</td>
+                <td>{{ payment.amountPayed }} DH</td>
+                <td>
+                    <p class="m-3 font-semibold">
+                        {{ payment.payedMember.onlineUser.firstName }}
+                        {{ payment.payedMember.onlineUser.lastName }}
+                    </p>
+                </td>
 
                 <td>
                     <button
-                    pButton
-                    pRipple
-                    icon="pi pi-print"
-                    class="p-button-rounded p-button-secondary mr-2"
-                    (click)="showPaymentToPrint(payment)"
+                        pButton
+                        pRipple
+                        icon="pi pi-print"
+                        class="p-button-rounded p-button-secondary mr-2"
+                        (click)="showPaymentToPrint(payment)"
                     ></button>
                     <button
                         pButton
@@ -230,123 +362,196 @@
     <ng-template pTemplate="content">
         <form [formGroup]="PaymentForm" class="p-fluid">
             <div class="formgrid grid">
-            <div class="field col-12 md:col-12">
-                <span class="p-float-label">
-                    <p-dropdown
-                        appendTo="body"
-                        id="subscriptionMember"
-                        [options]="subscriptions"
-                        formControlName="subscriptionMember"
-                        [autoDisplayFirst]="false"
-                        [filter]="true" filterBy="member.onlineUser.firstName"
-                    >
-                    <ng-template pTemplate="selectedItem">
-                        <div class="flex align-items-center gap-2" *ngIf="PaymentForm.get('subscriptionMember').value">
-                            <img [src]="PaymentForm.get('subscriptionMember').value.member.onlineUser.profilePicture | combineNginxUrl" class="imageDropdown" />
-                            <div>{{ PaymentForm.get('subscriptionMember').value.member.onlineUser.firstName }}</div>
-                            <div *ngIf="PaymentForm.get('subscriptionMember').value.endDate != undefined">{{ PaymentForm.get('subscriptionMember').value.endDate | date :'dd/MM/yyyy'}}</div>
-                            <div *ngIf="PaymentForm.get('subscriptionMember').value.endDate == undefined">{{'NotPayedYet' | translate}}</div>
-                            <div>{{ PaymentForm.get('subscriptionMember').value.plan.name}}</div>
-                        </div>
-                    </ng-template>
-                   
-                    <ng-template let-subscription pTemplate="item">
-                        <div class="flex align-items-center gap-2">
-                            <img [src]="subscription.member.onlineUser.profilePicture | combineNginxUrl" class="imageDropdown"  />
-                            <div>{{ subscription.member.onlineUser.firstName }}</div>
-                            <div>{{subscription.startDate | date :'dd/MM/yyyy'}}</div>
-                            <div>{{ subscription.plan.name}}</div>
+                <div class="field col-12 md:col-12">
+                    <span class="p-float-label">
+                        <p-dropdown
+                            appendTo="body"
+                            id="subscriptionMember"
+                            [options]="subscriptions"
+                            formControlName="subscriptionMember"
+                            [autoDisplayFirst]="false"
+                            [filter]="true"
+                            filterBy="member.onlineUser.firstName"
+                        >
+                            <ng-template pTemplate="selectedItem">
+                                <div
+                                    class="flex align-items-center gap-2"
+                                    *ngIf="
+                                        PaymentForm.get('subscriptionMember')
+                                            .value
+                                    "
+                                >
+                                    <img
+                                        alt="member"
+                                        [src]="
+                                            PaymentForm.get(
+                                                'subscriptionMember'
+                                            ).value.member.onlineUser
+                                                .profilePicture
+                                                | combineNginxUrl
+                                        "
+                                        class="imageDropdown"
+                                    />
+                                    <div>
+                                        {{
+                                            PaymentForm.get(
+                                                "subscriptionMember"
+                                            ).value.member.onlineUser.firstName
+                                        }}
+                                    </div>
+                                    <div
+                                        *ngIf="
+                                            PaymentForm.get(
+                                                'subscriptionMember'
+                                            ).value.endDate != undefined
+                                        "
+                                    >
+                                        {{
+                                            PaymentForm.get(
+                                                "subscriptionMember"
+                                            ).value.endDate
+                                                | date : "dd/MM/yyyy"
+                                        }}
+                                    </div>
+                                    <div
+                                        *ngIf="
+                                            PaymentForm.get(
+                                                'subscriptionMember'
+                                            ).value.endDate == undefined
+                                        "
+                                    >
+                                        {{ "NotPayedYet" | translate }}
+                                    </div>
+                                    <div>
+                                        {{
+                                            PaymentForm.get(
+                                                "subscriptionMember"
+                                            ).value.plan.name
+                                        }}
+                                    </div>
+                                </div>
+                            </ng-template>
 
-                        </div>
-                    </ng-template>
-                
-                </p-dropdown>
-                    <label for="subscriptionMember">Subscription</label>
-                </span>
-                <small
-                    *ngIf="
-                        PaymentForm.get('subscriptionMember').invalid &&
-                        (PaymentForm.get('subscriptionMember').dirty ||
-                            PaymentForm.get('subscriptionMember').touched)
-                    "
-                    class="p-error"
-                    >Subscription is required</small
-                >
-            </div>
-            <div class="field col-6 md:col-6">
-                
+                            <ng-template let-subscription pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <img
+                                        alt="member"
+                                        [src]="
+                                            subscription.member.onlineUser
+                                                .profilePicture
+                                                | combineNginxUrl
+                                        "
+                                        class="imageDropdown"
+                                    />
+                                    <div>
+                                        {{
+                                            subscription.member.onlineUser
+                                                .firstName
+                                        }}
+                                    </div>
+                                    <div>
+                                        {{
+                                            subscription.startDate
+                                                | date : "dd/MM/yyyy"
+                                        }}
+                                    </div>
+                                    <div>{{ subscription.plan.name }}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <label for="subscriptionMember">Subscription</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            PaymentForm.get('subscriptionMember').invalid &&
+                            (PaymentForm.get('subscriptionMember').dirty ||
+                                PaymentForm.get('subscriptionMember').touched)
+                        "
+                        class="p-error"
+                        >Subscription is required</small
+                    >
+                </div>
+                <div class="field col-6 md:col-6">
                     <input
                         id="amountPayedInput"
                         pInputText
-                           value ="Must pay : {{PaymentForm.get('subscriptionMember').value.plan.price - PaymentForm.get('subscriptionMember').value.plan.price*PaymentForm.get('subscriptionMember').value.discountPercentage/100}} DH"
-                            [disabled]="true"
-                           />
+                        value="Must pay : {{
+                            PaymentForm.get('subscriptionMember').value.plan
+                                .price -
+                                (PaymentForm.get('subscriptionMember').value
+                                    .plan.price *
+                                    PaymentForm.get('subscriptionMember').value
+                                        .discountPercentage) /
+                                    100
+                        }} DH"
+                        [disabled]="true"
+                    />
                 </div>
-                
-        
-            <div class="field col-12 md:col-6">
-                <span class="p-float-label">
-                    <p-inputNumber
-              
-                        id="amountPayed"
-                        formControlName="amountPayed"
-                        mode="currency"
+
+                <div class="field col-12 md:col-6">
+                    <span class="p-float-label">
+                        <p-inputNumber
+                            id="amountPayed"
+                            formControlName="amountPayed"
+                            mode="currency"
                             currency="MAD"
                             locale="en-MA"
-                    ></p-inputNumber>
-                    <label for="amountPayed">AmountPayed</label>
-                </span>
-                <small
-                    *ngIf="
-                        PaymentForm.get('amountPayed').invalid &&
-                        (PaymentForm.get('amountPayed').dirty ||
-                            PaymentForm.get('amountPayed').touched)
-                    "
-                    class="p-error"
-                    >AmountPayed is required</small
-                >
-            </div>
-            <div class="field col-6 md:col-6">
-                <span class="p-float-label">
-                    <p-calendar
-                        id="paymentDate"
-                        formControlName="paymentDate"
-                        appendTo="body"
-                        dateFormat="dd/mm/yy"
+                        ></p-inputNumber>
+                        <label for="amountPayed">AmountPayed</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            PaymentForm.get('amountPayed').invalid &&
+                            (PaymentForm.get('amountPayed').dirty ||
+                                PaymentForm.get('amountPayed').touched)
+                        "
+                        class="p-error"
+                        >AmountPayed is required</small
                     >
-                    </p-calendar>
-                    <label htmlFor="paymentDate">Payment Date</label>
-                </span>
-                <small
-                    *ngIf="
-                        PaymentForm.get('paymentDate').invalid &&
-                        (PaymentForm.get('paymentDate').dirty ||
-                            PaymentForm.get('paymentDate').touched)
-                    "
-                    class="p-error"
-                    >Payment Date Time is required</small
-                >
-            </div>
+                </div>
+                <div class="field col-6 md:col-6">
+                    <span class="p-float-label">
+                        <p-calendar
+                            id="paymentDate"
+                            formControlName="paymentDate"
+                            appendTo="body"
+                            dateFormat="dd/mm/yy"
+                        >
+                        </p-calendar>
+                        <label htmlFor="paymentDate">Payment Date</label>
+                    </span>
+                    <small
+                        *ngIf="
+                            PaymentForm.get('paymentDate').invalid &&
+                            (PaymentForm.get('paymentDate').dirty ||
+                                PaymentForm.get('paymentDate').touched)
+                        "
+                        class="p-error"
+                        >Payment Date Time is required</small
+                    >
+                </div>
 
-            <div class="field col-6 md:col-6">
-                
-                <input
-                    id="restPayedInput"
-                    pInputText
-                       value ="Rest to pay  : {{ PaymentForm.get('subscriptionMember').value.plan.price*(1-PaymentForm.get('subscriptionMember').value.discountPercentage/100)  - PaymentForm.get('amountPayed').value }} DH"
+                <div class="field col-6 md:col-6">
+                    <input
+                        id="restPayedInput"
+                        pInputText
+                        value="Rest to pay  : {{
+                            PaymentForm.get('subscriptionMember').value.plan
+                                .price *
+                                (1 -
+                                    PaymentForm.get('subscriptionMember').value
+                                        .discountPercentage /
+                                        100) -
+                                PaymentForm.get('amountPayed').value
+                        }} DH"
                         [disabled]="true"
-                       />
-            </div>
-       
-       
-
+                    />
+                </div>
             </div>
         </form>
     </ng-template>
 
     <ng-template pTemplate="footer">
-
-       
         <button
             pButton
             pRipple
@@ -356,7 +561,7 @@
             (click)="hideDialog()"
         ></button>
         <button
-        id="save"
+            id="save"
             pButton
             pRipple
             label="Save"
@@ -375,56 +580,75 @@
     [modal]="true"
     styleClass="p-fluid"
 >
-<div id="qrCard">
-    <p-card header="Qr Code" class="QrCard" subheader="use it to enter and leave Gym" >
-        <ng-template pTemplate="header">
-            <div class="flex">
-            <img
-                        src="{{ paymentInput.subscriptionMember.member.onlineUser.profilePicture | combineNginxUrl }}"
+    <div id="qrCard">
+        <p-card
+            header="Qr Code"
+            class="QrCard"
+            subheader="use it to enter and leave Gym"
+        >
+            <ng-template pTemplate="header">
+                <div class="flex">
+                    <img
+                        src="{{
+                            paymentInput.subscriptionMember.member.onlineUser
+                                .profilePicture | combineNginxUrl
+                        }}"
                         class="imageQr m-3"
-                        alt="Image"
+                        alt="member"
                     />
                     <div>
-      <div >
-            <p class="qrInfos m-3">
-                {{'CIN' | translate}}  : {{paymentInput.subscriptionMember.member.cin}}
-            </p>
-  <p class="qrInfos">
-                    {{'Plan' | translate}} : {{paymentInput.subscriptionMember.plan.name}}
-                </p>
-    <p class="qrInfos">
-                        {{'startDate' | translate}} : {{paymentInput.subscriptionMember.startDate | date:'dd/MM/yyyy'}}
-                    </p>
-           </div>
-               </div>
-                </div>
-                <div class="flex  justify-content-center">
-                   
-                            <p class="qrInfos">
-                                {{'FullName' | translate}} : {{paymentInput.subscriptionMember.member.onlineUser.firstName}} {{paymentInput.subscriptionMember.member.onlineUser.lastName}}
+                        <div>
+                            <p class="qrInfos m-3">
+                                {{ "CIN" | translate }} :
+                                {{ paymentInput.subscriptionMember.member.cin }}
                             </p>
-                 
+                            <p class="qrInfos">
+                                {{ "Plan" | translate }} :
+                                {{ paymentInput.subscriptionMember.plan.name }}
+                            </p>
+                            <p class="qrInfos">
+                                {{ "startDate" | translate }} :
+                                {{
+                                    paymentInput.subscriptionMember.startDate
+                                        | date : "dd/MM/yyyy"
+                                }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-        </ng-template>
-        <div class="flex align-items-center justify-content-center">
-        <qr-code [value]="paymentInput.subscriptionMember.codeSubscription" [size]="256"></qr-code>
+                <div class="flex justify-content-center">
+                    <p class="qrInfos">
+                        {{ "FullName" | translate }} :
+                        {{
+                            paymentInput.subscriptionMember.member.onlineUser
+                                .firstName
+                        }}
+                        {{
+                            paymentInput.subscriptionMember.member.onlineUser
+                                .lastName
+                        }}
+                    </p>
+                </div>
+            </ng-template>
+            <div class="flex align-items-center justify-content-center">
+                <qr-code
+                    [value]="paymentInput.subscriptionMember.codeSubscription"
+                    [size]="256"
+                ></qr-code>
+            </div>
+        </p-card>
     </div>
-       
-    </p-card>
-</div>
-<ng-template pTemplate="footer">
-    <button
-        pButton
-        pRipple
-        label="{{'Cancel' | translate}}"
-        icon="pi pi-times"
-        class="p-button-text"
-        (click)="hideqrDialog()"
-    ></button>
-
-</ng-template>
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="{{ 'Cancel' | translate }}"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideqrDialog()"
+        ></button>
+    </ng-template>
 </p-dialog>
-
 
 <p-dialog
     [(visible)]="showPaymentToPrintDialog"
@@ -434,91 +658,117 @@
     styleClass="p-fluid"
     id="payPrintDialog"
 >
-<div id="pymentPrint">
-    <p-card header="payment GymFlex" class="paymentPrint" >
-        <ng-template pTemplate="header">
+    <div id="pymentPrint">
+        <p-card header="payment GymFlex" class="paymentPrint">
+            <ng-template pTemplate="header"> </ng-template>
 
+            <div class="formgrid grid subInfos">
+                <div
+                    class="flex justify-content-center subInfos col-12 md:col-12"
+                >
+                    <p class="qrInfos">
+                        {{ "FullName" | translate }} :
+                        {{
+                            paymentInput.subscriptionMember.member.onlineUser
+                                .firstName
+                        }}
+                        {{
+                            paymentInput.subscriptionMember.member.onlineUser
+                                .lastName
+                        }}
+                    </p>
+                </div>
+                <div class="subInfos col-4 md:col-4">
+                    <p class="qrInfos">
+                        {{ "CIN" | translate }} :
+                        {{ paymentInput.subscriptionMember.member.cin }}
+                    </p>
+                </div>
 
-              
-        </ng-template>
-                   
-        <div class="formgrid grid subInfos">
-            
-            <div class="flex justify-content-center subInfos  col-12 md:col-12">
-            <p class="qrInfos">
-                {{'FullName' | translate}} : {{paymentInput.subscriptionMember.member.onlineUser.firstName}} {{paymentInput.subscriptionMember.member.onlineUser.lastName}}
-            </p>
-        </div>
-        <div class="subInfos col-4 md:col-4">
-            <p class="qrInfos">
-                {{'CIN' | translate}}  : {{paymentInput.subscriptionMember.member.cin}}
-            </p>
-        </div>
-           
-        <div class="subInfos col-4 md:col-4">
-                <p class="qrInfos">
-                    {{'Plan' | translate}} : {{paymentInput.subscriptionMember.plan.name}}
-                </p>
+                <div class="subInfos col-4 md:col-4">
+                    <p class="qrInfos">
+                        {{ "Plan" | translate }} :
+                        {{ paymentInput.subscriptionMember.plan.name }}
+                    </p>
+                </div>
+
+                <div class="subInfos col-4 md:col-4">
+                    <p class="qrInfos">
+                        {{ "startDate" | translate }}:
+                        {{
+                            paymentInput.subscriptionMember.startDate
+                                | date : "dd/MM/yyyy"
+                        }}
+                    </p>
+                </div>
+                <div class="col-6 md:col-6">
+                    <p class="qrInfos">
+                        Subscription amount: {{ paymentInput.shouldPay }} DH
+                    </p>
+                </div>
+                <div class="col-6 md:col-6">
+                    <p class="qrInfos">
+                        Amount payed: {{ paymentInput.amountPayed }} DH
+                    </p>
+                </div>
+                <div class="col-6 md:col-6">
+                    <p class="qrInfos">
+                        Amount Rest:{{
+                            paymentInput.subscriptionMember.plan.price -
+                                (paymentInput.subscriptionMember
+                                    .discountPercentage *
+                                    paymentInput.subscriptionMember.plan
+                                        .price) /
+                                    100 -
+                                paymentInput.amountPayed
+                        }}
+                        DH
+                    </p>
+                </div>
+
+                <div class="col-6 md:col-6">
+                    <p class="qrInfos">
+                        Payment Date :{{
+                            paymentInput.paymentDate | date : "short"
+                        }}
+                    </p>
+                </div>
+                <div class="col-5 md:col-5 mt-4 subInfos">
+                    <p>Subscription Qr Code</p>
+                    <qr-code
+                        [value]="
+                            paymentInput.subscriptionMember.codeSubscription
+                        "
+                        class="ml-7"
+                        [size]="100"
+                    ></qr-code>
+                </div>
+                <div class="col-7 md:col-7 mt-4 subInfos">
+                    <p class="qrInfos">Signature :</p>
+                </div>
             </div>
-               
-                <div class=" subInfos col-4 md:col-4">
-                    <p class="qrInfos">
-                        {{'startDate' | translate}}: {{paymentInput.subscriptionMember.startDate | date:'dd/MM/yyyy'}}
-                    </p>
-                </div>
-                <div class=" col-6 md:col-6">
-                    <p class="qrInfos">
-                        Subscription amount: {{paymentInput.shouldPay}} DH
-                    </p>
-                </div>
-                <div class=" col-6 md:col-6">
-                    <p class="qrInfos">
-                        Amount payed: {{paymentInput.amountPayed }} DH
-                    </p>
-                </div>
-                <div class=" col-6 md:col-6">
-                    <p class="qrInfos">
-                        Amount Rest:{{paymentInput.subscriptionMember.plan.price - paymentInput.subscriptionMember.discountPercentage*paymentInput.subscriptionMember.plan.price/100 - paymentInput.amountPayed }} DH
-                    </p>
-                </div>
-               
-                <div class=" col-6 md:col-6  ">
-                    <p class="qrInfos">
-                        Payment Date :{{paymentInput.paymentDate | date :'short'}}
-                    </p>
-                </div>
-                <div class=" col-5 md:col-5 mt-4 subInfos">
-                    <p>Subscription Qr Code </p><qr-code [value]="paymentInput.subscriptionMember.codeSubscription" class="ml-7" [size]="100"></qr-code>
-                </div>
-                <div class=" col-7 md:col-7 mt-4 subInfos">
-                <p class="qrInfos">Signature : </p>
-            </div>
-                
-     </div>
-        
-    
-       
-    </p-card>
-</div>
-<ng-template pTemplate="footer">
-    <button
-    pButton
-    pRipple
-    label="{{'Print' | translate}}"
-    icon="pi pi-check"
-    class="p-button-text"
-    [useExistingCss]="true"
-    printSectionId="pymentPrint" ngxPrint></button>
-    <button
-        pButton
-        pRipple
-        label="{{'Cancel' | translate}}"
-        icon="pi pi-times"
-        class="p-button-text"
-        (click)="hideprintDialog()"
-    ></button>
-
-</ng-template>
+        </p-card>
+    </div>
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            label="{{ 'Print' | translate }}"
+            icon="pi pi-check"
+            class="p-button-text"
+            [useExistingCss]="true"
+            printSectionId="pymentPrint"
+            ngxPrint
+        ></button>
+        <button
+            pButton
+            pRipple
+            label="{{ 'Cancel' | translate }}"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideprintDialog()"
+        ></button>
+    </ng-template>
 </p-dialog>
 
 <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

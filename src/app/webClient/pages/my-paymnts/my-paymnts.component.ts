@@ -1,10 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { TreeNode } from "primeng/api";
-import { map, Observable } from "rxjs";
+import { map } from "rxjs";
 import { Payment } from "src/app/core/models/Payment";
 import { Plan } from "src/app/core/models/Plan";
-import { Subscription } from "src/app/core/models/Subscription";
 import { SubscriptionWithPayments } from "src/app/core/models/SubscriptionWithPayments";
 import { PaymentService } from "src/app/features/membership/services/payment.service";
 import { PlanService } from "src/app/features/membership/services/plan.service";

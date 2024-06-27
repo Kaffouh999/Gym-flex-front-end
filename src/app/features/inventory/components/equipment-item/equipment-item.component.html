@@ -91,13 +91,13 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="width: 4rem" id="checkColumn">
+                <th scope="col" style="width: 4rem">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
                 <th
+                    scope="col"
                     pSortableColumn="equipment"
                     style="min-width: 10rem"
-                    id="equipmentColumn"
                 >
                     {{ "Equipment" | translate
                     }}<p-sortIcon field="equipment"></p-sortIcon>
@@ -134,7 +134,7 @@
                     </p-columnFilter>
                 </th>
                 <th
-                    id="gymBranchColumn"
+                    scope="col"
                     pSortableColumn="gymBranch.name"
                     style="min-width: 10rem"
                 >
@@ -173,7 +173,7 @@
                     </p-columnFilter>
                 </th>
                 <th
-                    id="firstUseDateColumn"
+                    scope="col"
                     pSortableColumn="firstUseDate"
                     style="min-width: 15rem"
                 >
@@ -185,7 +185,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th id="priceColumn" pSortableColumn="price">
+                <th scope="col" pSortableColumn="price">
                     {{ "price" | translate }}
                     <p-sortIcon field="price"></p-sortIcon>
                     <p-columnFilter
@@ -198,7 +198,7 @@
                 </th>
 
                 <th
-                    id="amortizationColumn"
+                    scope="col"
                     pSortableColumn="amortization"
                     style="min-width: 10rem"
                 >
@@ -213,12 +213,12 @@
                     ></p-columnFilter>
                 </th>
 
-                <th id="qrCodeColumn" style="min-width: 10rem">
+                <th scope="col" style="min-width: 10rem">
                     {{ "QrCode" | translate
                     }}<p-sortIcon field="amortization"></p-sortIcon>
                 </th>
                 <th
-                    id="safeMinValueColumn"
+                    scope="col"
                     pSortableColumn="safeMinValue"
                     style="min-width: 10rem"
                 >

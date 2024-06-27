@@ -140,24 +140,27 @@ export class MaintainingComponent implements OnInit {
             console.log(this.maintainingInput);
             this.maintainingService
                 .addMaintaining(this.maintainingInput)
-                .subscribe((res: any) => {
-                    this.getAllMaintainings();
-                    this.hideDialog();
-                    this.messageService.add({
-                        severity: "success",
-                        summary: "Successful",
-                        detail: "Maitining successfuly Aded",
-                        life: 3000,
-                    });
-                },(error:any) => {
-                    if(error.status==409){
+                .subscribe({
+                    next: (data: any) => {
+                        this.getAllMaintainings();
+                        this.hideDialog();
                         this.messageService.add({
-                            severity: "error",
-                            summary: "error",
-                            detail: error.error,
+                            severity: "success",
+                            summary: "Successful",
+                            detail: "Maitining successfuly Aded",
                             life: 3000,
                         });
-                    }
+                    },
+                    error: (error: any) => {
+                        if (error.status == 409) {
+                            this.messageService.add({
+                                severity: "error",
+                                summary: "error",
+                                detail: error.error,
+                                life: 3000,
+                            });
+                        }
+                    },
                 });
         } else {
             this.maintainingService
@@ -165,28 +168,29 @@ export class MaintainingComponent implements OnInit {
                     this.maintainingInput.id,
                     this.maintainingInput
                 )
-                .subscribe((res: any) => {
-                    this.getAllMaintainings();
-                    this.hideDialog();
-                    this.messageService.add({
-                        severity: "success",
-                        summary: "Successful",
-                        detail: "Maitining successfuly updated",
-                        life: 3000,
-                    });
-                },(error:any) => {
-                    if(error.status==409){
+                .subscribe({
+                    next: (data: any) => {
+                        this.getAllMaintainings();
+                        this.hideDialog();
                         this.messageService.add({
-                            severity: "error",
-                            summary: "error",
-                            detail: error.error,
+                            severity: "success",
+                            summary: "Successful",
+                            detail: "Maitining successfuly updated",
                             life: 3000,
                         });
-                    }
+                    },
+                    error: (error: any) => {
+                        if (error.status == 409) {
+                            this.messageService.add({
+                                severity: "error",
+                                summary: "error",
+                                detail: error.error,
+                                life: 3000,
+                            });
+                        }
+                    },
                 });
         }
-
-        
     }
     editMaintaining(maintaining: Maintaining) {
         this.fillForm(maintaining);

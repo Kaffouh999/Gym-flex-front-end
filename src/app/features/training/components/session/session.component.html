@@ -1,31 +1,44 @@
 <p-toast></p-toast>
 
 <div class="card">
-
-        <p-toolbar>
-            <div class="p-toolbar-group-start">
-                <p-button  (click)="startScanner()" icon="pi pi-stop-circle" class="mr-2" styleClass="p-button-secondary" label="{{'Show Scanner'|translate}}"></p-button>
-                <p-button label="{{'Stop Scanning'|translate}}" icon="pi pi-circle-fill" styleClass="p-button-danger" class="mr-2" (onClick)="stopScanner()"></p-button>
-            </div>
-            <div class="p-toolbar-group-end">
-             
-                <p-button icon="pi pi-file-export" styleClass="p-button-success mx-2"></p-button>
-            </div>
-        </p-toolbar>
-        <div  >
-            <p-overlayPanel #op (onHide)="stopScanner()">
+    <p-toolbar>
+        <div class="p-toolbar-group-start">
+            <p-button
+                (onClick)="startScanner($event)"
+                icon="pi pi-stop-circle"
+                class="mr-2"
+                styleClass="p-button-secondary"
+                label="{{ 'Show Scanner' | translate }}"
+            ></p-button>
+            <p-button
+                label="{{ 'Stop Scanning' | translate }}"
+                icon="pi pi-circle-fill"
+                styleClass="p-button-danger"
+                class="mr-2"
+                (onClick)="stopScanner()"
+            ></p-button>
+        </div>
+        <div class="p-toolbar-group-end">
+            <p-button
+                icon="pi pi-file-export"
+                styleClass="p-button-success mx-2"
+            ></p-button>
+        </div>
+    </p-toolbar>
+    <div>
+        <p-overlayPanel #op (onHide)="stopScanner()">
             <zxing-scanner
-     class="qrScanner"
-      (scanSuccess)="onScanSuccess($event)"
-      [formats]="barcodeFormat"
-      [torch]="false"
-      [tryHarder]="false"
-      #scanner
-      [autofocusEnabled]="true"
-      [enable]="false"
-      [delayBetweenScanSuccess]="7000"
-    ></zxing-scanner>
-</p-overlayPanel>
+                class="qrScanner"
+                (scanSuccess)="onScanSuccess($event)"
+                [formats]="barcodeFormat"
+                [torch]="false"
+                [tryHarder]="false"
+                #scanner
+                [autofocusEnabled]="true"
+                [enable]="false"
+                [delayBetweenScanSuccess]="7000"
+            ></zxing-scanner>
+        </p-overlayPanel>
     </div>
     <p-table
         #dt
@@ -44,44 +57,34 @@
     >
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
-                <h5 class="m-0">{{'Manage'|translate}} {{'Sessions'|translate}}</h5>
-                <!-- <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input
-                        pInputText
-                        type="text"
-                        (input)="
-                            dt.filterGlobal($event.target.value, 'contains')
-                        "
-                        placeholder="Search..."
-                    />
-                </span> -->
+                <h5 class="m-0">
+                    {{ "Manage" | translate }} {{ "Sessions" | translate }}
+                </h5>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th >
+                <th scope="col">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th >
-                    {{'Member'|translate}}
+                <th scope="col">
+                    {{ "Member" | translate }}
                 </th>
-                <th >
-                    {{'Day'|translate}}
+                <th scope="col">
+                    {{ "Day" | translate }}
                 </th>
-                <th >
-                    {{'Enter'|translate}}/{{'Leave'|translate}} 
+                <th scope="col">
+                    {{ "Enter" | translate }}/{{ "Leave" | translate }}
                 </th>
-                <th >
-                    {{'duration'|translate}}
+                <th scope="col">
+                    {{ "duration" | translate }}
                 </th>
-                <th >
-                    {{'GymBranch'|translate}}
+                <th scope="col">
+                    {{ "GymBranch" | translate }}
                 </th>
-                <th  >
-                    {{'Manager'|translate}} {{'at the time'|translate}}
+                <th scope="col">
+                    {{ "Manager" | translate }} {{ "at the time" | translate }}
                 </th>
-           
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-session>
@@ -89,35 +92,62 @@
                 <td>
                     <p-tableCheckbox [value]="session"></p-tableCheckbox>
                 </td>
-                
+
                 <td id="image">
                     <div class="flex align-items-center">
-                   <div><p-image
-                        [src]="session.subscriptionMember.member.onlineUser.profilePicture | combineNginxUrl "
-                        class="imageTable"
-                        alt="Image"
-                        [preview]="true"
-                    ></p-image>
+                        <div>
+                            <p-image
+                                [src]="
+                                    session.subscriptionMember.member.onlineUser
+                                        .profilePicture | combineNginxUrl
+                                "
+                                class="imageTable"
+                                alt="Image"
+                                [preview]="true"
+                            ></p-image>
+                        </div>
+                        <div class="ml-4">
+                            {{
+                                session.subscriptionMember.member.onlineUser
+                                    .firstName
+                            }}
+                            {{
+                                session.subscriptionMember.member.onlineUser
+                                    .lastName
+                            }}
+                        </div>
                     </div>
-                   <div class="ml-4"> {{session.subscriptionMember.member.onlineUser.firstName}} {{session.subscriptionMember.member.onlineUser.lastName}}</div>
-                </div>
                 </td>
-               <td>{{  session.enteringTime| date :'dd/MM/yyyy'}}</td>
-                <td> <p-timeline [value]="[session.enteringTime,session.leavingTime]" layout="horizontal">
-                    <ng-template pTemplate="marker" let-event>
-                            <i class="pi pi-arrow-down-right" *ngIf="event != undefined"></i>
-                    </ng-template>
-                    <ng-template pTemplate="content"  let-event>
-                        {{ event | date :'HH:mm'}}
-                    </ng-template>
-              
-                </p-timeline> </td>
+                <td>{{ session.enteringTime | date : "dd/MM/yyyy" }}</td>
+                <td>
+                    <p-timeline
+                        [value]="[session.enteringTime, session.leavingTime]"
+                        layout="horizontal"
+                    >
+                        <ng-template pTemplate="marker" let-event>
+                            <i
+                                class="pi pi-arrow-down-right"
+                                *ngIf="event != undefined"
+                            ></i>
+                        </ng-template>
+                        <ng-template pTemplate="content" let-event>
+                            {{ event | date : "HH:mm" }}
+                        </ng-template>
+                    </p-timeline>
+                </td>
 
-                <td>{{ (session.leavingTime != undefined)? (session.enteringTime | minutesDiff: session.leavingTime) : 0  }} min</td>
-                <td>{{ session.gymBranch.name}}</td>
+                <td>
+                    {{
+                        session.leavingTime != undefined
+                            ? (session.enteringTime
+                              | minutesDiff : session.leavingTime)
+                            : 0
+                    }}
+                    min
+                </td>
+                <td>{{ session.gymBranch.name }}</td>
 
-                <td>{{ session.managerAtTheTime.onlineUser.firstName }} </td>
-               
+                <td>{{ session.managerAtTheTime.onlineUser.firstName }}</td>
             </tr>
         </ng-template>
         <ng-template pTemplate="summary">
@@ -128,9 +158,5 @@
         </ng-template>
     </p-table>
 </div>
-
-
-
-
 
 <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

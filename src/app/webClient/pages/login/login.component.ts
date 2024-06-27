@@ -43,11 +43,11 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        let email: String = this.loginForm.get("email").value;
-        let password: String = this.loginForm.get("password").value;
+        let email: string = this.loginForm.get("email").value;
+        let password: string = this.loginForm.get("password").value;
         let loginUser: LoginUser = { email: email, password: password };
-        this.authService.login(loginUser).subscribe(
-            (response: any) => {
+        this.authService.login(loginUser).subscribe({
+            next: (response: any) => {
                 localStorage.setItem(
                     this.accessTokenKey,
                     response.access_token
@@ -60,14 +60,14 @@ export class LoginComponent implements OnInit {
                 this.authService.getRoleFromToken();
                 this.router.navigate(["/"]);
             },
-            (error: any) => {
+            error: (error: any) => {
                 this.messageService.add({
                     severity: "error",
                     summary: "Error",
                     detail: "Email or password is incorrect",
                     life: 3000,
                 });
-            }
-        );
+            },
+        });
     }
 }

@@ -29,7 +29,7 @@ export class OnlineUserService {
     public deleteUser(id: number) {
         return this.http.delete(this.onlineUserURL + "/" + id);
     }
-    uploadImage(name: String, formData: FormData) {
+    uploadImage(name: string, formData: FormData) {
         return this.http.post(
             environment.API_URL + "/online-users/upload/" + name,
             formData

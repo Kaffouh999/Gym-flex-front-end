@@ -7,8 +7,8 @@ GymFlex is an Angular and PrimeNG-based application designed for gym management,
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Setup](#setup)
-    - [Prerequisites](#prerequisites)
-    - [Installation Steps](#installation-steps)
+  - [Prerequisites](#prerequisites)
+  - [Installation Steps](#installation-steps)
 - [How to Use](#how-to-use)
 - [Testing](#testing)
 - [Future Plans](#future-plans)
@@ -30,34 +30,44 @@ GymFlex is an Angular and PrimeNG-based application designed for gym management,
 
 ## Setup
 
-#### Prerequisites
+### Prerequisites
 
 - Node.js
 - Backend API (GymFlex API)
 
-#### Installation Steps
+### Installation Steps
 
 1. Clone the repo:
+
 ```bash
-   git clone https://github.com/Kaffouh999/Gym-flex-front-end.git
- ```
-2. Navigate to the project directory: 
+git clone https://github.com/Kaffouh999/Gym-flex-front-end.git
+```
+
+2. Navigate to the project directory:
+
 ```bash
 cd gymflex
 ```
-3. Install dependencies: 
+
+3. Install dependencies:
+
 ```bash
 npm install
 ```
+
 4. Configure API and Nginx URLs in `src/environments/environment.ts`
+
 ```typescript
-  API_URL: 'http://localhost:8081',
-  NGINX_URL: 'http://localhost:5051'
+API_URL: 'http://localhost:8081',
+NGINX_URL: 'http://localhost:5051'
 ```
-5. Launch the development server: 
+
+5. Launch the development server:
+
 ```bash
 ng serve
 ```
+
 6. Visit [http://localhost:4200](http://localhost:4200) in your browser
 
 ## How to Use
@@ -71,16 +81,13 @@ ng serve
 
 GymFlex includes unit tests to ensure code quality and functionality. To run the tests, use the following command:
 
-```
+```bash
 ng test
 ```
-
 
 ## Future Plans
 
 - Development of a mobile app for client workout tracking.
-
-
 
 ## Credits
 

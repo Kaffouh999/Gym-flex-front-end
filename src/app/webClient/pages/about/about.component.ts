@@ -7,7 +7,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent {
-  images:String[]=['../../../assets/img/testimonial/testimonial-1.jpg','../../../assets/img/testimonial/testimonial-1.jpg',
+  images:string[]=['../../../assets/img/testimonial/testimonial-1.jpg','../../../assets/img/testimonial/testimonial-1.jpg',
   '../../../assets/img/testimonial/testimonial-1.jpg','../../../assets/img/testimonial/testimonial-1.jpg',
   '../../../assets/img/testimonial/testimonial-1.jpg','../../../assets/img/testimonial/testimonial-1.jpg',];
 

@@ -37,23 +37,14 @@
                     icon="pi pi-filter-slash"
                     (click)="clear(dt)"
                 ></button>
-            <!-- <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input
-                    pInputText
-                    type="text"
-                    (input)="dt.filterGlobal($event.target.value, 'contains')"
-                    placeholder="Search..."
-                />
-            </span> -->
         </div>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th style="width: 4rem">
+            <th scope="col" style="width: 4rem">
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th pSortableColumn="name" >
+            <th scope="col" pSortableColumn="name" >
                 {{ 'Name' | translate }} <p-sortIcon field="name"></p-sortIcon>
                 <p-columnFilter
                 class="filterIcon"
@@ -62,7 +53,7 @@
                 display="menu"
             ></p-columnFilter>
             </th>
-            <th pSortableColumn="description" >
+            <th scope="col" pSortableColumn="description" >
                 {{ 'Description' | translate }}
                 <p-sortIcon field="description"></p-sortIcon>
                 <p-columnFilter
@@ -72,7 +63,7 @@
                 display="menu"
             ></p-columnFilter>
             </th>
-            <th pSortableColumn="For Client" s>
+            <th scope="col" pSortableColumn="For Client" s>
                 {{ 'ForClient' | translate }} <p-sortIcon field="For Client"></p-sortIcon>
                 <p-columnFilter
                 class="filterIcon"
@@ -81,7 +72,7 @@
                 display="menu"
             ></p-columnFilter>
             </th>
-            <th pSortableColumn="ForInventory" >
+            <th scope="col" pSortableColumn="ForInventory" >
                 {{ 'ForInventory' | translate }}
                 <p-sortIcon field="ForInventory"></p-sortIcon>
                 <p-columnFilter
@@ -92,7 +83,7 @@
             ></p-columnFilter>
             </th>
 
-            <th></th>
+            <th scope="col"></th>
         </tr>
     
     </ng-template>

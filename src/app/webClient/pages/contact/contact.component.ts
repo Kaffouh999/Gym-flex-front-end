@@ -44,9 +44,9 @@ export class ContactComponent implements OnInit {
             idUser: this.authService.getAuthUser().id,
         };
         this.http
-            .post(environment.API_URL+"/web/contact", contactObject)
+            .post(environment.API_URL + "/web/contact", contactObject)
             .subscribe((res: any) => {
-                let isSent: Boolean = res as Boolean;
+                let isSent: boolean = res as boolean;
                 if (isSent) {
                     this.messageService.add({
                         severity: "success",

@@ -22,7 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { OurEquipmentsComponent } from './our-equipments/our-equipments.component';
 import { ImageModule } from 'primeng/image';
 import { BadgeModule } from 'primeng/badge';
-import { CombineNginxUrlPipe, CombineNginxUrlPipeModule } from 'src/app/core/pipes/CombineNginxUrlPipe';
+import { CombineNginxUrlPipeModule } from 'src/app/core/pipes/CombineNginxUrlPipe';
 
 
 

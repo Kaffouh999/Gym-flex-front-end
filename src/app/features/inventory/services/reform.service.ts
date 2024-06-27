@@ -21,7 +21,7 @@ export class ReformService {
             this.reformURL+ "/" + reform.id
         );
     }
-    updateReform(id: Number, reform: Reform) {
+    updateReform(id: number, reform: Reform) {
         return this.http.put(this.reformURL+ "/" + id, reform);
     }
 }

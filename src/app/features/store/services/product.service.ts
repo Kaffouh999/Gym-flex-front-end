@@ -29,7 +29,7 @@ export class ProductService {
     public deleteProduct(id: number) {
         return this.http.delete(this.productURL + "/" + id);
     }
-    uploadImage(name: String, formData: FormData) {
+    uploadImage(name: string, formData: FormData) {
         return this.http.post(this.productURL + "/upload/" + name, formData);
     }
     updateImage(id: number, formData: FormData) {

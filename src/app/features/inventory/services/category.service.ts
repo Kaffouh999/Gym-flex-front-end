@@ -20,7 +20,7 @@ export class CategoryService {
     deleteCategory(category: Category) {
         return this.http.delete(this.categoryUrl + "/" + category.id);
     }
-    updateCategory(id: Number, category: Category) {
+    updateCategory(id: number, category: Category) {
         return this.http.put(this.categoryUrl + "/" + id, category);
     }
 }

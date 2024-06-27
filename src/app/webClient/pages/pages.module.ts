@@ -1,5 +1,4 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import { AboutComponent } from "./about/about.component";
 import { BlogComponent } from "./blog/blog.component";
 import { BmiCalcComponent } from "./bmi-calc/bmi-calc.component";
@@ -13,17 +12,15 @@ import { ServicesComponent } from "./services/services.component";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { TeamComponent } from "./team/team.component";
 import { BrowserModule } from "@angular/platform-browser";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { MinutesDiffPipe } from "../../core/pipes/MinutesDiffPipe";
 import { InplaceModule } from "primeng/inplace";
-
 import { ButtonModule } from "primeng/button";
 import { InputTextModule } from "primeng/inputtext";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CarouselModule } from "ngx-owl-carousel-o";
 import { PasswordModule } from "primeng/password";
 import { SharedModule } from "../shared/shared.module";
-import { FormsModule } from "@angular/forms";
 import { DialogModule } from "primeng/dialog";
 import { ToggleButtonModule } from "primeng/togglebutton";
 import { AppRoutingModule } from "src/app/app-routing.module";
