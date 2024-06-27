@@ -482,7 +482,7 @@
         </p-card>
     </div> -->
     <div id="cardContainer">
-    <div class="cardd" id="cardd" style="margin: 0 auto;">
+    <div class="gymflex-member-card" id="gymflex-member-card" style="margin: 0 auto;">
         <div class="accent"></div>
         <div class="main-section">
             <div class="logo-section">
@@ -493,10 +493,10 @@
                 <div class="number">CIN: {{ subscriptionInput.member.cin }}</div>
                 <div class="number">Member N°: </div>
             </div>
-            <svg class="silhouette" viewBox="0 0 100 100">
+            <!-- <svg class="silhouette" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="48" fill="#f39c12"/>
                 <path d="M50 25 L30 75 L70 75 Z" fill="#2c3e50"/>
-            </svg>
+            </svg> -->
             <div class="quote">"Don't limit your challenge, challenge your limit"</div>
         </div>
             <img class="photo-placeholder" src="{{
@@ -520,7 +520,7 @@
             class="p-button-text"
             (click)="hideqrDialog()"
         ></button>
-        <button
+        <!-- <button
             pButton
             pRipple
             label="{{ 'Print' | translate }}"
@@ -540,6 +540,15 @@
             'transition': 'transform 0.3s ease'} }"
             printSectionId="cardContainer"
             ngxPrint
+        ></button> -->
+        <button
+            id="print"
+            pButton
+            pRipple
+            label="{{ 'print' | translate }}"
+            icon="pi pi-print"
+            class="p-button-text"
+            (click)="printMemberCard()"
         ></button>
     </ng-template>
 </p-dialog>

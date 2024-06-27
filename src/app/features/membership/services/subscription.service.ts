@@ -1,5 +1,6 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { Subscription } from "src/app/core/models/Subscription";
 import { environment } from "src/environments/environment";
 
@@ -34,5 +35,10 @@ export class SubscriptionService {
     }
     public searchSubscriptions(subscription: Subscription) {
         return this.http.post(this.subscriptionURL + "/search", subscription);
+    }
+    public getMemberCard(id: number): Observable<Blob> {
+        return this.http.get(`${this.subscriptionURL}/printMemberCard/` + id, {
+            responseType: "blob",
+        });
     }
 }
