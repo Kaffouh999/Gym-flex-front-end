@@ -1,12 +1,12 @@
 export interface GymBranch{
     id:number | undefined;
-    name:String;
+    name:string;
     latitude:number;
     longitude:number;
-    adress:String;
-    email:String;
-    appPasswordEmail:String;
-    phoneNumber:String;
+    adress:string;
+    email:string;
+    appPasswordEmail:string;
+    phoneNumber:string;
     openingDate:Date | undefined;
     closingDate:Date | undefined;
     sessionDurationAllowed : number; 

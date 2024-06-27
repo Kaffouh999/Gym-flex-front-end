@@ -4,10 +4,10 @@ import { OnlineUser } from "./OnlineUser";
 
 export interface Member{
     id:number | undefined;
-    cin:String;
+    cin:string;
     age:number;
-    adress:String;
-    gender:Boolean;
+    adress:string;
+    gender:boolean;
     gymBranch:GymBranch;
     onlineUser:OnlineUser;
 }

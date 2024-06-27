@@ -17,7 +17,7 @@
                 label="{{ 'FindEquipmentByQrcode' | translate }}"
                 icon="pi pi-search"
                 class="p-button-success mx-2"
-                (click)="startScanner()"
+                (click)="startScanner($event)"
             ></button>
             <button
                 pButton
@@ -87,25 +87,18 @@
                     icon="pi pi-filter-slash"
                     (click)="clear(dt)"
                 ></button>
-                <!-- <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input
-                    pInputText
-                    type="text"
-                    (input)="
-                        dt.filterGlobal($event.target.value, 'contains')
-                    "
-                    placeholder="Search..."
-                />
-            </span> -->
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="width: 4rem">
+                <th style="width: 4rem" id="checkColumn">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th pSortableColumn="equipment" style="min-width: 10rem">
+                <th
+                    pSortableColumn="equipment"
+                    style="min-width: 10rem"
+                    id="equipmentColumn"
+                >
                     {{ "Equipment" | translate
                     }}<p-sortIcon field="equipment"></p-sortIcon>
                     <p-columnFilter
@@ -140,7 +133,11 @@
                         </ng-template>
                     </p-columnFilter>
                 </th>
-                <th pSortableColumn="gymBranch.name" style="min-width: 10rem">
+                <th
+                    id="gymBranchColumn"
+                    pSortableColumn="gymBranch.name"
+                    style="min-width: 10rem"
+                >
                     {{ "GymBranch" | translate
                     }}<p-sortIcon field="gymBranch.name"></p-sortIcon>
                     <p-columnFilter
@@ -175,7 +172,11 @@
                         </ng-template>
                     </p-columnFilter>
                 </th>
-                <th pSortableColumn="firstUseDate" style="min-width: 15rem">
+                <th
+                    id="firstUseDateColumn"
+                    pSortableColumn="firstUseDate"
+                    style="min-width: 15rem"
+                >
                     {{ "FirstUseDate" | translate }}
                     <p-sortIcon field="firstUseDate"></p-sortIcon>
                     <p-columnFilter
@@ -184,7 +185,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th pSortableColumn="price">
+                <th id="priceColumn" pSortableColumn="price">
                     {{ "price" | translate }}
                     <p-sortIcon field="price"></p-sortIcon>
                     <p-columnFilter
@@ -196,7 +197,11 @@
                     ></p-columnFilter>
                 </th>
 
-                <th pSortableColumn="amortization" style="min-width: 10rem">
+                <th
+                    id="amortizationColumn"
+                    pSortableColumn="amortization"
+                    style="min-width: 10rem"
+                >
                     {{ "Amortization" | translate
                     }}<p-sortIcon field="amortization"></p-sortIcon>
                     <p-columnFilter
@@ -208,11 +213,15 @@
                     ></p-columnFilter>
                 </th>
 
-                <th style="min-width: 10rem">
+                <th id="qrCodeColumn" style="min-width: 10rem">
                     {{ "QrCode" | translate
                     }}<p-sortIcon field="amortization"></p-sortIcon>
                 </th>
-                <th pSortableColumn="safeMinValue" style="min-width: 10rem">
+                <th
+                    id="safeMinValueColumn"
+                    pSortableColumn="safeMinValue"
+                    style="min-width: 10rem"
+                >
                     {{ "SafeMinValue" | translate
                     }}<p-sortIcon field="safeMinValue"></p-sortIcon>
                     <p-columnFilter
@@ -223,7 +232,7 @@
                         display="menu"
                     ></p-columnFilter>
                 </th>
-                <th></th>
+                <th scope="col"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-equipmentItem>

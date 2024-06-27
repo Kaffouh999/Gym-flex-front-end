@@ -1,9 +1,9 @@
 export interface Plan{
     id:number | undefined;
-    name:String;
-    description : String;
+    name:string;
+    description : string;
     duration : number;
     price : number;
     ratingPer5:number;
-    imageAds : String;
+    imageAds : string;
 }

@@ -1,6 +1,5 @@
-import { Component, OnInit, forwardRef, AfterViewInit, ViewChild } from "@angular/core";
+import { Component, OnInit, forwardRef, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, NgControl, Validators } from "@angular/forms";
-import { SubCategoryService } from "../../services/sub-category.service";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { EquipmentService } from "../../services/equipment.service";
 import { GymBranchComponent } from "src/app/features/settings/components/gym-branch/gym-branch.component";
@@ -28,15 +27,15 @@ import { OverlayPanel } from "primeng/overlaypanel";
 })
 export class EquipmentItemComponent implements OnInit {
     equipmentItemDialog: boolean = false;
-    showQrDialog:boolean=false;
+    showQrDialog: boolean = false;
     equipmentItemForm: FormGroup;
     equipmentItems: EquipemntItem[];
     equipments: Equipemnt[];
     gymBranchs: GymBranch[];
-    barcodeFormat: any=[];
-    @ViewChild('scanner') scanner: ZXingScannerComponent | undefined = undefined;
-    @ViewChild('op') overlayPanel: OverlayPanel;
-
+    barcodeFormat: any = [];
+    @ViewChild("scanner") scanner: ZXingScannerComponent | undefined =
+        undefined;
+    @ViewChild("op") overlayPanel: OverlayPanel;
 
     equipmentItemInput: EquipemntItem;
     constructor(
@@ -47,15 +46,14 @@ export class EquipmentItemComponent implements OnInit {
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
-   
-    ngOnInit(): void {
 
+    ngOnInit(): void {
         this.initEquiItem();
 
         this.getAllEquipmentItems();
         this.getAllEquipments();
         this.getAllGymBranches();
-       
+
         this.equipmentItemForm = this.formBuilder.group({
             firstUseDate: ["", Validators.required],
             price: [""],
@@ -89,8 +87,7 @@ export class EquipmentItemComponent implements OnInit {
                 this.equipmentItems = this.equipmentItems.map((item) => {
                     return {
                         ...item, // copy all fields from the original object
-                        firstUseDate: new Date(item.firstUseDate)
-                        
+                        firstUseDate: new Date(item.firstUseDate),
                     };
                 });
             });
@@ -199,69 +196,69 @@ export class EquipmentItemComponent implements OnInit {
     clear(table: Table) {
         table.clear();
     }
-    showQrCode(equipemntItem : EquipemntItem){
-        this.equipmentItemInput = {...equipemntItem};
+    showQrCode(equipemntItem: EquipemntItem) {
+        this.equipmentItemInput = { ...equipemntItem };
         this.showQrDialog = true;
-        }
+    }
 
-        startScanner() {
-            // Start the scanner
-            this.scanner!.scanStart();
-            this.overlayPanel.toggle(event);
-          }
-        
-          stopScanner() {
-            // Stop the scanner
-            this.scanner?.scanStop();
-          }
-        
-          onScanSuccess(resultString: string) {
-            this.stopScanner();
-            console.log('QR code scanned:', resultString);
-           
-            this.equipmentItemService.getByQrCode(resultString).subscribe((res:any) => {
-                
-                let equipemntItem:EquipemntItem = res as EquipemntItem;
-                this.equipmentItems=[];
+    startScanner(event: any) {
+        // Start the scanner
+        this.scanner.scanStart();
+        this.overlayPanel.toggle(event);
+    }
+
+    stopScanner() {
+        // Stop the scanner
+        this.scanner?.scanStop();
+    }
+
+    onScanSuccess(resultString: string) {
+        this.stopScanner();
+        console.log("QR code scanned:", resultString);
+
+        this.equipmentItemService
+            .getByQrCode(resultString)
+            .subscribe((res: any) => {
+                let equipemntItem: EquipemntItem = res as EquipemntItem;
+                this.equipmentItems = [];
                 this.equipmentItems.push(equipemntItem);
-            })
-        
-          }
+            });
+    }
 
-        hideqrDialog(){
-            this.showQrDialog = false;
-        }
+    hideqrDialog() {
+        this.showQrDialog = false;
+    }
 
-        initEquiItem(){
-            let gym:GymBranch={
-                id: undefined,
-                name: "",
-                latitude: 0,
-                longitude: 0,
-                adress: undefined,
-                email: undefined,
-                appPasswordEmail: undefined,
-                phoneNumber: undefined,
-                openingDate: undefined,
-                closingDate: undefined,
-                sessionDurationAllowed: 0
-            }
-            let equipment:Equipemnt={
-                id: undefined,
-                name: "",
-                description: "",
-                imageUrl: "",
-                subCategory: undefined
-            }
-            this.equipmentItemInput = {
-                id: undefined,
-                firstUseDate: undefined,
-                price: 0,
-                amortization: 0,
-                bareCode: "",
-                safeMinValue: 0,
-                equipment: equipment,
-                gymBranch: gym,
-            };
-        }
+    initEquiItem() {
+        let gym: GymBranch = {
+            id: undefined,
+            name: "",
+            latitude: 0,
+            longitude: 0,
+            adress: undefined,
+            email: undefined,
+            appPasswordEmail: undefined,
+            phoneNumber: undefined,
+            openingDate: undefined,
+            closingDate: undefined,
+            sessionDurationAllowed: 0,
+        };
+        let equipment: Equipemnt = {
+            id: undefined,
+            name: "",
+            description: "",
+            imageUrl: "",
+            subCategory: undefined,
+        };
+        this.equipmentItemInput = {
+            id: undefined,
+            firstUseDate: undefined,
+            price: 0,
+            amortization: 0,
+            bareCode: "",
+            safeMinValue: 0,
+            equipment: equipment,
+            gymBranch: gym,
+        };
+    }
 }

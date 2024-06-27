@@ -41,7 +41,6 @@ export class SubCategoryComponent implements OnInit {
     ngOnInit(): void {
         this.getAllCategories();
         this.getAllSubCategories();
-    
     }
     openNew() {
         this.subCategoryInput = {
@@ -71,11 +70,17 @@ export class SubCategoryComponent implements OnInit {
         if (this.subCategoryInput.id === undefined) {
             this.subCategoryService
                 .addSubCategory(this.subCategoryInput)
-                .subscribe((res: any) => {
-                    this.getAllSubCategories();
-                },
-                (error:any) => {
-                    this.handleError(error);
+                .subscribe({
+                    next: (res: any) => {
+                        this.getAllSubCategories();
+                        this.messageService.add({
+                            severity: "success",
+                            summary: "Success",
+                            detail: "SubCategory added successfully",
+                            life: 3000,
+                        });
+                    },
+                    error: (error: any) => this.handleError(error),
                 });
         } else {
             this.subCategoryService
@@ -83,11 +88,17 @@ export class SubCategoryComponent implements OnInit {
                     this.subCategoryInput.id,
                     this.subCategoryInput
                 )
-                .subscribe((res: any) => {
-                    this.getAllSubCategories();
-                },
-                (error:any) => {
-                    this.handleError(error);
+                .subscribe({
+                    next: (res: any) => {
+                        this.getAllSubCategories();
+                        this.messageService.add({
+                            severity: "success",
+                            summary: "Success",
+                            detail: "SubCategory updated successfully",
+                            life: 3000,
+                        });
+                    },
+                    error: (error: any) => this.handleError(error),
                 });
         }
 
@@ -98,20 +109,18 @@ export class SubCategoryComponent implements OnInit {
         this.fillForm(subCategory);
         this.subCategoryDialog = true;
     }
-    delete(subCategory:SubCategory){
-        this.subCategoryService
-        .deleteSubCategory(subCategory)
-        .subscribe((respense: any) => {
-            this.getAllSubCategories();
-            this.messageService.add({
-                severity: "success",
-                summary: "Successful",
-                detail: "SubCategory Deleted",
-                life: 3000,
-            });
-
-        },(error : any ) => {
-            this.handleError(error);
+    delete(subCategory: SubCategory) {
+        this.subCategoryService.deleteSubCategory(subCategory).subscribe({
+            next: (response: any) => {
+                this.getAllSubCategories();
+                this.messageService.add({
+                    severity: "success",
+                    summary: "Successful",
+                    detail: "SubCategory Deleted",
+                    life: 3000,
+                });
+            },
+            error: (error: any) => this.handleError(error),
         });
     }
 
@@ -123,8 +132,7 @@ export class SubCategoryComponent implements OnInit {
             icon: "pi pi-exclamation-triangle",
             reject: () => {},
             accept: () => {
-             this.delete(subCategory);
-               
+                this.delete(subCategory);
             },
         });
     }
@@ -155,8 +163,7 @@ export class SubCategoryComponent implements OnInit {
         table.clear();
     }
 
-
-    handleError(error:any){
+    handleError(error: any) {
         if (error.status === 409) {
             // Display error message from the response body to the user
             const errorMessage = error.error;
@@ -167,13 +174,13 @@ export class SubCategoryComponent implements OnInit {
                 life: 3000,
             });
             // Display error message to the user using appropriate UI components
-          } else {
+        } else {
             this.messageService.add({
                 severity: "error",
                 summary: "Error",
                 detail: "there is an error in our server , please report here",
                 life: 3000,
             });
-          }
+        }
     }
 }

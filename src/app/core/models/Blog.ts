@@ -1,14 +1,13 @@
 import { CategoryBlog } from "./CategoryBlog";
-import { Member } from "./Member";
 
 export interface Blog {
     id: number | undefined;
-    name:String;
+    name:string;
 
-    description:String;
-    title: String;
-    body: String;
+    description:string;
+    title: string;
+    body: string;
     dateCreation: Date;
     categoryBlog: CategoryBlog;
-    headerImage: String;
+    headerImage: string;
 }

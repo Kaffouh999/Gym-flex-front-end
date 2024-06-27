@@ -48,14 +48,14 @@ export class CategoryBlogComponent implements OnInit {
     }
 
     getAllCategoryBlogs() {
-        this.categoryBlogService.getAllCategoryBlogs().subscribe(
-            (data: any) => {
+        this.categoryBlogService.getAllCategoryBlogs().subscribe({
+            next: (data: any) => {
                 this.categoryBlogs = data;
             },
-            (error: any) => {
+            error: (error: any) => {
                 console.error(error);
-            }
-        );
+            },
+        });
     }
 
     addCategoryBlog() {
@@ -63,28 +63,32 @@ export class CategoryBlogComponent implements OnInit {
         if (this.categoryBlogInserted.id === undefined) {
             this.categoryBlogService
                 .addCategoryBlog(this.categoryBlogInserted)
-                .subscribe(
-                    (res: any) => {
+                .subscribe({
+                    next: (res: any) => {
                         this.getAllCategoryBlogs();
+                        this.messageService.add({
+                            severity: "success",
+                            summary: "Success",
+                            detail: "Category Blog added successfully",
+                            life: 3000,
+                        });
                     },
-                    (err: any) => {
-                        this.handleError(err);
-                    }
-                );
+                    error: (err: any) => this.handleError(err),
+                });
         } else {
             this.categoryBlogService
                 .updateCategoryBlog(
                     this.categoryBlogInserted.id,
                     this.categoryBlogInserted
                 )
-                .subscribe(
-                    (res: any) => {
+                .subscribe({
+                    next: (res: any) => {
                         this.getAllCategoryBlogs();
                     },
-                    (err: any) => {
+                    error: (err: any) => {
                         this.handleError(err);
-                    }
-                );
+                    },
+                });
         }
 
         this.addDialog = false;
@@ -97,20 +101,18 @@ export class CategoryBlogComponent implements OnInit {
     }
 
     delete(category: CategoryBlog) {
-        this.categoryBlogService.deleteCategoryBlog(category).subscribe(
-            (respense: any) => {
+        this.categoryBlogService.deleteCategoryBlog(category).subscribe({
+            next: (response: any) => {
                 this.getAllCategoryBlogs();
                 this.messageService.add({
                     severity: "success",
                     summary: "Successful",
-                    detail: "category Deleted",
+                    detail: "Category Deleted",
                     life: 3000,
                 });
             },
-            (error: any) => {
-                this.handleError(error);
-            }
-        );
+            error: (error: any) => this.handleError(error),
+        });
     }
 
     deleteCategoryBlog(category: CategoryBlog) {

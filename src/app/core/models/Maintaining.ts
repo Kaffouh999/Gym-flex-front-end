@@ -7,5 +7,5 @@ export interface Maintaining {
     maintainerResponsible: Member | undefined;
     startDate: Date | undefined;
     endDate: Date | undefined;
-    cost: Number;
+    cost: number;
 }

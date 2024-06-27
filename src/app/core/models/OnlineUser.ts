@@ -2,11 +2,11 @@ import { Role } from "./Role";
 
 export interface OnlineUser{
     id:number | undefined;
-    firstName:String;
-    lastName:String;
-    login:String;
-    email:String;
-    password:String;
-    profilePicture:String | undefined;
+    firstName:string;
+    lastName:string;
+    login:string;
+    email:string;
+    password:string;
+    profilePicture:string | undefined;
     role:Role|undefined;
 }

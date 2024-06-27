@@ -1,4 +1,4 @@
 export interface EquipmentStatistics {
-    equipmentName:String;
+    equipmentName:string;
     equipmentItemCount:number;
 }

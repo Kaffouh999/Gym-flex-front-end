@@ -1,11 +1,5 @@
 import { Component, OnInit, forwardRef } from "@angular/core";
-import {
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    NgControl,
-    Validators,
-} from "@angular/forms";
+import { FormBuilder, FormGroup, NgControl } from "@angular/forms";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { Blog } from "src/app/core/models/Blog";
 import { CategoryBlog } from "src/app/core/models/CategoryBlog";
@@ -37,12 +31,12 @@ export class BlogsComponent implements OnInit {
     members: Member[];
     blogInput: Blog = {
         id: undefined,
-        name:"",
-        description:"",
+        name: "",
+        description: "",
         title: undefined,
         body: undefined,
         dateCreation: undefined,
-        
+
         categoryBlog: undefined,
         headerImage: undefined,
     };
@@ -59,19 +53,19 @@ export class BlogsComponent implements OnInit {
 
         this.getAllBlogs();
         this.blogForm = this.formBuilder.group({
-            name:[""],
-            description:[""],
+            name: [""],
+            description: [""],
             body: [""],
             title: [""],
-            categoryBlog:[""],
-            author:[""]
+            categoryBlog: [""],
+            author: [""],
         });
     }
     openNew() {
         this.blogInput = {
             id: undefined,
-            name:"",
-            description:"",
+            name: "",
+            description: "",
             title: "",
             body: "",
             dateCreation: undefined,
@@ -108,21 +102,21 @@ export class BlogsComponent implements OnInit {
     fillBlog(): void {
         this.blogInput = {
             id: this.blogInput.id,
-            name:this.blogForm.get("name").value,
-            description:this.blogForm.get("description").value,
+            name: this.blogForm.get("name").value,
+            description: this.blogForm.get("description").value,
             title: this.blogForm.get("title").value,
             categoryBlog: this.blogForm.get("categoryBlog").value,
             body: this.blogForm.get("body").value,
             dateCreation: new Date(),
 
-            headerImage:"",
+            headerImage: "",
         };
     }
     fillForm(blog: Blog): void {
         this.blogInput = {
             id: blog.id,
-            name:"",
-            description:"",
+            name: "",
+            description: "",
             title: "",
             body: "",
             dateCreation: undefined,
@@ -132,63 +126,77 @@ export class BlogsComponent implements OnInit {
         };
         this.blogForm.patchValue({
             categoryBlog: blog.categoryBlog,
-            name:blog.name,
-            body:blog.body,
-            title:blog.title,
-            description:blog.description
+            name: blog.name,
+            body: blog.body,
+            title: blog.title,
+            description: blog.description,
         });
     }
     saveBlog() {
         this.fillBlog();
         if (this.blogInput.id === undefined) {
             console.log(this.blogInput);
-            this.blogService.addBlog(this.blogInput).subscribe(
-                (res: any) => {
+            this.blogService.addBlog(this.blogInput).subscribe({
+                next: (res: any) => {
                     this.getAllBlogs();
                     this.hideDialog();
                     this.messageService.add({
                         severity: "success",
                         summary: "Successful",
-                        detail: "Maitining successfuly Aded",
+                        detail: "Blog added successfully",
                         life: 3000,
                     });
                 },
-                (error: any) => {
-                    if (error.status == 409) {
+                error: (error: any) => {
+                    if (error.status === 409) {
                         this.messageService.add({
                             severity: "error",
-                            summary: "error",
+                            summary: "Error",
                             detail: error.error,
                             life: 3000,
                         });
+                    } else {
+                        this.messageService.add({
+                            severity: "error",
+                            summary: "Error",
+                            detail: "An unexpected error occurred.",
+                            life: 3000,
+                        });
                     }
-                }
-            );
+                },
+            });
         } else {
             this.blogService
                 .updateBlog(this.blogInput.id, this.blogInput)
-                .subscribe(
-                    (res: any) => {
+                .subscribe({
+                    next: (res: any) => {
                         this.getAllBlogs();
                         this.hideDialog();
                         this.messageService.add({
                             severity: "success",
                             summary: "Successful",
-                            detail: "Maitining successfuly updated",
+                            detail: "Maintaining successfully updated",
                             life: 3000,
                         });
                     },
-                    (error: any) => {
-                        if (error.status == 409) {
+                    error: (error: any) => {
+                        if (error.status === 409) {
                             this.messageService.add({
                                 severity: "error",
-                                summary: "error",
+                                summary: "Error",
                                 detail: error.error,
                                 life: 3000,
                             });
+                        } else {
+                            this.messageService.add({
+                                severity: "error",
+                                summary: "Error",
+                                detail: "An unexpected error occurred.",
+                                life: 3000,
+                            });
                         }
-                    }
-                );
+                    },
+                });
         }
     }
     editBlog(blog: Blog) {

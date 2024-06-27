@@ -122,46 +122,64 @@ export class ReformComponent implements OnInit {
         this.fillReform();
         if (this.reformInput.id === undefined) {
             console.log(this.reformInput);
-            this.reformService
-                .addReform(this.reformInput)
-                .subscribe((res: any) => {
+            this.reformService.addReform(this.reformInput).subscribe({
+                next: (res: any) => {
                     this.getAllReforms();
                     this.messageService.add({
                         severity: "success",
                         summary: "successful reform",
-                        detail: "equipment reformed successfuly",
+                        detail: "equipment reformed successfully",
                         life: 3000,
                     });
-                },(error:any) => {
-                    if(error.status==409){
+                },
+                error: (error: any) => {
+                    if (error.status == 409) {
                         this.messageService.add({
                             severity: "error",
                             summary: "error",
                             detail: error.error,
                             life: 3000,
                         });
+                    } else {
+                        this.messageService.add({
+                            severity: "error",
+                            summary: "Error",
+                            detail: "An unexpected error occurred.",
+                            life: 3000,
+                        });
                     }
-                });
+                },
+            });
         } else {
             this.reformService
                 .updateReform(this.reformInput.id, this.reformInput)
-                .subscribe((res: any) => {
-                    this.getAllReforms();
-                    this.messageService.add({
-                        severity: "success",
-                        summary: "successful reform",
-                        detail: "equipment reformed successfuly",
-                        life: 3000,
-                    });
-                },(error:any) => {
-                    if(error.status==409){
+                .subscribe({
+                    next: (res: any) => {
+                        this.getAllReforms();
                         this.messageService.add({
-                            severity: "error",
-                            summary: "error",
-                            detail: error.error,
+                            severity: "success",
+                            summary: "successful reform",
+                            detail: "equipment reformed successfully",
                             life: 3000,
                         });
-                    }
+                    },
+                    error: (error: any) => {
+                        if (error.status == 409) {
+                            this.messageService.add({
+                                severity: "error",
+                                summary: "error",
+                                detail: error.error,
+                                life: 3000,
+                            });
+                        } else {
+                            this.messageService.add({
+                                severity: "error",
+                                summary: "Error",
+                                detail: "An unexpected error occurred.",
+                                life: 3000,
+                            });
+                        }
+                    },
                 });
         }
 

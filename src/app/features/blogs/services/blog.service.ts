@@ -18,7 +18,7 @@ export class BlogService {
     deleteBlog(blog: Blog) {
         return this.http.delete(this.apiURL + "/" + blog.id);
     }
-    updateBlog(id: Number, blog: Blog) {
+    updateBlog(id: number, blog: Blog) {
         return this.http.put(this.apiURL + id, blog);
     }
 }

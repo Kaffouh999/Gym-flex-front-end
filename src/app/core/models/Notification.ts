@@ -1,8 +1,8 @@
 export interface Notification{
     id:number | undefined;
-    message:String;
-    attachUrl:String;
-    redirectUrl:String;
+    message:string;
+    attachUrl:string;
+    redirectUrl:string;
     idEntityConcerned:number;
-    readed:Boolean;
+    readed:boolean;
 }

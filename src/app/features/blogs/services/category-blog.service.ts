@@ -20,7 +20,7 @@ export class CategoryBlogService {
     deleteCategoryBlog(categoryBlog: CategoryBlog) {
         return this.http.delete(this.categoryBlogURL + "/" + categoryBlog.id);
     }
-    updateCategoryBlog(id: Number, categoryBlog: CategoryBlog) {
+    updateCategoryBlog(id: number, categoryBlog: CategoryBlog) {
         return this.http.put(this.categoryBlogURL + "/" + id, categoryBlog);
     }
 }

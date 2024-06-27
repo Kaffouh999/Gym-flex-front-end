@@ -1,9 +1,8 @@
 import { Component, OnInit, forwardRef } from "@angular/core";
 
 import { ConfirmationService, MessageService } from "primeng/api";
-import { FormBuilder, FormGroup, NgControl, Validators } from "@angular/forms";
+import { NgControl } from "@angular/forms";
 import { GymBranchComponent } from "src/app/features/settings/components/gym-branch/gym-branch.component";
-import { Table } from "primeng/table";
 import { PaymentService } from "../membership/services/payment.service";
 import { PaymentStatistics } from "src/app/core/models/PaymentStatistics";
 import { MemberEquipmentStatistic } from "src/app/core/models/MemberEquipmentStatistic";
@@ -173,7 +172,7 @@ export class DashboardComponent implements OnInit {
         this.paymentService.getAllPaymentsStatistics().subscribe((res:any) => {
             const documentStyle = getComputedStyle(document.documentElement);
             let statistics=res as PaymentStatistics[] ;
-            let labels:String[]=[];
+            let labels:string[]=[];
             let data:number[]=[];
             let data1:number[]=[];
             let income:number[]=[];
@@ -248,7 +247,7 @@ export class DashboardComponent implements OnInit {
 
     getEquippmentStatistics(documentStyle:any ,textColor:any){
         this.equipementService.getEquippmentStatistics().subscribe((res) => {
-            let equipmentNames:String[]=[];
+            let equipmentNames:string[]=[];
             let itemNums:number[]=[];
             let equiStats:EquipmentStatistics[] = res as EquipmentStatistics[];
             equiStats.forEach((stat:EquipmentStatistics) => {
