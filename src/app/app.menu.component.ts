@@ -16,13 +16,14 @@ import { AuthService } from "./shared/services/auth.service";
                         [index]="i"
                     ></li>
                 </ng-container>
+                <li app-menuitem [item]="staticItem" [root]="true"></li>
             </ul>
         </div>
     `,
 })
 export class AppMenuComponent implements OnInit {
     model: any[];
-
+    staticItem: any;
     constructor(
         private translateService: TranslateService,
         private ngZone: NgZone,
@@ -30,6 +31,12 @@ export class AppMenuComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.staticItem = {
+            label: "Visit Web Site",
+            key: "VisitWeb",
+            icon: "pi pi-fw pi-globe",
+            routerLink: ["/web/home"],
+        };
         this.model = [
             {
                 label: "Dashboard",
@@ -232,13 +239,6 @@ export class AppMenuComponent implements OnInit {
                         authority: "PREFERENCES",
                     },
                 ],
-            },
-            {
-                label: "Visit Web Site",
-                key: "VisitWeb",
-                icon: "pi pi-fw pi-globe",
-                routerLink: ["/web/home"],
-                authority: "MANAGEWEBSITE",
             },
         ];
         this.translateMenu();

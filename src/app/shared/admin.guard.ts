@@ -10,8 +10,7 @@ export class AdminGuard implements CanActivate {
 
     canActivate(): boolean {
         let roles = this.authService.getRol();
-        if (roles.includes("ANALYTICS")) {
-            console.log(this.authService.getRol().includes("ANALYTICS"));
+        if (roles.length > 0) {
             return true;
         } else {
             this.router.navigate(["/web/home"]);

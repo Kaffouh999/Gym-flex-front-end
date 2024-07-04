@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
     paymentOptions:any;
     attendanceData:any;
     attendanceOptions:any;
-
+    liveClients:number=0;
     totalNumPayment:number=0;
     totalNumIncome:number=0;
 
