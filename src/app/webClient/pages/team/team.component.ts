@@ -19,7 +19,7 @@ export class TeamComponent implements OnInit {
 
     ngOnInit(): void {
         this.getTimeStamp();
-        this.memberService.getAllMembers().subscribe((res: any) => {
+        this.memberService.getCoachMembers().subscribe((res: any) => {
             this.members = res as Member[];
         });
     }

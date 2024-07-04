@@ -44,7 +44,7 @@ export class TeamComponentSection implements OnInit {
     }
 
     getAllMembers() {
-        this.memberService.getAllMembers().subscribe({
+        this.memberService.getCoachMembers().subscribe({
             next: (res: any) => {
                 this.teams = res as Member[];
             },

@@ -124,8 +124,8 @@
                 </nav>
             </div>
             <div class="col-lg-2">
-                <div class="sideBtns">
-                    <div>
+                <div id="sideBtns" class="sideBtns" style="width: max-content; position: relative; right: 40px;">
+                    <div style="float: right;">
                         <p-button
                             *ngIf="!isLoggedIn()"
                             routerLink="login"
@@ -152,7 +152,7 @@
                         ></p-button>
                     </div>
 
-                    <div class="top-option">
+                    <div class="top-option" style="float: left;position: relative; bottom: 40px;">
                         <div class="to-social" *ngIf="isLoggedIn()">
                             <p-image
                                 src="{{

@@ -35,4 +35,7 @@ export class MemberService {
     public getMemberByUser(id: number) {
         return this.http.get(this.memberURL + "/user/" + id);
     }
+    public getCoachMembers() {
+        return this.http.get(this.memberURL + "/coach-members");
+    }
 }

@@ -247,6 +247,7 @@ export class AppMenuComponent implements OnInit {
         this.translateService.onLangChange.subscribe(
             (event: LangChangeEvent) => {
                 this.model = this.loopTranslate(this.model);
+                this.staticItem.label = this.translateService.instant(this.staticItem.key);
             }
         );
     }
