@@ -154,8 +154,8 @@
                         <div
                             class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2"
                         >
-                            <span class="text-2xl font-semibold">{{
-                                subscription.endDate | date : "dd/MM/yy"
+                            <span class="text-2xl font-semibold">Exp :{{
+                                calculateEndDate(subscription.startDate,subscription.plan.duration) | date : "dd/MM/yy"
                             }}</span>
                             <div>
                                 <button
@@ -188,7 +188,7 @@
         <ng-template let-subscription pTemplate="gridItem">
             <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
                 <div
-                    class="p-4 border-1 surface-border surface-card border-round"
+                    class="p-3 border-1 surface-border surface-card border-round"
                 >
                     <div
                         class="flex flex-wrap align-items-center justify-content-between gap-2"
@@ -216,17 +216,17 @@
                     <div
                         class="flex align-items-center justify-content-between"
                     >
-                        <span class="text-2xl font-semibold">{{
-                            subscription.endDate | date : "dd/MM/yy"
+                        <span class="text-2xl font-semibold">Exp: {{
+                            calculateEndDate(subscription.startDate,subscription.plan.duration) | date : "dd/MM/yy"
                         }}</span>
-                        <button
-                            pButton
-                            pRipple
-                            icon="pi pi-qrcode"
-                            class="p-button-rounded p-button-secondary mr-2"
-                            (click)="showQrCode(subscription)"
-                        ></button>
                         <div>
+                            <button
+                                pButton
+                                pRipple
+                                icon="pi pi-qrcode"
+                                class="p-button-rounded p-button-secondary mr-2"
+                                (click)="showQrCode(subscription)"
+                            ></button>
                             <button
                                 pButton
                                 pRipple

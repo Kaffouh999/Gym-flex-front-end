@@ -287,4 +287,15 @@ export class SubscriptionComponent {
                 window.open(fileURL);
             });
     }
+
+    calculateEndDate(startDateString: string, numberOfDays: number): string {
+        // Parse the start date string
+        const startDate = new Date(startDateString);
+        
+        // Add the number of days
+        const endDate = new Date(startDate.getTime() + numberOfDays * 24 * 60 * 60 * 1000);
+        
+        // Format the end date as an ISO string
+        return endDate.toISOString();
+      }
 }
