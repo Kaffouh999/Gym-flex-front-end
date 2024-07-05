@@ -42,6 +42,8 @@ export class RoleComponent {
         preferences: false,
         manageWebSite: false,
         coach: false,
+        blogs: false,
+        store: false
     };
     roleForm: FormGroup;
     ngOnInit(): void {
@@ -58,6 +60,8 @@ export class RoleComponent {
             preferences: [""],
             manageWebSite: [""],
             coach: [""],
+            blogs: [""],
+            store: [""],
         });
     }
 
@@ -156,6 +160,8 @@ export class RoleComponent {
             preferences: false,
             manageWebSite: false,
             coach: false,
+            blogs: false,
+            store: false,
         };
         this.fillForm(this.roleInserted);
         this.addDialog = true;
@@ -178,6 +184,8 @@ export class RoleComponent {
             preferences: this.roleForm.get("preferences").value,
             manageWebSite: this.roleForm.get("manageWebSite").value,
             coach: this.roleForm.get("coach").value,
+            blogs: this.roleForm.get("blogs").value,
+            store: this.roleForm.get("store").value,
         };
     }
 
@@ -195,6 +203,8 @@ export class RoleComponent {
             preferences: false,
             manageWebSite: false,
             coach: false,
+            blogs: false,
+            store: false,
         };
         this.roleForm.patchValue({
             name: role.name,
@@ -207,6 +217,9 @@ export class RoleComponent {
             settings: role.settings,
             preferences: role.preferences,
             manageWebSite: role.manageWebSite,
+            coach: role.coach,
+            blogs: role.blogs,
+            store: role.store,
         });
     }
     clear(table: Table) {

@@ -67,7 +67,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-7">
                 <nav aria-label="Home" class="nav-menu">
                     <ul>
                         <li routerLinkActive="active">
@@ -123,9 +123,30 @@
                     </ul>
                 </nav>
             </div>
-            <div class="col-lg-2">
-                <div id="sideBtns" class="sideBtns" style="width: max-content; position: relative; right: 40px;">
-                    <div style="float: right;">
+            <div class="col-lg-3">
+                <div id="sideBtns" class="sideBtns">
+                    <div class="top-option" style="display: inline-block;">
+                        <div class="to-social" *ngIf="isLoggedIn()">
+                            <p-image
+                                src="{{
+                                    authUser.profilePicture | combineNginxUrl
+                                }}"
+                                class="usreImage"
+                            ></p-image>
+                            <p-badge value="2" style="color: brown"></p-badge>
+                            <i
+                                routerLink="my-account"
+                                class="pi pi-user"
+                                style="font-size: 2.5rem"
+                            ></i>
+                            <i
+                                class="pi pi-spin pi-cog"
+                                routerLink="my-account"
+                                style="font-size: 2rem"
+                            ></i>
+                        </div>
+                    </div>
+                    <div style="display: inline-block;">
                         <p-button
                             *ngIf="!isLoggedIn()"
                             routerLink="login"
@@ -152,27 +173,7 @@
                         ></p-button>
                     </div>
 
-                    <div class="top-option" style="float: left;position: relative; bottom: 40px;">
-                        <div class="to-social" *ngIf="isLoggedIn()">
-                            <p-image
-                                src="{{
-                                    authUser.profilePicture | combineNginxUrl
-                                }}"
-                                class="usreImage"
-                            ></p-image>
-                            <p-badge value="2" style="color: brown"></p-badge>
-                            <i
-                                routerLink="my-account"
-                                class="pi pi-user"
-                                style="font-size: 2.5rem"
-                            ></i>
-                            <i
-                                class="pi pi-spin pi-cog"
-                                routerLink="my-account"
-                                style="font-size: 2rem"
-                            ></i>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

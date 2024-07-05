@@ -11,4 +11,6 @@ export interface Role {
     preferences: boolean;
     manageWebSite: boolean;
     coach: boolean;
+    blogs:boolean;
+    store: boolean;
 }

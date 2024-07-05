@@ -63,97 +63,6 @@
                     display="menu"
                 ></p-columnFilter>
             </th>
-            <th scope="col" pSortableColumn="Analytics" style="min-width: 15rem">
-                {{ "analytics" | translate }}
-                <p-sortIcon field="analytics"></p-sortIcon>
-                <p-columnFilter
-                    class="filterIcon"
-                    type="boolean"
-                    field="analytics"
-                    display="menu"
-                ></p-columnFilter>
-            </th>
-            <th scope="col" pSortableColumn="membership" style="min-width: 15rem">
-                {{ "membership" | translate }}
-                <p-sortIcon field="membership"></p-sortIcon>
-                <p-columnFilter
-                    class="filterIcon"
-                    type="boolean"
-                    field="membership"
-                    display="menu"
-                ></p-columnFilter>
-            </th>
-            <th scope="col" pSortableColumn="payments" style="min-width: 15rem">
-                {{ "payments" | translate }}
-                <p-sortIcon field="payments"></p-sortIcon>
-                <p-columnFilter
-                    class="filterIcon"
-                    type="boolean"
-                    field="payments"
-                    display="menu"
-                ></p-columnFilter>
-            </th>
-            <th scope="col" pSortableColumn="inventory" style="min-width: 15rem">
-                {{ "inventory" | translate }}
-                <p-sortIcon field="inventory"></p-sortIcon>
-                <p-columnFilter
-                    class="filterIcon"
-                    type="boolean"
-                    field="inventory"
-                    display="menu"
-                ></p-columnFilter>
-            </th>
-            <th scope="col" pSortableColumn="training" style="min-width: 15rem">
-                {{ "training" | translate }}
-                <p-sortIcon field="training"></p-sortIcon>
-                <p-columnFilter
-                    class="filterIcon"
-                    type="boolean"
-                    field="training"
-                    display="menu"
-                ></p-columnFilter>
-            </th>
-            <th scope="col" pSortableColumn="settings" style="min-width: 15rem">
-                {{ "settings" | translate }}
-                <p-sortIcon field="settings"></p-sortIcon>
-                <p-columnFilter
-                    class="filterIcon"
-                    type="boolean"
-                    field="settings"
-                    display="menu"
-                ></p-columnFilter>
-            </th>
-            <th scope="col" pSortableColumn="preferences" style="min-width: 15rem">
-                {{ "preferences" | translate }}
-                <p-sortIcon field="preferences"></p-sortIcon>
-                <p-columnFilter
-                    class="filterIcon"
-                    type="boolean"
-                    field="preferences"
-                    display="menu"
-                ></p-columnFilter>
-            </th>
-            <th scope="col" pSortableColumn="manageWebSite" style="min-width: 15rem">
-                {{ "manageWebSite" | translate }}
-                <p-sortIcon field="manageWebSite"></p-sortIcon>
-                <p-columnFilter
-                    class="filterIcon"
-                    type="boolean"
-                    field="manageWebSite"
-                    display="menu"
-                ></p-columnFilter>
-            </th>
-
-            <th scope="col" pSortableColumn="coach" style="min-width: 15rem">
-                {{ "Coach" | translate }}
-                <p-sortIcon field="coach"></p-sortIcon>
-                <p-columnFilter
-                    class="filterIcon"
-                    type="boolean"
-                    field="coach"
-                    display="menu"
-                ></p-columnFilter>
-            </th>
 
             <th scope="col"></th>
         </tr>
@@ -165,15 +74,6 @@
             </td>
             <td>{{ role.name }}</td>
             <td>{{ role.description }}</td>
-            <td>{{ role.analytics }}</td>
-            <td>{{ role.membership }}</td>
-            <td>{{ role.payments }}</td>
-            <td>{{ role.inventory }}</td>
-            <td>{{ role.training }}</td>
-            <td>{{ role.settings }}</td>
-            <td>{{ role.preferences }}</td>
-            <td>{{ role.manageWebSite }}</td>
-            <td>{{ role.coach }}</td>
 
             <td>
                 <button
@@ -187,7 +87,7 @@
                     pButton
                     pRipple
                     icon="pi pi-trash"
-                    class="p-button-rounded p-button-warning"
+                    class="p-button-rounded p-button-danger"
                     (click)="deleteRole(role)"
                 ></button>
             </td>
@@ -203,7 +103,7 @@
 
 <p-dialog
     [(visible)]="addDialog"
-    [style]="{ width: '450px' }"
+    [style]="{ width: '650px' }"
     header="Category Details"
     [modal]="true"
     styleClass="p-fluid"
@@ -335,6 +235,24 @@
                         offLabel="No"
                     ></p-toggleButton>
                     <label for="coach">&nbsp; {{ "coach" | translate }}</label>
+                </div>
+                <!-- blogs -->
+                <div class="field col-3 md:col-4">
+                    <p-toggleButton
+                        formControlName="blogs"
+                        onLabel="{{ 'blogs' | translate }}"
+                        offLabel="No"
+                    ></p-toggleButton>
+                    <label for="blogs">&nbsp; {{ "blogs" | translate }}</label>
+                </div>
+                <!-- store -->
+                <div class="field col-3 md:col-4">
+                    <p-toggleButton
+                        formControlName="store"
+                        onLabel="{{ 'store' | translate }}"
+                        offLabel="No"
+                    ></p-toggleButton>
+                    <label for="store">&nbsp; {{ "store" | translate }}</label>
                 </div>
             </div>
         </form>
