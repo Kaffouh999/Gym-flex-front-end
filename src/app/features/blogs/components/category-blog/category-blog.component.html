@@ -12,101 +12,101 @@
             ></button>
         </ng-template>
     </p-toolbar>
+    <p-table
+        #dt
+        [value]="categoryBlogs"
+        [rows]="10"
+        [paginator]="true"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        [globalFilterFields]="['name', 'description']"
+        responsiveLayout="stack"
+        [breakpoint]="'960px'"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">
+                    {{ "Manage" | translate }} {{ "categories" | translate }}
+                </h5>
+                <button
+                    pButton
+                    label="Clear"
+                    class="p-button-outlined clearButton"
+                    icon="pi pi-filter-slash"
+                    (click)="clear(dt)"
+                ></button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th scope="col" style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th scope="col" pSortableColumn="name">
+                    {{ "Name" | translate }}
+                    <p-sortIcon field="name"></p-sortIcon>
+                    <p-columnFilter
+                        class="filterIcon"
+                        type="text"
+                        field="name"
+                        display="menu"
+                    ></p-columnFilter>
+                </th>
+                <th scope="col" pSortableColumn="description">
+                    {{ "Description" | translate }}
+                    <p-sortIcon field="description"></p-sortIcon>
+                    <p-columnFilter
+                        class="filterIcon"
+                        type="text"
+                        field="description"
+                        display="menu"
+                    ></p-columnFilter>
+                </th>
+                <th scope="col"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-categoryBlog>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="categoryBlog"></p-tableCheckbox>
+                </td>
+                <td>
+                    <span class="p-column-title">Name : </span
+                    >{{ categoryBlog.name }}
+                </td>
+                <td>
+                    <span class="p-column-title">Description : </span
+                    >{{ categoryBlog.description }}
+                </td>
+
+                <td>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-success mr-2"
+                        (click)="editCategoryBlog(categoryBlog)"
+                    ></button>
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger"
+                        (click)="deleteCategoryBlog(categoryBlog)"
+                    ></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are
+                {{ categoryBlogs ? categoryBlogs.length : 0 }} categories.
+            </div>
+        </ng-template>
+    </p-table>
 </div>
-
-<p-table
-    #dt
-    [value]="categoryBlogs"
-    [rows]="10"
-    [paginator]="true"
-    [rowHover]="true"
-    dataKey="id"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [showCurrentPageReport]="true"
-    [globalFilterFields]="['name', 'description']"
-    responsiveLayout="stack"
-    [breakpoint]="'960px'"
->
-    <ng-template pTemplate="caption">
-        <div class="flex align-items-center justify-content-between">
-            <h5 class="m-0">
-                {{ "Manage" | translate }} {{ "categories" | translate }}
-            </h5>
-            <button
-                pButton
-                label="Clear"
-                class="p-button-outlined clearButton"
-                icon="pi pi-filter-slash"
-                (click)="clear(dt)"
-            ></button>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <th scope="col" style="width: 4rem">
-                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-            </th>
-            <th scope="col" pSortableColumn="name">
-                {{ "Name" | translate }} <p-sortIcon field="name"></p-sortIcon>
-                <p-columnFilter
-                    class="filterIcon"
-                    type="text"
-                    field="name"
-                    display="menu"
-                ></p-columnFilter>
-            </th>
-            <th scope="col" pSortableColumn="description">
-                {{ "Description" | translate }}
-                <p-sortIcon field="description"></p-sortIcon>
-                <p-columnFilter
-                    class="filterIcon"
-                    type="text"
-                    field="description"
-                    display="menu"
-                ></p-columnFilter>
-            </th>
-            <th scope="col"></th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-categoryBlog>
-        <tr>
-            <td>
-                <p-tableCheckbox [value]="categoryBlog"></p-tableCheckbox>
-            </td>
-            <td>
-                <span class="p-column-title">Name : </span
-                >{{ categoryBlog.name }}
-            </td>
-            <td>
-                <span class="p-column-title">Description : </span
-                >{{ categoryBlog.description }}
-            </td>
-
-            <td>
-                <button
-                    pButton
-                    pRipple
-                    icon="pi pi-pencil"
-                    class="p-button-rounded p-button-success mr-2"
-                    (click)="editCategoryBlog(categoryBlog)"
-                ></button>
-                <button
-                    pButton
-                    pRipple
-                    icon="pi pi-trash"
-                    class="p-button-rounded p-button-danger"
-                    (click)="deleteCategoryBlog(categoryBlog)"
-                ></button>
-            </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="summary">
-        <div class="flex align-items-center justify-content-between">
-            In total there are
-            {{ categoryBlogs ? categoryBlogs.length : 0 }} categories.
-        </div>
-    </ng-template>
-</p-table>
 
 <p-dialog
     [(visible)]="addDialog"
