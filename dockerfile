@@ -1,5 +1,8 @@
 # Stage 1: Build the Angular application
-FROM node:14 as build
+FROM node:18.17.1-alpine as build
+
+# Ensure Angular CLI is installed
+RUN npm install -g @angular/cli
 
 # Set the working directory
 WORKDIR /app
@@ -8,7 +11,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN npm install
+#RUN npm install
 
 # Copy the rest of the application code
 COPY . .
