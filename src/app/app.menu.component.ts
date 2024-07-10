@@ -197,7 +197,7 @@ export class AppMenuComponent implements OnInit {
                     },
                     {
                         label: "Blogs",
-                        key: "Blogs",
+                        key: "blog",
                         icon: "pi pi-fw pi-align-justify",
                         routerLink: ["/blogs/blogs"],
                         authority: "BLOGS",

@@ -1,5 +1,5 @@
 <div class="grid">
-    <p-card class="col-4 nums" header="Equipments in our gym">
+    <p-card class="col-4 nums" header="{{'equipInGym' | translate}}">
         <h4 class="m-0">
             {{ memberEquipmentStatistics.numberOfEquipments }} Equipment
         </h4>
@@ -7,7 +7,7 @@
             {{ memberEquipmentStatistics.numberOfEquipmentItems }} Items
         </h5>
     </p-card>
-    <p-card class="col-4 nums" header="Members in our gym">
+    <p-card class="col-4 nums" header="{{'membInGym' | translate}}">
         <h4 class="m-0">
             {{
                 memberEquipmentStatistics.numberOfMen +
@@ -17,7 +17,7 @@
         </h4>
         <h5 style="float: right">{{liveClients}} Live right now</h5>
     </p-card>
-    <p-card class="col-4 nums" header="Monthly Payments">
+    <p-card class="col-4 nums" header="{{'MonthlyPayments' | translate}}">
         <h4 class="m-0">{{ totalNumPayment }} Payment</h4>
         <h5 style="float: right">Total earned {{ totalNumIncome }} DH</h5>
     </p-card>
@@ -28,7 +28,7 @@
             [data]="genderData"
             [options]="genderOptions"
         ></p-chart>
-        <p style="margin: 0 auto">Distribution of members by gender</p>
+        <p style="margin: 0 auto">{{'Distributionofmembersbygender' | translate}}</p>
     </div>
     <div class="col-4 chart card flex justify-content-center">
         <p-chart
@@ -36,7 +36,7 @@
             [data]="equipmentData"
             [options]="equipmentOPtions"
         ></p-chart>
-        <p style="margin: 0 auto">Distribution of equipments by type</p>
+        <p style="margin: 0 auto">{{'Distributionofequipmentsbytype' | translate}}</p>
     </div>
 
     <div class="col-6 moneyChart">
