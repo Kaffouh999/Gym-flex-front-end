@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,10 +17,10 @@
         <div class="landing-wrapper">
             <div class="landing-header">
                 <div class="landing-header-content clearfix">
-                    <img src="../layout/images/logo.png" width="113">
+                    <img alt="some pic" src="../layout/images/logo.png" width="113">
 
                     <a id="menu-button" href="#">
-                        <img src="../layout/images/landing/landing-menu-icon.svg">
+                        <img alt="some pic" src="../layout/images/landing/landing-menu-icon.svg">
                     </a>
                     <ul id="menu">
                         <li><a href="#">Home</a></li>
@@ -37,7 +37,7 @@
                 <div class="introduction-content">
                     <span class="title">PrimeNG Omega</span>
                     <span class="subtitle">Clean, Elegant and Functional</span>
-                    <img src="../layout/images/landing/section1_logo.png">
+                    <img alt="some pic" src="../layout/images/landing/section1_logo.png">
                     <a class="p-button" type="button" role="button" aria-disabled="false">
                         <span class="p-button-text">Sign Up</span>
                     </a>
@@ -52,42 +52,42 @@
 
                     <div class="grid mt-6">
                         <div class="col-12 md:col-4 mt-6">
-                            <img src="../layout/images/landing/section2_1.png" class="feature-icon">
+                            <img alt="some pic" src="../layout/images/landing/section2_1.png" class="feature-icon">
                             <span class="feature-text">
                                 <span>Responsive</span>
                                 <p>Kogi Cosby sweater ethical squid irony disrupt, organic tote bag gluten-free.</p>
                             </span>
                         </div>
                         <div class="col-12 md:col-4 mt-6">
-                            <img src="../layout/images/landing/section2_2.png" class="feature-icon">
+                            <img alt="some pic" src="../layout/images/landing/section2_2.png" class="feature-icon">
                             <span class="feature-text">
                                 <span>Clean</span>
                                 <p>Bushwick meh Blue Bottle pork belly mustache skateboard 3 wolf moon.</p>
                             </span>
                         </div>
                         <div class="col-12 md:col-4 mt-6">
-                            <img src="../layout/images/landing/section2_3.png" class="feature-icon">
+                            <img alt="some pic" src="../layout/images/landing/section2_3.png" class="feature-icon">
                             <span class="feature-text">
                                 <span>Grid</span>
                                 <p>Banjo tote bag bicycle rights, High Life sartorial cray craft beer whatever.</p>
                             </span>
                         </div>
                         <div class="col-12 md:col-4 mt-6">
-                            <img src="../layout/images/landing/section2_4.png" class="feature-icon">
+                            <img alt="some pic" src="../layout/images/landing/section2_4.png" class="feature-icon">
                             <span class="feature-text">
                                 <span>Modern</span>
                                 <p>Retro occupy organic, stumptown shabby chic pour-over roof party DIY.</p>
                             </span>
                         </div>
                         <div class="col-12 md:col-4 mt-6">
-                            <img src="../layout/images/landing/section2_5.png" class="feature-icon">
+                            <img alt="some pic" src="../layout/images/landing/section2_5.png" class="feature-icon">
                             <span class="feature-text">
                                 <span>Documented</span>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam enim numquam.</p>
                             </span>
                         </div>
                         <div class="col-12 md:col-4 mt-6">
-                            <img src="../layout/images/landing/section2_6.png" class="feature-icon">
+                            <img alt="some pic" src="../layout/images/landing/section2_6.png" class="feature-icon">
                             <span class="feature-text">
                                 <span>Support</span>
                                 <p>Retro occupy organic, stumptown shabby chic pour-over roof party DIY.</p>
@@ -101,7 +101,7 @@
                 <div class="mobile-content">
                     <span class="title">Try Our Mobile App!</span>
                     <span class="subtitle">Available at App Store and Google Play.</span>
-                    <img src="../layout/images/landing/section3_mobile.png">
+                    <img alt="some pic" src="../layout/images/landing/section3_mobile.png">
                     <a class="p-button" type="button" role="button" aria-disabled="false">
                         <span class="p-button-text">Learn More</span>
                     </a>
@@ -160,7 +160,7 @@
                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
                         doloremque.</p>
                     <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/B_lYGUtCd0g" frameborder="0" width="560"></iframe>
+                        <iframe title="Some Title" src="https://www.youtube.com/embed/B_lYGUtCd0g" width="560"></iframe>
                     </div>
                 </div>
             </div>
@@ -170,7 +170,7 @@
                     <div class="footer-top">
                         <div class="grid">
                             <div class="col-6">
-                                <img src="../layout/images/logo.png">
+                                <img alt="some pic" src="../layout/images/logo.png">
                                 <p>Omega Premium Layout</p>
                             </div>
                             <div class="col-6">
@@ -195,7 +195,7 @@
             </div>
         </div>
         <script>
-            OmegaLanding = {
+            let OmegaLanding = {
                 addClass: function(element, className) {
                     if (element.classList)
                         element.classList.add(className);
@@ -238,8 +238,8 @@
             });
 
             var menuLinks = document.querySelectorAll('#menu a');
-            for (i = 0; i < menuLinks.length; i++) {
-                menuLinks[i].addEventListener('click', function(e) {
+            for (const element of menuLinks) {
+                element.addEventListener('click', function(e) {
                     OmegaLanding.hideMenu();
                 });
             }
