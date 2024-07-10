@@ -1,4 +1,3 @@
-import { faker } from "@faker-js/faker";
 //<reference types="cypress" />
 context("Actions", () => {
     beforeEach(() => {

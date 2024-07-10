@@ -19,11 +19,8 @@ context("Actions", () => {
 
         cy.contains("Membership").click();
 
-       // cy.wait(5);
-
         cy.get(".pi-id-card").click();
 
-        //cy.wait(1000);
     });
 
     it("Should add new member", () => {
@@ -31,8 +28,6 @@ context("Actions", () => {
         cy.wait(2000);
         cy.get(".pi-plus").click({ force: true });
         cy.wait(2000);
-
-        //cy.get("#user").click();
 
         cy.get("#firstName").type(faker.person.firstName());
 
