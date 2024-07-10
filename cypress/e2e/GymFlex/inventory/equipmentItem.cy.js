@@ -8,13 +8,11 @@ context("Actions", () => {
             return false;
         });
 
-        cy.get("#username").type("youssef.mathchess@gmail.com");
+        cy.get("#username").type("othmanekaffouh2001@gmail.com");
 
-        cy.get("#password").type("z");
+        cy.get("#password").type("K@ffouh_2001");
 
         cy.get(".loginBtn").click();
-
-        cy.get(".pi-bars").click();
 
         cy.contains("inventory").click();
 
