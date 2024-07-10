@@ -25,9 +25,6 @@
             <li>
                 <span>My Space</span>
                 <ul class="dropdown">
-                   <!--  <li>
-                        <a routerLink="./class-timetable.html">My Orders</a>
-                    </li> -->
                     <li>
                         <a routerLink="./class-timetable.html"
                             >My Subscriptions</a
@@ -98,11 +95,6 @@
                         <li>
                             <span class="dropdownmenu">My Space</span>
                             <ul class="dropdown">
-                                <!-- <li>
-                                    <a href="./class-timetable.html"
-                                        >My Orders</a
-                                    >
-                                </li> -->
                                 <li *ngIf="isLoggedIn()">
                                     <a routerLink="paymnts">My payments</a>
                                 </li>
