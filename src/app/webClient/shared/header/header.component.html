@@ -25,9 +25,9 @@
             <li>
                 <span>My Space</span>
                 <ul class="dropdown">
-                    <li>
+                   <!--  <li>
                         <a routerLink="./class-timetable.html">My Orders</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a routerLink="./class-timetable.html"
                             >My Subscriptions</a
@@ -98,11 +98,11 @@
                         <li>
                             <span class="dropdownmenu">My Space</span>
                             <ul class="dropdown">
-                                <li>
+                                <!-- <li>
                                     <a href="./class-timetable.html"
                                         >My Orders</a
                                     >
-                                </li>
+                                </li> -->
                                 <li *ngIf="isLoggedIn()">
                                     <a routerLink="paymnts">My payments</a>
                                 </li>
@@ -125,7 +125,7 @@
             </div>
             <div class="col-lg-3">
                 <div id="sideBtns" class="sideBtns">
-                    <div class="top-option" style="display: inline-block;">
+                    <div class="top-option" style="display: inline-block">
                         <div class="to-social" *ngIf="isLoggedIn()">
                             <p-image
                                 src="{{
@@ -146,7 +146,7 @@
                             ></i>
                         </div>
                     </div>
-                    <div style="display: inline-block;">
+                    <div style="display: inline-block">
                         <p-button
                             *ngIf="!isLoggedIn()"
                             routerLink="login"
@@ -172,8 +172,6 @@
                             styleClass="p-button-outlined p-button-warning login"
                         ></p-button>
                     </div>
-
-                    
                 </div>
             </div>
         </div>
