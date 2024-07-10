@@ -286,7 +286,7 @@ export class MemberComponent {
         });
     }
     getAllUsers() {
-        this.onlineUserService.getAllUsers().subscribe({
+        this.onlineUserService.getUsersByMemberIsNull().subscribe({
             next: (res: any) => {
                 this.users = res as OnlineUser[];
                 this.users.unshift(null);

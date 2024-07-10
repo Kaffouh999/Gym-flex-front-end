@@ -14,6 +14,10 @@ export class OnlineUserService {
         return this.http.get(this.onlineUserURL);
     }
 
+    public getUsersByMemberIsNull() {
+        return this.http.get(this.onlineUserURL + "/member-is-null");
+    }
+
     public getUserById(id: number) {
         return this.http.get(this.onlineUserURL + "/" + id);
     }
