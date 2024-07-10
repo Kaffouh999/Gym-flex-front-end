@@ -17,7 +17,7 @@
                                 <a routerLink="detailBlog">{{ blog.title }}</a>
                             </h5>
                             <ul>
-                                <li>{{ blog.dateCreation }}</li>
+                                <li>{{ blog.dateCreation | date : "dd/MM/yyyy HH:mm" }}</li>
                             </ul>
                             <p [innerHTML]="blog.body"></p>
                         </div>
