@@ -118,7 +118,7 @@
             <div class="col-lg-3">
                 <div id="sideBtns" class="sideBtns">
                     <div class="top-option" style="display: inline-block">
-                        <div class="to-social" *ngIf="isLoggedIn()">
+                        <div class="to-social" *ngIf="isLoggedIn() && hasRole()">
                             <p-image
                                 src="{{
                                     authUser.profilePicture | combineNginxUrl

@@ -32,14 +32,17 @@ export class HeaderComponent {
         this.authService.logout();
     }
     hasWriteToDasboard() {
-        if (
+        return (
             this.authService.getRol() != undefined &&
             this.authService.getRol() != null &&
             this.authService.getRol().length > 0
-        ) {
-            return true;
-        }
-        return false;
+        );
+    }
+    hasRole() {
+        return (
+            this.authService.getRol() != undefined &&
+            this.authService.getRol() != null
+        );
     }
     getTimeStamp() {
         this.timeStamp = new Date().getTime();
