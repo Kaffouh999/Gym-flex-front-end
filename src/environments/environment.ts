@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:32770/api',
+  API_URL: 'http://localhost:8081/api',
   NGINX_URL: 'http://localhost:5051'
 };

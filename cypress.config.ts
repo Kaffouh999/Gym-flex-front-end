@@ -8,4 +8,12 @@ export default defineConfig({
     viewportWidth: 1920,
     viewportHeight: 1080,
   },
+
+  component: {
+    devServer: {
+      framework: "angular",
+      bundler: "webpack",
+    },
+    specPattern: "**/*.cy.ts",
+  },
 });
